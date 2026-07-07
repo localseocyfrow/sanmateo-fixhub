@@ -9,7 +9,6 @@ import { Container, Section, SectionHeading } from "@/components/ui/Layout";
 import { QuickAnswer } from "@/components/ui/QuickAnswer";
 import { ServiceCard, ProblemCard, LocationCard } from "@/components/cards/Cards";
 import { ProcessSteps } from "@/components/ui/ProcessSteps";
-import { FutureContent } from "@/components/ui/FutureContent";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { CTASection } from "@/components/ui/CTASection";
 import { LinkButton, CallButton } from "@/components/ui/Buttons";
@@ -239,20 +238,6 @@ export default function Home() {
           </div>
           <div className="mt-8 text-center">
             <LinkButton href="/repair-process/" variant="secondary">See Our Full Repair Process</LinkButton>
-          </div>
-        </Container>
-      </Section>
-
-      {/* 12. Recent jobs — future content */}
-      <Section tint="white">
-        <Container>
-          <SectionHeading eyebrow="Recent work" title="Recent Stove Repair Jobs Near San Mateo" align="center" />
-          <div className="mx-auto mt-8 max-w-3xl">
-            <FutureContent
-              icon="stove"
-              title="Local job photos & project examples coming soon"
-              description="As stove repairs are completed across San Mateo and the Peninsula, customer-approved job photos, repair details, and project examples will be added here. We only publish real, verified work — never stock or invented jobs."
-            />
           </div>
         </Container>
       </Section>

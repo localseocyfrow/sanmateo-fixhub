@@ -107,7 +107,6 @@ export const site = {
     technicians: false,
     certifications: false,
     warranty: false,
-    recentJobs: false,
   },
 } as const;
 
