@@ -16,13 +16,13 @@ const INTRINSIC_H = 344;
 
 /**
  * SanMateo FixHub logo. Height-constrained (width auto) to stay sharp and
- * proportional. Sized larger for visibility while still fitting the header
- * (h-16 / lg:72px). The wordmark uses dark navy ink, so on dark surfaces
- * (`variant="light"`) it sits on a clean white chip for contrast, at a slightly
- * larger size where there is more room.
+ * proportional. Sized generously for readability of the wordmark while still
+ * fitting the header (h-[68px] / lg:h-20). Rendered at higher image quality so
+ * the fine wordmark/tagline stay crisp. On dark surfaces (`variant="light"`)
+ * it sits on a clean white chip for contrast, at a slightly larger size.
  */
 export function Logo({ variant = "dark", className = "" }: Props) {
-  const imgClass = variant === "light" ? "h-14 w-auto lg:h-16" : "h-12 w-auto lg:h-14";
+  const imgClass = variant === "light" ? "h-[60px] w-auto lg:h-[72px]" : "h-[52px] w-auto lg:h-16";
 
   const img = (
     <Image
@@ -31,7 +31,8 @@ export function Logo({ variant = "dark", className = "" }: Props) {
       width={INTRINSIC_W}
       height={INTRINSIC_H}
       priority={variant === "dark"}
-      sizes="(min-width: 1024px) 80px, 70px"
+      quality={90}
+      sizes="(min-width: 1024px) 90px, 75px"
       className={imgClass}
     />
   );
