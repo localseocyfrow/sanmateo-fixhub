@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SanMateo FixHub — Stove Repair Lead-Gen Site
 
-## Getting Started
+A premium, production-ready local lead-generation website for **SanMateo FixHub**, a specialist stove-repair service in San Mateo, CA and the Peninsula. Built with **Next.js 16 (App Router, Turbopack)**, **React 19**, **TypeScript**, and **Tailwind CSS v4**.
 
-First, run the development server:
+## Stack & conventions
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- App Router, Server Components by default (only `Header` and `RequestServiceForm` are client components).
+- Static generation everywhere via `generateStaticParams` for `/services`, `/locations`, `/problems`, `/brands`, `/blog`.
+- Data-driven content: page templates render typed content objects from `content/*`.
+- Async request APIs (Next 16): `params` is a `Promise`.
+
+## Project structure
+
+```
+app/          route segments, sitemap.ts, robots.ts, manifest.ts, icon.tsx, opengraph-image.tsx, llms.txt
+components/    reusable UI (layout/, ui/, cards/) + Hero, Logo, Icon, PhoneLink, RequestServiceForm, JsonLd
+content/       services, locations, problems, blog, faqs data (the words on the pages)
+lib/           site.ts (central config), types.ts, seo.ts, schema.ts, nav.ts, content.ts (access layer)
+docs/          keyword research, architecture, linking map, launch checklist, ringba/form setup
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Configuration — everything lives in `lib/site.ts`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Business name, phone (display / tracking / e164), hours, service areas, email, address, availability flags,
+supported brands, socials, form endpoint, and Ringba values. **Replace the placeholders before launch** — see
+`docs/seo-launch-checklist.md`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Environment variables (`.env.local`):
 
-## Learn More
+```bash
+NEXT_PUBLIC_FORM_ENDPOINT=""       # see docs/form-integration.md
+NEXT_PUBLIC_RINGBA_POOL_ID=""      # see docs/ringba-setup.md
+NEXT_PUBLIC_RINGBA_SCRIPT_URL=""
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Commands
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run dev      # local dev (Turbopack)
+npm run build    # production build
+npm run start    # serve production build
+npm run lint     # ESLint
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Content integrity
 
-## Deploy on Vercel
+No fabricated reviews, ratings, credentials, technicians, job counts, prices, or availability claims.
+Unverified "proof" areas (reviews, case studies, technicians, certifications, before/after, recent jobs) render as
+clearly-labeled **future content** placeholders, gated behind flags in `lib/site.ts` (`features.*`). Brand pages only
+publish/index when a brand is `supported: true`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See `docs/` for keyword research, content architecture, internal linking, and the pre-launch checklist.
