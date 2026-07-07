@@ -1,6 +1,6 @@
 import { site } from "@/lib/site";
 import { absoluteUrl } from "@/lib/seo";
-import { services, cityLocations, locations, problems, postsSorted, globalFaqs } from "@/lib/content";
+import { services, cityLocations, locations, problems, globalFaqs } from "@/lib/content";
 
 export const dynamic = "force-static";
 
@@ -30,11 +30,6 @@ ${line("San Mateo County (county-wide)", `/locations/${locations.find((l) => l.i
 
 ## Common Stove Problems (symptom guides)
 ${problems.map((p) => line(p.name, `/problems/${p.slug}`)).join("\n")}
-
-## Guides & Articles
-${postsSorted()
-  .map((p) => line(p.title, `/blog/${p.slug}`))
-  .join("\n")}
 
 ## Key Pages
 ${line("Stove Repair Cost & Pricing Guidance", "/stove-repair-cost-san-mateo-ca")}

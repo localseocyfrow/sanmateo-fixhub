@@ -25,12 +25,10 @@
 │   └─ 10 symptom pages → matching service + emergency + pricing
 ├─ /brands/ (brand hub)
 │   └─ [brand]-stove-repair-san-mateo-ca   ← only supported brands rendered/indexed
-├─ /blog/ (content hub)
-│   └─ 12 answer-first articles → service/location/pricing
-└─ trust: about, contact, reviews, repair-process, emergency-stove-help,
+└─ trust: about, contact, repair-process, emergency-stove-help,
           stove-repair-cost-san-mateo-ca, warranty, safety, certifications,
           technicians, brands-we-service, case-studies, before-after, faq,
-          resources, privacy-policy, terms
+          privacy-policy, terms
 ```
 
 ## Page-type templates (shared components, unique data)
@@ -41,13 +39,12 @@ Every page is data-driven from `content/*` + `lib/*`. Templates guarantee struct
 - **Location template** — unique local H1 · Quick Answer · brand in first paragraph · local housing/appliance/climate angle · main problems · relevant services · why fast repair matters locally · nearby neighborhoods/communities · FAQ · CTAs · breadcrumbs · LocalBusiness (areaServed) + Breadcrumb JSON-LD · links to parent San Mateo + core services + contact + nearby cities. ≥60% unique wording enforced by per-city data.
 - **Problem template** — symptom explained in first paragraph · likely causes (no remote diagnosis claims) · safety guidance where relevant · "what to do next" · short FAQ · links to matching service + emergency + pricing + contact · breadcrumbs.
 - **Brand template** — brand-qualified H1 · what we service for the brand · common brand-specific stove issues · generic (no trademarked claims / not an authorized-service claim unless configured) · links to services + contact. Rendered only when `supported`.
-- **Blog template** — answer in first 2–3 sentences · short headings · mid + final CTA · links to service + location.
 
 ## Content data model (`content/` + `lib/`)
 
 - `lib/site.ts` — single source of truth: business, phone (display + tracking + click-to-call), hours, service areas, email, address (nullable), emergency/same-day flags, supported brands, socials, form endpoint, Ringba values, feature flags for unverified proof sections.
-- `lib/types.ts` — `Service`, `Location`, `Problem`, `BlogPost`, `Brand`, `Faq`, `NavItem`.
-- `content/services.ts`, `content/locations.ts`, `content/problems.ts`, `content/blog.ts`, `content/brands.ts`, `content/faqs.ts`.
+- `lib/types.ts` — `Service`, `Location`, `Problem`, `Brand`, `Faq`, `NavItem`.
+- `content/services.ts`, `content/locations.ts`, `content/problems.ts`, `content/faqs.ts`.
 - `lib/nav.ts` — header/footer navigation.
 - `lib/seo.ts` — `buildMetadata()`, `absoluteUrl()`, canonical/OG/Twitter.
 - `lib/schema.ts` — Organization, WebSite, LocalBusiness, Service, BreadcrumbList, FAQPage builders (no fake ratings/reviews/hours/address).

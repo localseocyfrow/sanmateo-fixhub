@@ -63,7 +63,7 @@ export default function SafetyPage() {
             title="Related Guides"
             links={[
               { label: "Gas Smell From Stove", href: "/problems/gas-smell-from-stove/", description: "Full safety steps." },
-              { label: "Can a Stove Problem Affect Kitchen Safety?", href: "/blog/can-a-stove-problem-affect-kitchen-safety/", description: "What to watch for." },
+              { label: "Stove Keeps Shutting Off", href: "/problems/stove-keeps-shutting-off/", description: "A symptom worth checking promptly." },
               { label: "Emergency Stove Help", href: "/emergency-stove-help/", description: "Urgent situations." },
               { label: "Gas Stove Repair", href: "/services/gas-stove-repair-san-mateo-ca/", description: "Ignition and burner service." },
             ]}

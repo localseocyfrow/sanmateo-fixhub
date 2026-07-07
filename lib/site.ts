@@ -102,8 +102,6 @@ export const site = {
   // These gate whether "proof" sections show real content or a clearly-labeled
   // "future content area" placeholder. Never flip to true without real data.
   features: {
-    reviews: false,
-    testimonials: false,
     caseStudies: false,
     beforeAfter: false,
     technicians: false,

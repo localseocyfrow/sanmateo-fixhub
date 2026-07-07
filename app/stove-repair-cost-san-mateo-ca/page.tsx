@@ -89,7 +89,7 @@ export default function CostPage() {
             title="Related Pages"
             links={[
               { label: "Stove Repair", href: "/services/stove-repair-san-mateo-ca/", description: "The core stove repair service." },
-              { label: "Repair or Replacement?", href: "/blog/stove-repair-or-replacement/", description: "How to decide between the two." },
+              { label: "Common Stove Problems", href: "/problems/", description: "Match your symptom to a likely fix." },
               { label: "Our Repair Process", href: "/repair-process/", description: "What to expect from start to finish." },
               { label: "Request Service", href: "/contact/", description: "Get a clear estimate for your stove." },
             ]}

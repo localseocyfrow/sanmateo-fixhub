@@ -2,7 +2,7 @@ import { Icon } from "../Icon";
 
 /**
  * Clearly-labeled placeholder for content that requires VERIFIED business data
- * (reviews, job photos, technician profiles, case studies, certifications).
+ * (job photos, technician profiles, case studies, certifications).
  * Renders an honest "coming soon" panel instead of fabricating proof.
  */
 export function FutureContent({

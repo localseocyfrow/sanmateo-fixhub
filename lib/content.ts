@@ -2,12 +2,11 @@
 import { services } from "@/content/services";
 import { locations } from "@/content/locations";
 import { problems } from "@/content/problems";
-import { posts } from "@/content/blog";
 import { globalFaqs } from "@/content/faqs";
 import { brands } from "@/lib/site";
-import type { Service, Location, Problem, BlogPost, Brand } from "@/lib/types";
+import type { Service, Location, Problem, Brand } from "@/lib/types";
 
-export { services, locations, problems, posts, globalFaqs, brands };
+export { services, locations, problems, globalFaqs, brands };
 
 // ── Services ────────────────────────────────────────────────────────────────
 export const getService = (slug: string): Service | undefined =>
@@ -25,13 +24,6 @@ export const cityLocations = () => locations.filter((l) => !l.isCounty);
 export const getProblem = (slug: string): Problem | undefined =>
   problems.find((p) => p.slug === slug);
 export const problemSlugs = () => problems.map((p) => p.slug);
-
-// ── Blog ────────────────────────────────────────────────────────────────────
-export const getPost = (slug: string): BlogPost | undefined =>
-  posts.find((p) => p.slug === slug);
-export const postSlugs = () => posts.map((p) => p.slug);
-export const postsSorted = (): BlogPost[] =>
-  [...posts].sort((a, b) => (a.date < b.date ? 1 : -1));
 
 // ── Brands (only supported are public) ──────────────────────────────────────
 export const getBrand = (slug: string): Brand | undefined =>

@@ -2,7 +2,7 @@
 
 One primary target per indexable URL. Meta titles/descriptions are generated in `lib/` content data + `lib/seo.ts`; the values below are the canonical intent for each page. Site brand suffix `| SanMateo FixHub` is appended by the title template.
 
-Legend — Type: `home` `service` `location` `problem` `brand` `blog` `trust` `hub`. Intent: `T`=transactional/commercial-local, `I`=informational, `C`=commercial-investigation.
+Legend — Type: `home` `service` `location` `problem` `brand` `trust` `hub`. Intent: `T`=transactional/commercial-local, `I`=informational, `C`=commercial-investigation.
 
 ## Core
 
@@ -14,7 +14,6 @@ Legend — Type: `home` `service` `location` `problem` `brand` `blog` `trust` `h
 | `/service-areas/` | stove repair near me San Mateo Peninsula | T | hub | Stove Repair Service Areas Across the Peninsula |
 | `/problems/` | common stove problems | I | hub | Common Stove Problems & What They Mean |
 | `/brands/` | stove brands we repair | T | hub | Stove & Range Brands We Service |
-| `/blog/` | stove repair tips San Mateo | I | hub | Stove Repair Guides & Tips |
 
 ## Service pages
 
@@ -67,23 +66,6 @@ Legend — Type: `home` `service` `location` `problem` `brand` `blog` `trust` `h
 
 `/brands/[brand]-stove-repair-san-mateo-ca/` — target `[brand] stove repair`. Priority by TP/volume: GE, Samsung (TP ~30k), Whirlpool (vol 1k), Viking (vol 900, high CPC), then LG, Frigidaire, Bosch, KitchenAid, Thermador, Wolf.
 
-## Blog posts (informational → service/location)
-
-| URL slug | Primary keyword / question | Links to |
-|---|---|---|
-| `why-is-my-stove-not-heating` | why is my stove not heating | stove-not-heating problem, stove repair |
-| `why-does-my-gas-stove-keep-clicking` | why does my gas stove keep clicking | igniter repair, clicking problem |
-| `how-to-know-if-stove-igniter-is-bad` | how do I know if my stove igniter is bad | igniter repair |
-| `is-it-safe-to-use-stove-with-gas-smell` | is it safe to use a stove with a gas smell | gas smell problem, emergency |
-| `what-causes-uneven-burner-flames` | what causes uneven burner flames | burner repair |
-| `stove-repair-or-replacement` | do I need stove repair or replacement | stove repair |
-| `how-much-does-stove-repair-cost-san-mateo` | how much does stove repair cost in San Mateo | pricing page |
-| `why-electric-stove-takes-too-long-to-heat` | why is my electric stove taking too long to heat | electric stove repair |
-| `what-to-do-before-calling-stove-repair` | what should I do before calling stove repair | repair process |
-| `range-vs-cooktop-difference` | range vs cooktop difference | range & cooktop repair |
-| `can-a-stove-problem-affect-kitchen-safety` | can a stove problem affect kitchen safety | safety page |
-| `why-is-my-stove-turning-off-unexpectedly` | why is my stove turning off unexpectedly | shutting-off problem |
-
 ## Trust / legal (mostly noindex-friendly but kept indexable where useful)
 
-`/about/`, `/contact/`, `/reviews/`, `/repair-process/`, `/emergency-stove-help/`, `/stove-repair-cost-san-mateo-ca/` (targets **stove repair cost**), `/warranty/`, `/safety/`, `/certifications/`, `/technicians/`, `/brands-we-service/`, `/case-studies/`, `/before-after/`, `/faq/`, `/resources/`, `/privacy-policy/`, `/terms/`.
+`/about/`, `/contact/`, `/repair-process/`, `/emergency-stove-help/`, `/stove-repair-cost-san-mateo-ca/` (targets **stove repair cost**), `/warranty/`, `/safety/`, `/certifications/`, `/technicians/`, `/brands-we-service/`, `/case-studies/`, `/before-after/`, `/faq/`, `/privacy-policy/`, `/terms/`.

@@ -55,7 +55,7 @@ Brand KD is very low (1–3) with large traffic potential — the single stronge
 
 | Keyword | Volume | Global | KD | CPC | Parent topic | TP | Page |
 |---|---|---|---|---|---|---|---|
-| gas stove clicking | 150 | 200 | 0 | $0.45 | why does my gas stove keep clicking | 1,300 | /problems/stove-clicking-but-not-lighting/ + blog |
+| gas stove clicking | 150 | 200 | 0 | $0.45 | why does my gas stove keep clicking | 1,300 | /problems/stove-clicking-but-not-lighting/ |
 | stove not heating | 100 | 100 | 0 | $0.00 | oven not heating up | 1,900 | /problems/stove-not-heating/ |
 | stove won't turn on | 100 | 150 | 0 | $0.80 | gas stove not lighting | 1,600 | /problems/stove-wont-turn-on/ |
 | gas smell from stove | 90 | 100 | 0 | $1.60 | stove gas leak | 350 | /problems/gas-smell-from-stove/ (safety-first) |
@@ -73,7 +73,7 @@ Peninsula city terms (`stove repair Burlingame`, `stove repair Redwood City`, `s
 ## 6. Search-intent summary
 
 - **Transactional/commercial + local:** head service terms, "near me", city terms, brand terms → **service & location pages** (conversion-first, LocalBusiness/Service schema, strong CTAs).
-- **Informational:** symptom/problem terms, "how/why/cost" → **problem pages & blog** (answer-first, FAQ, links down to service pages).
+- **Informational:** symptom/problem terms, "how/why/cost" → **problem pages** (answer-first, FAQ, links down to service pages).
 - **Commercial-investigation:** `stove repair cost`, `repair vs replacement` → **pricing page & comparison blocks**.
 
 ## 7. Cannibalization control

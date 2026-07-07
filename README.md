@@ -5,7 +5,7 @@ A premium, production-ready local lead-generation website for **SanMateo FixHub*
 ## Stack & conventions
 
 - App Router, Server Components by default (only `Header` and `RequestServiceForm` are client components).
-- Static generation everywhere via `generateStaticParams` for `/services`, `/locations`, `/problems`, `/brands`, `/blog`.
+- Static generation everywhere via `generateStaticParams` for `/services`, `/locations`, `/problems`, `/brands`.
 - Data-driven content: page templates render typed content objects from `content/*`.
 - Async request APIs (Next 16): `params` is a `Promise`.
 
@@ -14,7 +14,7 @@ A premium, production-ready local lead-generation website for **SanMateo FixHub*
 ```
 app/          route segments, sitemap.ts, robots.ts, manifest.ts, icon.tsx, opengraph-image.tsx, llms.txt
 components/    reusable UI (layout/, ui/, cards/) + Hero, Logo, Icon, PhoneLink, RequestServiceForm, JsonLd
-content/       services, locations, problems, blog, faqs data (the words on the pages)
+content/       services, locations, problems, faqs data (the words on the pages)
 lib/           site.ts (central config), types.ts, seo.ts, schema.ts, nav.ts, content.ts (access layer)
 docs/          keyword research, architecture, linking map, launch checklist, ringba/form setup
 ```
@@ -45,7 +45,7 @@ npm run lint     # ESLint
 ## Content integrity
 
 No fabricated reviews, ratings, credentials, technicians, job counts, prices, or availability claims.
-Unverified "proof" areas (reviews, case studies, technicians, certifications, before/after, recent jobs) render as
+Unverified "proof" areas (case studies, technicians, certifications, before/after, recent jobs) render as
 clearly-labeled **future content** placeholders, gated behind flags in `lib/site.ts` (`features.*`). Brand pages only
 publish/index when a brand is `supported: true`.
 

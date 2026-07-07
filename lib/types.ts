@@ -122,28 +122,6 @@ export type Problem = {
   icon: IconName;
 };
 
-export type BlogPost = {
-  slug: string;
-  title: string;
-  metaTitle: string;
-  metaDescription: string;
-  /** ISO date string. */
-  date: string;
-  /** Answer-first excerpt (also the answer in first 2–3 sentences). */
-  excerpt: string;
-  /** Reading category tag. */
-  category: string;
-  /** Ordered content sections (answer-first). */
-  sections: ContentSection[];
-  faqs?: Faq[];
-  /** Related service slug for CTA/links. */
-  serviceSlug?: string;
-  /** Related location slug. */
-  locationSlug?: string;
-  /** Related problem slug. */
-  problemSlug?: string;
-};
-
 export type Brand = {
   slug: string; // "whirlpool"
   name: string; // "Whirlpool"

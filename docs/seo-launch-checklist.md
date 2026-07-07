@@ -9,7 +9,7 @@
 - [ ] `address` — leave `null` unless a real, public, staffed address exists (affects LocalBusiness schema)
 - [ ] `brands[].supported` — enable only brands actually serviced
 - [ ] `email`, `social` profiles
-- [ ] Proof flags (`features.reviews`, `.caseStudies`, `.technicians`, `.certifications`, `.warranty`) — enable only with verified content
+- [ ] Proof flags (`features.caseStudies`, `.technicians`, `.certifications`, `.warranty`) — enable only with verified content
 - [ ] `siteUrl` — production domain (used for canonical, OG, sitemap)
 
 ## Technical SEO

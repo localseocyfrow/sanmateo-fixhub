@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { absoluteUrl } from "@/lib/seo";
-import { services, locations, problems, postSlugs, supportedBrandList, brandPageSlug } from "@/lib/content";
+import { services, locations, problems, supportedBrandList, brandPageSlug } from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -13,13 +13,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/problems/", priority: 0.8, freq: "monthly" },
     { path: "/brands/", priority: 0.6, freq: "monthly" },
     { path: "/brands-we-service/", priority: 0.5, freq: "monthly" },
-    { path: "/blog/", priority: 0.7, freq: "weekly" },
     { path: "/stove-repair-cost-san-mateo-ca/", priority: 0.8, freq: "monthly" },
     { path: "/repair-process/", priority: 0.6, freq: "monthly" },
     { path: "/emergency-stove-help/", priority: 0.7, freq: "monthly" },
     { path: "/about/", priority: 0.5, freq: "yearly" },
     { path: "/contact/", priority: 0.7, freq: "yearly" },
-    { path: "/reviews/", priority: 0.4, freq: "monthly" },
     { path: "/warranty/", priority: 0.4, freq: "yearly" },
     { path: "/safety/", priority: 0.5, freq: "yearly" },
     { path: "/certifications/", priority: 0.4, freq: "yearly" },
@@ -27,7 +25,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/case-studies/", priority: 0.4, freq: "monthly" },
     { path: "/before-after/", priority: 0.4, freq: "monthly" },
     { path: "/faq/", priority: 0.6, freq: "monthly" },
-    { path: "/resources/", priority: 0.5, freq: "monthly" },
     { path: "/privacy-policy/", priority: 0.2, freq: "yearly" },
     { path: "/terms/", priority: 0.2, freq: "yearly" },
   ];
@@ -48,9 +45,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   for (const p of problems)
     entries.push({ url: absoluteUrl(`/problems/${p.slug}`), lastModified: now, changeFrequency: "monthly", priority: 0.7 });
-
-  for (const slug of postSlugs())
-    entries.push({ url: absoluteUrl(`/blog/${slug}`), lastModified: now, changeFrequency: "monthly", priority: 0.6 });
 
   // Only supported brand pages are indexable.
   for (const b of supportedBrandList())

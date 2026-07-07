@@ -69,7 +69,7 @@ export default function RepairProcessPage() {
             <RelatedLinks
               title="Helpful Next Steps"
               links={[
-                { label: "What To Do Before Calling", href: "/blog/what-to-do-before-calling-stove-repair/", description: "Simple checks to do first." },
+                { label: "Common Stove Problems", href: "/problems/", description: "Match the symptom before you call." },
                 { label: "Stove Repair Cost Guidance", href: "/stove-repair-cost-san-mateo-ca/", description: "What affects the price." },
                 { label: "Emergency Stove Help", href: "/emergency-stove-help/", description: "When a problem can't wait." },
                 { label: "Request Service", href: "/contact/", description: "Start your stove repair." },

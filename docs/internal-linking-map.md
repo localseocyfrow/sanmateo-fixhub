@@ -31,11 +31,8 @@ Principles: descriptive, varied anchor text (no exact-match spam); every page re
 ## Brand pages link to
 - Core services + Contact + Brands hub
 
-## Blog posts link to
-- 1 primary **service** + 1 relevant **location** or **problem** + mid & final **CTA**
-
 ## Footer (global) links to
-Home · Services (hub + all 10) · Problems (hub) · Brands (hub) · Locations (hub + key cities) · Pricing · Reviews · About · Contact · Privacy Policy · Terms
+Home · Services (hub + all 10) · Problems (hub) · Brands (hub) · Locations (hub + key cities) · Pricing · FAQ · About · Contact · Privacy Policy · Terms
 
 ## Header (global)
 Sticky. Services dropdown (all services + hub link) · Locations dropdown (key cities + hub) · Problems · Brands · Pricing · About · Contact. Persistent **Call Now** button (PhoneLink). Mobile: hamburger + sticky bottom call bar.

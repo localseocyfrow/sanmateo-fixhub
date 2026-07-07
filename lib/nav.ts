@@ -88,10 +88,10 @@ export const footerNav: { title: string; links: NavItem[] }[] = [
     links: [
       { label: "About", href: "/about/" },
       { label: "Brands We Service", href: "/brands-we-service/" },
-      { label: "Reviews", href: "/reviews/" },
+      { label: "FAQ", href: "/faq/" },
       { label: "Safety", href: "/safety/" },
-      { label: "Resources", href: "/resources/" },
-      { label: "Blog", href: "/blog/" },
+      { label: "Warranty", href: "/warranty/" },
+      { label: "Certifications", href: "/certifications/" },
       { label: "Contact", href: "/contact/" },
     ],
   },
