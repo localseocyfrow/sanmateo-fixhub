@@ -13,14 +13,16 @@ export const site = {
   /** Production URL — used for canonical, Open Graph, sitemap. REPLACE. */
   siteUrl: "https://www.sanmateofixhub.com",
 
-  // ── PHONE (PLACEHOLDER — replace with real / Ringba tracking number) ─────────
+  // ── PHONE — official business number (swap for a Ringba tracking number later)
   phone: {
     /** Human-readable number shown on the page. */
-    display: "(650) 000-0000",
+    display: "(650) 525-2329",
     /** Tracking number (may equal display, or a Ringba static fallback). */
-    tracking: "(650) 000-0000",
+    tracking: "(650) 525-2329",
     /** E.164 for tel: links. */
-    e164: "+16500000000",
+    e164: "+16505252329",
+    /** International format used in structured data (schema.org telephone). */
+    intl: "+1 650 525 2329",
   },
 
   // ── CONTACT ──────────────────────────────────────────────────────────────────

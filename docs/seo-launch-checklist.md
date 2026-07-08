@@ -1,7 +1,7 @@
 # SEO / Local SEO / AEO / GEO Launch Checklist
 
 ## Before publishing — MUST replace in `lib/site.ts`
-- [ ] `phone.display` / `phone.tracking` / `phone.e164` — real business / Ringba number (currently placeholder `(650) 000-0000`)
+- [x] `phone.display` / `phone.tracking` / `phone.e164` — set to the official business number `(650) 525-2329` / `+16505252329` (swap `tracking` for a Ringba number later if desired)
 - [ ] `ringba` values (number pool ID, JS tag) — see `docs/ringba-setup.md`
 - [ ] `forms.endpoint` — real form handler — see `docs/form-integration.md`
 - [ ] `hours` — confirm real business hours (placeholder is generic)

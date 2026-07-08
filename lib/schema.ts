@@ -18,7 +18,7 @@ export function organizationSchema() {
     url: absoluteUrl("/"),
     description: `${site.name} — ${site.tagline}. Specialist gas and electric stove, range, and cooktop repair serving San Mateo and the Peninsula.`,
     email: site.email,
-    telephone: site.phone.e164,
+    telephone: site.phone.intl,
     areaServed: site.serviceAreas.map((a) => ({ "@type": "City", name: a })),
     ...(sameAs.length ? { sameAs } : {}),
   };
@@ -47,7 +47,7 @@ export function localBusinessSchema(opts?: { areaName?: string; url?: string }) 
     "@id": `${absoluteUrl(opts?.url ?? "/")}#localbusiness`,
     name: site.name,
     url: opts?.url ? absoluteUrl(opts.url) : absoluteUrl("/"),
-    telephone: site.phone.e164,
+    telephone: site.phone.intl,
     email: site.email,
     description: `Specialist stove, range, and cooktop repair serving ${opts?.areaName ?? "San Mateo and the Peninsula"}.`,
     areaServed: (opts?.areaName ? [opts.areaName] : site.serviceAreas).map((a) => ({
