@@ -2,14 +2,14 @@
 //  • No aggregateRating / review objects (no verified reviews exist).
 //  • No postal address unless site.address is a real object.
 //  • No openingHours claims unless explicitly desired (kept minimal & truthful).
-import { site } from "./site";
+import { site, socialProfiles } from "./site";
 import { absoluteUrl } from "./seo";
 
 const ORG_ID = `${site.siteUrl.replace(/\/$/, "")}/#organization`;
 const WEBSITE_ID = `${site.siteUrl.replace(/\/$/, "")}/#website`;
 
 export function organizationSchema() {
-  const sameAs = Object.values(site.social).filter(Boolean);
+  const sameAs = socialProfiles.map((p) => p.url).filter(Boolean);
   return {
     "@context": "https://schema.org",
     "@type": "Organization",

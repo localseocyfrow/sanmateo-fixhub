@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: absoluteUrl("/"),
   },
-  twitter: { card: "summary_large_image" },
+  twitter: { card: "summary_large_image", site: "@sanmateofixhub", creator: "@sanmateofixhub" },
   formatDetection: { telephone: true },
 };
 

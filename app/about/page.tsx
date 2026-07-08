@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/seo";
-import { site } from "@/lib/site";
+import { site, socialProfiles } from "@/lib/site";
 import { PageHero } from "@/components/Hero";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Container, Section } from "@/components/ui/Layout";
 import { QuickAnswer } from "@/components/ui/QuickAnswer";
 import { RelatedLinks } from "@/components/ui/RelatedLinks";
 import { CTASection } from "@/components/ui/CTASection";
+import { SocialIcon } from "@/components/SocialIcons";
 
 export const metadata: Metadata = buildMetadata({
   title: "About SanMateo FixHub — Stove Repair Specialists",
@@ -85,6 +86,29 @@ export default function AboutPage() {
               { label: "Contact us", href: "/contact/", description: "Request stove service or ask a question." },
             ]}
           />
+
+          <div>
+            <h2 className="text-2xl font-extrabold tracking-tight text-navy-800">Follow Us</h2>
+            <p className="mt-2 text-ink-soft leading-relaxed">
+              Follow SanMateo FixHub for stove repair tips, maintenance advice, and updates.
+            </p>
+            <ul className="mt-4 flex flex-wrap gap-3">
+              {socialProfiles.map((s) => (
+                <li key={s.key}>
+                  <a
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`SanMateo FixHub on ${s.label}`}
+                    className="group inline-flex items-center gap-2 rounded-xl border border-line bg-white px-4 py-2.5 font-semibold text-navy-800 shadow-soft transition hover:border-copper-400 hover:text-copper-700"
+                  >
+                    <SocialIcon name={s.key} className="h-5 w-5 text-navy-700 group-hover:text-copper-600" />
+                    {s.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </Container>
       </Section>
       <CTASection source="about" />

@@ -60,6 +60,8 @@ export function buildMetadata({
       card: "summary_large_image",
       title,
       description,
+      site: "@sanmateofixhub",
+      creator: "@sanmateofixhub",
       images: [absoluteUrl("/opengraph-image")],
     },
   };

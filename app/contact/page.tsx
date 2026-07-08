@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { site, clickToCall } from "@/lib/site";
+import { site, clickToCall, mailTo, socialProfiles } from "@/lib/site";
 import { buildMetadata } from "@/lib/seo";
 import { PageHero } from "@/components/Hero";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
-import { Container, Section } from "@/components/ui/Layout";
+import { Container, Section, SectionHeading } from "@/components/ui/Layout";
 import { RequestServiceForm } from "@/components/RequestServiceForm";
 import { Icon } from "@/components/Icon";
+import { SocialIcon } from "@/components/SocialIcons";
 
 export const metadata: Metadata = buildMetadata({
   title: "Contact SanMateo FixHub — Request Stove Repair",
@@ -66,6 +67,49 @@ export default function ContactPage() {
               </ul>
             </div>
           </aside>
+        </Container>
+      </Section>
+
+      <Section tint="white">
+        <Container>
+          <SectionHeading
+            eyebrow="Stay Connected"
+            title="Connect With SanMateo FixHub"
+            intro="Reach us by email, or follow along for stove repair tips, maintenance advice, and updates."
+            align="center"
+          />
+          <div className="mx-auto mt-10 grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <a
+              href={mailTo}
+              className="group flex items-center gap-4 rounded-2xl border border-line bg-white p-5 shadow-soft transition hover:-translate-y-0.5 hover:border-copper-400 hover:shadow-card"
+            >
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-navy-800 text-white transition-colors group-hover:bg-copper-600">
+                <SocialIcon name="mail" className="h-5 w-5" />
+              </span>
+              <span className="min-w-0">
+                <span className="block font-bold text-navy-800 group-hover:text-copper-700">Email</span>
+                <span className="block truncate text-sm text-ink-soft">{site.email}</span>
+              </span>
+            </a>
+            {socialProfiles.map((s) => (
+              <a
+                key={s.key}
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`SanMateo FixHub on ${s.label}`}
+                className="group flex items-center gap-4 rounded-2xl border border-line bg-white p-5 shadow-soft transition hover:-translate-y-0.5 hover:border-copper-400 hover:shadow-card"
+              >
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-navy-800 text-white transition-colors group-hover:bg-copper-600">
+                  <SocialIcon name={s.key} className="h-5 w-5" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block font-bold text-navy-800 group-hover:text-copper-700">{s.label}</span>
+                  <span className="block truncate text-sm text-ink-soft">{s.handle}</span>
+                </span>
+              </a>
+            ))}
+          </div>
         </Container>
       </Section>
     </>

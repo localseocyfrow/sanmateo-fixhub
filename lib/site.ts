@@ -24,7 +24,7 @@ export const site = {
   },
 
   // ── CONTACT ──────────────────────────────────────────────────────────────────
-  email: "hello@sanmateofixhub.com", // PLACEHOLDER
+  email: "sanmateofixhub0@gmail.com",
   /**
    * Public street address. Leave `null` unless a real, public, staffed address
    * exists — a null address suppresses postal-address fields in LocalBusiness
@@ -72,12 +72,12 @@ export const site = {
     "San Mateo County",
   ],
 
-  // ── SOCIAL (PLACEHOLDER — add real profiles or leave empty) ──────────────────
+  // ── SOCIAL — official profile URLs (single source of truth) ──────────────────
   social: {
-    facebook: "",
-    instagram: "",
-    yelp: "",
-    google: "",
+    youtube: "https://www.youtube.com/@SanMateoFixHub",
+    instagram: "https://www.instagram.com/sanmateofixhub",
+    pinterest: "https://www.pinterest.com/sanmateofixhub/",
+    x: "https://x.com/sanmateofixhub",
   },
 
   // ── FORMS (see docs/form-integration.md) ─────────────────────────────────────
@@ -200,3 +200,21 @@ export const supportedBrands = () => brands.filter((b) => b.supported);
 
 // Convenience derived values
 export const clickToCall = `tel:${site.phone.e164}`;
+export const mailTo = `mailto:${site.email}`;
+
+// ── SOCIAL PROFILES — reusable render config (label, url, icon, handle) ───────
+// Single source for footer / contact / about. URLs come from `site.social`.
+// `icon` matches a name in components/SocialIcons.tsx.
+export type SocialKey = "youtube" | "instagram" | "pinterest" | "x";
+
+export const socialProfiles: {
+  key: SocialKey;
+  label: string;
+  url: string;
+  handle: string;
+}[] = [
+  { key: "youtube", label: "YouTube", url: site.social.youtube, handle: "@SanMateoFixHub" },
+  { key: "instagram", label: "Instagram", url: site.social.instagram, handle: "@sanmateofixhub" },
+  { key: "pinterest", label: "Pinterest", url: site.social.pinterest, handle: "sanmateofixhub" },
+  { key: "x", label: "X", url: site.social.x, handle: "@sanmateofixhub" },
+];

@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { site, clickToCall } from "@/lib/site";
+import { site, clickToCall, mailTo, socialProfiles } from "@/lib/site";
 import { footerNav, legalNav } from "@/lib/nav";
 import { Logo } from "../Logo";
 import { Icon } from "../Icon";
+import { SocialIcon } from "../SocialIcons";
 
 export function Footer() {
   const year = 2026; // static build-time year; avoids Date() in RSC caching
@@ -45,11 +46,27 @@ export function Footer() {
               </a>
             </li>
             <li className="flex items-center gap-2">
-              <Icon name="stove" className="h-4 w-4 text-teal-500" />
-              <a href={`mailto:${site.email}`} className="hover:text-white">
+              <SocialIcon name="mail" className="h-4 w-4 text-teal-500" />
+              <a href={mailTo} className="hover:text-white">
                 {site.email}
               </a>
             </li>
+          </ul>
+
+          <ul className="mt-5 flex items-center gap-3">
+            {socialProfiles.map((s) => (
+              <li key={s.key}>
+                <a
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`SanMateo FixHub on ${s.label}`}
+                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-navy-100 ring-1 ring-white/10 transition hover:bg-copper-600 hover:text-white"
+                >
+                  <SocialIcon name={s.key} className="h-[18px] w-[18px]" />
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
 
