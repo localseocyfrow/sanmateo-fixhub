@@ -8,6 +8,8 @@ import { Container, Section, SectionHeading } from "@/components/ui/Layout";
 import { RequestServiceForm } from "@/components/RequestServiceForm";
 import { Icon } from "@/components/Icon";
 import { SocialIcon } from "@/components/SocialIcons";
+import { JsonLd } from "@/components/JsonLd";
+import { webPageSchema, localBusinessSchema } from "@/lib/schema";
 
 export const metadata: Metadata = buildMetadata({
   title: "Contact SanMateo FixHub — Request Stove Repair",
@@ -112,6 +114,18 @@ export default function ContactPage() {
           </div>
         </Container>
       </Section>
+
+      <JsonLd
+        data={[
+          webPageSchema({
+            type: "ContactPage",
+            name: "Contact SanMateo FixHub",
+            description: "Contact SanMateo FixHub for stove repair in San Mateo, CA — call, email, or request service online.",
+            url: "/contact",
+          }),
+          localBusinessSchema(),
+        ]}
+      />
     </>
   );
 }

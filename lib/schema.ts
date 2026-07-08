@@ -1,26 +1,57 @@
-// JSON-LD builders. Rules enforced here:
-//  • No aggregateRating / review objects (no verified reviews exist).
-//  • No postal address unless site.address is a real object.
-//  • No openingHours claims unless explicitly desired (kept minimal & truthful).
+// JSON-LD builders. Truthfulness rules enforced here:
+//  • NO aggregateRating / Review objects — no verified reviews exist.
+//  • NO Offer / priceRange / exact prices — no verified pricing.
+//  • NO Person (technician) schema — no real named staff to publish.
+//  • NO PostalAddress unless site.address is a real, configured object.
+//  • openingHoursSpecification is driven by the central config (owner-controlled).
 import { site, socialProfiles } from "./site";
 import { absoluteUrl } from "./seo";
 
-const ORG_ID = `${site.siteUrl.replace(/\/$/, "")}/#organization`;
-const WEBSITE_ID = `${site.siteUrl.replace(/\/$/, "")}/#website`;
+const BASE = site.siteUrl.replace(/\/$/, "");
+const ORG_ID = `${BASE}/#organization`;
+const WEBSITE_ID = `${BASE}/#website`;
+
+const logoUrl = absoluteUrl("/brand/sanmateo-fixhub-logo.png");
+const heroUrl = absoluteUrl("/images/home/san-mateo-stove-repair-hero.png");
+
+const sameAs = () => socialProfiles.map((p) => p.url).filter(Boolean);
+
+const openingHours = () =>
+  site.hours.spec.map((s) => ({
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: s.days,
+    opens: s.open,
+    closes: s.close,
+  }));
+
+const areaServed = (areas?: string[]) =>
+  (areas ?? site.serviceAreas).map((a) => ({ "@type": "City", name: a }));
 
 export function organizationSchema() {
-  const sameAs = socialProfiles.map((p) => p.url).filter(Boolean);
+  const profiles = sameAs();
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": ORG_ID,
     name: site.name,
+    legalName: site.legalName,
     url: absoluteUrl("/"),
+    slogan: site.tagline,
     description: `${site.name} — ${site.tagline}. Specialist gas and electric stove, range, and cooktop repair serving San Mateo and the Peninsula.`,
     email: site.email,
     telephone: site.phone.intl,
-    areaServed: site.serviceAreas.map((a) => ({ "@type": "City", name: a })),
-    ...(sameAs.length ? { sameAs } : {}),
+    logo: { "@type": "ImageObject", url: logoUrl, caption: `${site.name} logo` },
+    image: [logoUrl, heroUrl],
+    areaServed: areaServed(),
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: site.phone.intl,
+      email: site.email,
+      contactType: "customer service",
+      areaServed: "US",
+      availableLanguage: ["English"],
+    },
+    ...(profiles.length ? { sameAs: profiles } : {}),
   };
 }
 
@@ -31,6 +62,7 @@ export function websiteSchema() {
     "@id": WEBSITE_ID,
     url: absoluteUrl("/"),
     name: site.name,
+    inLanguage: "en-US",
     publisher: { "@id": ORG_ID },
   };
 }
@@ -38,7 +70,8 @@ export function websiteSchema() {
 /**
  * LocalBusiness schema. Emits a postal address ONLY when a verified address is
  * configured. For a service-area business without a public address we still
- * describe the service area, which is valid and honest.
+ * describe the service area, which is valid and honest. Includes logo/image,
+ * opening hours (from config), and social profiles.
  */
 export function localBusinessSchema(opts?: { areaName?: string; url?: string }) {
   const base: Record<string, unknown> = {
@@ -50,15 +83,13 @@ export function localBusinessSchema(opts?: { areaName?: string; url?: string }) 
     telephone: site.phone.intl,
     email: site.email,
     description: `Specialist stove, range, and cooktop repair serving ${opts?.areaName ?? "San Mateo and the Peninsula"}.`,
-    areaServed: (opts?.areaName ? [opts.areaName] : site.serviceAreas).map((a) => ({
-      "@type": "City",
-      name: a,
-    })),
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: site.geo.lat,
-      longitude: site.geo.lng,
-    },
+    logo: logoUrl,
+    image: [heroUrl, logoUrl],
+    areaServed: areaServed(opts?.areaName ? [opts.areaName] : undefined),
+    geo: { "@type": "GeoCoordinates", latitude: site.geo.lat, longitude: site.geo.lng },
+    openingHoursSpecification: openingHours(),
+    parentOrganization: { "@id": ORG_ID },
+    sameAs: sameAs(),
   };
   if (site.address) {
     base.address = {
@@ -73,12 +104,7 @@ export function localBusinessSchema(opts?: { areaName?: string; url?: string }) 
   return base;
 }
 
-export function serviceSchema(opts: {
-  name: string;
-  description: string;
-  url: string;
-  serviceType: string;
-}) {
+export function serviceSchema(opts: { name: string; description: string; url: string; serviceType: string }) {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -86,8 +112,10 @@ export function serviceSchema(opts: {
     serviceType: opts.serviceType,
     description: opts.description,
     url: absoluteUrl(opts.url),
+    image: heroUrl,
     provider: { "@id": ORG_ID },
-    areaServed: site.serviceAreas.map((a) => ({ "@type": "City", name: a })),
+    areaServed: areaServed(),
+    // NOTE: no Offer/price — pricing is quoted per job, never asserted here.
   };
 }
 
@@ -114,5 +142,48 @@ export function faqSchema(faqs: { question: string; answer: string }[]) {
       name: f.question,
       acceptedAnswer: { "@type": "Answer", text: f.answer },
     })),
+  };
+}
+
+/** Generic page schema — pass type "ContactPage" | "AboutPage" | "WebPage" etc. */
+export function webPageSchema(opts: { type?: string; name: string; description: string; url: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": opts.type ?? "WebPage",
+    name: opts.name,
+    description: opts.description,
+    url: absoluteUrl(opts.url),
+    isPartOf: { "@id": WEBSITE_ID },
+    about: { "@id": ORG_ID },
+    primaryImageOfPage: { "@type": "ImageObject", url: heroUrl },
+    inLanguage: "en-US",
+  };
+}
+
+/** CollectionPage wrapping an ItemList — for hub/index pages. */
+export function collectionPageSchema(opts: {
+  name: string;
+  description: string;
+  url: string;
+  items: { name: string; url: string }[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: opts.name,
+    description: opts.description,
+    url: absoluteUrl(opts.url),
+    isPartOf: { "@id": WEBSITE_ID },
+    about: { "@id": ORG_ID },
+    inLanguage: "en-US",
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: opts.items.map((it, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: it.name,
+        url: absoluteUrl(it.url),
+      })),
+    },
   };
 }

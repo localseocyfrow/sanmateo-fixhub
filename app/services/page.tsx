@@ -7,6 +7,8 @@ import { Container, Section, SectionHeading } from "@/components/ui/Layout";
 import { ServiceCard } from "@/components/cards/Cards";
 import { QuickAnswer } from "@/components/ui/QuickAnswer";
 import { CTASection } from "@/components/ui/CTASection";
+import { JsonLd } from "@/components/JsonLd";
+import { collectionPageSchema } from "@/lib/schema";
 
 export const metadata: Metadata = buildMetadata({
   title: "Stove Repair Services in San Mateo, CA",
@@ -43,6 +45,15 @@ export default function ServicesIndex() {
         </Container>
       </Section>
       <CTASection source="services-index" />
+      <JsonLd
+        data={collectionPageSchema({
+          name: "Stove Repair Services in San Mateo, CA",
+          description:
+            "Specialist stove repair services in San Mateo — gas and electric stoves, ranges, cooktops, burners, igniters, control boards, and pilot lights.",
+          url: "/services",
+          items: services.map((s) => ({ name: s.name, url: `/services/${s.slug}` })),
+        })}
+      />
     </>
   );
 }

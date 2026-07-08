@@ -7,6 +7,8 @@ import { Container, Section, SectionHeading } from "@/components/ui/Layout";
 import { LocationCard } from "@/components/cards/Cards";
 import { QuickAnswer } from "@/components/ui/QuickAnswer";
 import { CTASection } from "@/components/ui/CTASection";
+import { JsonLd } from "@/components/JsonLd";
+import { collectionPageSchema } from "@/lib/schema";
 
 export const metadata: Metadata = buildMetadata({
   title: "Stove Repair Locations Across San Mateo County",
@@ -57,6 +59,15 @@ export default function LocationsIndex() {
         </Container>
       </Section>
       <CTASection source="locations-index" />
+      <JsonLd
+        data={collectionPageSchema({
+          name: "Stove Repair Locations Across San Mateo County",
+          description:
+            "Cities and communities served by SanMateo FixHub for stove repair across San Mateo County and the Peninsula.",
+          url: "/locations",
+          items: locations.map((l) => ({ name: `Stove Repair in ${l.city}`, url: `/locations/${l.slug}` })),
+        })}
+      />
     </>
   );
 }

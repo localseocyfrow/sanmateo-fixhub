@@ -7,6 +7,8 @@ import { Container, Section, SectionHeading } from "@/components/ui/Layout";
 import { ProblemCard } from "@/components/cards/Cards";
 import { QuickAnswer } from "@/components/ui/QuickAnswer";
 import { CTASection } from "@/components/ui/CTASection";
+import { JsonLd } from "@/components/JsonLd";
+import { collectionPageSchema } from "@/lib/schema";
 
 export const metadata: Metadata = buildMetadata({
   title: "Common Stove Problems & What They Mean",
@@ -43,6 +45,15 @@ export default function ProblemsIndex() {
         </Container>
       </Section>
       <CTASection source="problems-index" />
+      <JsonLd
+        data={collectionPageSchema({
+          name: "Common Stove Problems & What They Mean",
+          description:
+            "Symptom guides for common stove problems — not heating, clicking without lighting, gas smell, dead burners, and more.",
+          url: "/problems",
+          items: problems.map((p) => ({ name: p.name, url: `/problems/${p.slug}` })),
+        })}
+      />
     </>
   );
 }

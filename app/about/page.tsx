@@ -8,6 +8,8 @@ import { QuickAnswer } from "@/components/ui/QuickAnswer";
 import { RelatedLinks } from "@/components/ui/RelatedLinks";
 import { CTASection } from "@/components/ui/CTASection";
 import { SocialIcon } from "@/components/SocialIcons";
+import { JsonLd } from "@/components/JsonLd";
+import { webPageSchema } from "@/lib/schema";
 
 export const metadata: Metadata = buildMetadata({
   title: "About SanMateo FixHub — Stove Repair Specialists",
@@ -112,6 +114,14 @@ export default function AboutPage() {
         </Container>
       </Section>
       <CTASection source="about" />
+      <JsonLd
+        data={webPageSchema({
+          type: "AboutPage",
+          name: "About SanMateo FixHub",
+          description: "About SanMateo FixHub — specialist gas and electric stove, range, and cooktop repair for San Mateo and the Peninsula.",
+          url: "/about",
+        })}
+      />
     </>
   );
 }

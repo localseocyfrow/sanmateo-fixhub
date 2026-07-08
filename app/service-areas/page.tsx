@@ -9,6 +9,8 @@ import { Container, Section, SectionHeading } from "@/components/ui/Layout";
 import { QuickAnswer } from "@/components/ui/QuickAnswer";
 import { CTASection } from "@/components/ui/CTASection";
 import { Icon } from "@/components/Icon";
+import { JsonLd } from "@/components/JsonLd";
+import { collectionPageSchema } from "@/lib/schema";
 
 export const metadata: Metadata = buildMetadata({
   title: "Stove Repair Service Areas — San Mateo Peninsula",
@@ -69,6 +71,15 @@ export default function ServiceAreasPage() {
         </Container>
       </Section>
       <CTASection source="service-areas" />
+      <JsonLd
+        data={collectionPageSchema({
+          name: "Stove Repair Service Areas Across the Peninsula",
+          description:
+            "Every community SanMateo FixHub covers for stove repair across San Mateo County and the mid-Peninsula.",
+          url: "/service-areas",
+          items: cityLocations().map((l) => ({ name: `Stove Repair in ${l.city}`, url: `/locations/${l.slug}` })),
+        })}
+      />
     </>
   );
 }
