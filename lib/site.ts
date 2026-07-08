@@ -11,7 +11,7 @@ export const site = {
   legalName: "SanMateo FixHub",
   tagline: "Local Stove Repair Specialists in San Mateo, CA",
   /** Production URL — used for canonical, Open Graph, sitemap. REPLACE. */
-  siteUrl: "https://www.sanmateofixhub.com",
+  siteUrl: "https://stoverepairsanmateoca.com",
 
   // ── PHONE — official business number (swap for a Ringba tracking number later)
   phone: {
