@@ -5,6 +5,7 @@
 //  • NO PostalAddress unless site.address is a real, configured object.
 //  • openingHoursSpecification is driven by the central config (owner-controlled).
 import { site, socialProfiles } from "./site";
+import { services } from "./content";
 import { absoluteUrl } from "./seo";
 
 const BASE = site.siteUrl.replace(/\/$/, "");
@@ -50,6 +51,31 @@ export function organizationSchema() {
       contactType: "customer service",
       areaServed: "US",
       availableLanguage: ["English"],
+    },
+    knowsAbout: [
+      "Stove repair",
+      "Gas stove repair",
+      "Electric stove repair",
+      "Range repair",
+      "Cooktop repair",
+      "Burner repair",
+      "Stove igniter repair",
+      "Stove control board repair",
+      "Pilot light repair",
+      "Appliance diagnosis",
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Stove Repair Services",
+      itemListElement: services.map((s) => ({
+        "@type": "Offer",
+        // No price — repairs are quoted per job; we never assert a price here.
+        itemOffered: {
+          "@type": "Service",
+          name: s.name,
+          url: absoluteUrl(`/services/${s.slug}`),
+        },
+      })),
     },
     ...(profiles.length ? { sameAs: profiles } : {}),
   };

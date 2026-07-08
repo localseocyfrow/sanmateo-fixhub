@@ -7,10 +7,12 @@ import { JsonLd } from "@/components/JsonLd";
 import { Hero } from "@/components/Hero";
 import { Container, Section, SectionHeading } from "@/components/ui/Layout";
 import { QuickAnswer } from "@/components/ui/QuickAnswer";
+import { DefinitionBlock } from "@/components/ui/DefinitionBlock";
 import { ServiceCard, ProblemCard, LocationCard } from "@/components/cards/Cards";
 import { ProcessSteps } from "@/components/ui/ProcessSteps";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { CTASection } from "@/components/ui/CTASection";
+import { RequestServiceForm } from "@/components/RequestServiceForm";
 import { LinkButton, CallButton } from "@/components/ui/Buttons";
 import { Icon } from "@/components/Icon";
 import type { IconName } from "@/lib/types";
@@ -61,14 +63,19 @@ export default function Home() {
     <>
       <Hero />
 
-      {/* 2. Quick Answer */}
+      {/* 2. Quick Answer + definition (AEO) */}
       <Section tint="surface" className="!py-12">
-        <Container>
+        <Container className="grid gap-6 lg:grid-cols-[1.15fr_1fr] lg:items-center">
           <QuickAnswer>
             SanMateo FixHub provides specialist stove repair in San Mateo, CA for gas stoves, electric stoves, ranges,
             and cooktops. We help diagnose problems like a stove not heating, a stove clicking but not lighting, or a
             dead burner, then guide you toward the right repair for homes and businesses across the Peninsula.
           </QuickAnswer>
+          <DefinitionBlock term="Stove Repair">
+            Stove repair is the diagnosis and correction of faults in a stove&apos;s cooking system — gas burners and
+            igniters, electric elements and switches, control boards, gas valves, and pilot lights. It restores safe,
+            even heating and often fixes the failed part without replacing the whole appliance.
+          </DefinitionBlock>
         </Container>
       </Section>
 
@@ -303,6 +310,38 @@ export default function Home() {
           <div className="mt-6 text-center">
             <Link href="/faq/" className="font-semibold text-copper-700 hover:underline">See all frequently asked questions →</Link>
           </div>
+        </Container>
+      </Section>
+
+      {/* Request form — conversion */}
+      <Section tint="white" id="request-service">
+        <Container className="grid items-start gap-10 lg:grid-cols-[1fr_1.1fr]">
+          <div>
+            <SectionHeading
+              eyebrow="Request Service"
+              title="Book Stove Repair in San Mateo"
+              intro="Tell us what your stove is doing and we'll help you check availability and next steps. Prefer to talk it through now? Calling is the fastest way to reach us."
+            />
+            <ul className="mt-6 space-y-3">
+              {[
+                { icon: "flame" as IconName, t: "Gas & electric stoves, ranges & cooktops" },
+                { icon: "search" as IconName, t: "Clear diagnosis before any repair" },
+                { icon: "stove" as IconName, t: "Homes & small commercial kitchens" },
+                { icon: "shield" as IconName, t: "Safety-aware gas & electrical work" },
+              ].map((i) => (
+                <li key={i.t} className="flex items-center gap-3 text-ink-soft">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-teal-50 text-teal-700">
+                    <Icon name={i.icon} className="h-5 w-5" />
+                  </span>
+                  {i.t}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-7">
+              <CallButton variant="primary" source="home-form" />
+            </div>
+          </div>
+          <RequestServiceForm />
         </Container>
       </Section>
 

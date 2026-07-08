@@ -1,4 +1,4 @@
-import { site } from "@/lib/site";
+import { site, socialProfiles } from "@/lib/site";
 import { absoluteUrl } from "@/lib/seo";
 import { services, cityLocations, locations, problems, globalFaqs } from "@/lib/content";
 
@@ -15,9 +15,14 @@ export function GET() {
 
 ## About
 ${site.name} is a stove repair specialist (not a general appliance or handyman service). Focus areas: gas stoves, electric stoves, ranges, cooktops, burners, igniters, control boards, and pilot lights.
-Contact: ${site.phone.display} · ${site.email}
+Entity type: Local service business (HomeAndConstructionBusiness) serving a defined Peninsula area.
+Phone: ${site.phone.display} (${site.phone.intl}) · Click-to-call: tel:${site.phone.e164}
+Email: ${site.email}
 Hours: ${site.hours.display}
 Service areas: ${site.serviceAreas.join(", ")}
+
+## Connect / Social profiles
+${socialProfiles.map((s) => `- ${s.label}: ${s.url}`).join("\n")}
 
 ## Core Services
 ${services.map((s) => line(s.name, `/services/${s.slug}`)).join("\n")}
