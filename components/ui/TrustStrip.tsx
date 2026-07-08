@@ -6,7 +6,7 @@ const defaultItems: { icon: IconName; label: string }[] = [
   { icon: "flame", label: "Gas & Electric Stove Help" },
   { icon: "stove", label: "Homes & Businesses" },
   { icon: "search", label: "Clear Repair Guidance" },
-  { icon: "clock", label: "Fast Availability Check" },
+  { icon: "clock", label: "Open 24/7" },
 ];
 
 export function TrustStrip({

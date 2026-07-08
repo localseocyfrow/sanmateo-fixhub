@@ -42,18 +42,22 @@ export const site = {
   /** Geo center for service-area map context (San Mateo, CA). */
   geo: { lat: 37.5629917, lng: -122.3255254 },
 
-  // ── HOURS (PLACEHOLDER — confirm real hours) ─────────────────────────────────
+  // ── HOURS — open 24/7 (confirmed availability) ───────────────────────────────
   hours: {
-    display: "Mon–Sat, 8:00 AM – 6:00 PM",
-    /** Structured for potential schema use once verified. */
+    display: "Open 24/7",
+    /** 24/7 opening hours for schema (all days, 00:00–23:59). */
     spec: [
-      { days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], open: "08:00", close: "18:00" },
+      {
+        days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        open: "00:00",
+        close: "23:59",
+      },
     ],
   },
 
-  // ── AVAILABILITY CLAIMS — set true ONLY if genuinely offered ─────────────────
-  emergencyAvailable: false,
-  sameDayAvailable: false,
+  // ── AVAILABILITY CLAIMS — confirmed 24/7 availability ────────────────────────
+  emergencyAvailable: true,
+  sameDayAvailable: true,
 
   // ── SERVICE AREAS ────────────────────────────────────────────────────────────
   primaryCity: "San Mateo",
