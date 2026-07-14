@@ -16,6 +16,7 @@ import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { CTASection } from "@/components/ui/CTASection";
 import { RelatedLinks } from "@/components/ui/RelatedLinks";
 import { LinkButton } from "@/components/ui/Buttons";
+import { LeadSmartForm } from "@/components/LeadSmartForm";
 import { Icon } from "@/components/Icon";
 
 export function generateStaticParams() {
@@ -77,7 +78,7 @@ export default async function ServicePage({ params }: Params) {
               <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
                 <p className="text-lg font-semibold">Have a stove problem in San Mateo right now?</p>
                 <div className="flex flex-wrap gap-3">
-                  <LinkButton href="/contact/" variant="primary">Request Service</LinkButton>
+                  <LinkButton href="/contact#request-estimate" variant="primary">Request Service</LinkButton>
                   {service.emergency && (
                     <LinkButton href="/emergency-stove-help/" variant="ghostLight">Emergency Help</LinkButton>
                   )}
@@ -98,7 +99,7 @@ export default async function ServicePage({ params }: Params) {
                 ))}
               </ul>
               <div className="mt-6">
-                <CTASection variant="band" heading="Not sure what's wrong?" subheading="Describe the symptom and we'll help you figure out next steps." source={`service-${service.slug}-signs`} />
+                <CTASection variant="band" heading="Not sure what's wrong?" subheading="Describe the symptom and we'll help you figure out next steps." source={`service-${service.slug}-signs`} requestHref="/contact#request-estimate" />
               </div>
             </div>
 
@@ -164,7 +165,7 @@ export default async function ServicePage({ params }: Params) {
         </Container>
       </Section>
 
-      <CTASection source={`service-${service.slug}-footer`} />
+      <CTASection source={`service-${service.slug}-footer`} requestHref="/contact#request-estimate" />
 
       <JsonLd
         data={[
@@ -193,8 +194,12 @@ function ServiceSidebar({ serviceName }: { serviceName: string }) {
       <div className="rounded-2xl border border-line bg-white p-6 shadow-card">
         <h2 className="text-lg font-bold text-navy-800">Request {serviceName}</h2>
         <p className="mt-1.5 text-sm text-ink-soft">Tell us what your stove is doing and we&apos;ll help with next steps.</p>
+        {/* Desktop: embedded LeadSmart request form. Mobile funnels to the contact form. */}
+        <div className="mt-4 hidden lg:block">
+          <LeadSmartForm variant="compact" title={`Request ${serviceName}`} />
+        </div>
         <div className="mt-4 space-y-3">
-          <LinkButton href="/contact/" variant="primary" className="w-full">Request Service</LinkButton>
+          <LinkButton href="/contact#request-estimate" variant="primary" className="w-full lg:hidden">Request Service</LinkButton>
           <LinkButton href="/repair-process/" variant="outline" className="w-full">How Our Process Works</LinkButton>
         </div>
         <ul className="mt-5 space-y-2 border-t border-line pt-4 text-sm text-ink-soft">

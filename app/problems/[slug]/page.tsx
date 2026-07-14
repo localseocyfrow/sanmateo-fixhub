@@ -14,6 +14,7 @@ import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { CTASection } from "@/components/ui/CTASection";
 import { RelatedLinks } from "@/components/ui/RelatedLinks";
 import { LinkButton } from "@/components/ui/Buttons";
+import { LeadSmartForm } from "@/components/LeadSmartForm";
 import { Icon } from "@/components/Icon";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -108,7 +109,7 @@ export default async function ProblemPage({ params }: Params) {
               <div className="mt-4 flex flex-wrap gap-3">
                 {service && <LinkButton href={`/services/${service.slug}/`} variant="primary">{service.name}</LinkButton>}
                 {problem.emergencyRelevant && <LinkButton href="/emergency-stove-help/" variant="ghostLight">Emergency Stove Help</LinkButton>}
-                <LinkButton href="/contact/" variant="ghostLight">Request Service</LinkButton>
+                <LinkButton href="/contact#request-estimate" variant="ghostLight">Request Service</LinkButton>
               </div>
             </div>
 
@@ -130,8 +131,12 @@ export default async function ProblemPage({ params }: Params) {
             <div className="rounded-2xl border border-line bg-white p-6 shadow-card">
               <h2 className="text-lg font-bold text-navy-800">Need help now?</h2>
               <p className="mt-1.5 text-sm text-ink-soft">Describe what your stove is doing and we&apos;ll help with safe next steps.</p>
+              {/* Desktop: embedded LeadSmart request form. Mobile funnels to the contact form. */}
+              <div className="mt-4 hidden lg:block">
+                <LeadSmartForm variant="compact" title="Request stove repair help" />
+              </div>
               <div className="mt-4 space-y-3">
-                <LinkButton href="/contact/" variant="primary" className="w-full">Request Service</LinkButton>
+                <LinkButton href="/contact#request-estimate" variant="primary" className="w-full lg:hidden">Request Service</LinkButton>
                 <Link href="/safety/" className="flex min-h-[44px] w-full items-center justify-center rounded-xl border-2 border-navy-800 px-5 font-semibold text-navy-800 hover:bg-navy-800 hover:text-white">Stove Safety Tips</Link>
               </div>
             </div>
@@ -139,7 +144,7 @@ export default async function ProblemPage({ params }: Params) {
         </Container>
       </Section>
 
-      <CTASection source={`problem-${problem.slug}-footer`} />
+      <CTASection source={`problem-${problem.slug}-footer`} requestHref="/contact#request-estimate" />
       <JsonLd data={faqSchema(problem.faqs)} />
     </>
   );

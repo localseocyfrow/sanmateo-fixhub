@@ -94,6 +94,12 @@ export const site = {
     notifyEmail: "leads@sanmateofixhub.com", // PLACEHOLDER
   },
 
+  // ── LEADSMART EMBEDDED LEAD FORM (iframe) ─────────────────────────────────────
+  leadsmart: {
+    /** LeadSmart-hosted form URL embedded via <iframe>. Empty => graceful call-us fallback. */
+    formUrl: process.env.NEXT_PUBLIC_LEADSMART_URL ?? "",
+  },
+
   // ── RINGBA CALL TRACKING (see docs/ringba-setup.md) ──────────────────────────
   ringba: {
     /** Set true only once the tag + number pool are live. */

@@ -5,7 +5,7 @@ import { buildMetadata } from "@/lib/seo";
 import { PageHero } from "@/components/Hero";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Container, Section, SectionHeading } from "@/components/ui/Layout";
-import { RequestServiceForm } from "@/components/RequestServiceForm";
+import { LeadSmartForm } from "@/components/LeadSmartForm";
 import { Icon } from "@/components/Icon";
 import { SocialIcon } from "@/components/SocialIcons";
 import { JsonLd } from "@/components/JsonLd";
@@ -30,11 +30,11 @@ export default function ContactPage() {
       />
       <Section tint="surface">
         <Container className="grid gap-10 lg:grid-cols-[1fr_360px]">
-          <div>
+          <div id="request-estimate" className="scroll-mt-24">
             <h2 className="text-2xl font-extrabold tracking-tight text-navy-800">Send a Service Request</h2>
             <p className="mt-2 text-ink-soft">Tell us about your stove problem and how you&apos;d like to be contacted.</p>
             <div className="mt-6">
-              <RequestServiceForm />
+              <LeadSmartForm variant="full" />
             </div>
           </div>
 

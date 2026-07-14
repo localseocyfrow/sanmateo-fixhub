@@ -12,7 +12,7 @@ import { ServiceCard, ProblemCard, LocationCard } from "@/components/cards/Cards
 import { ProcessSteps } from "@/components/ui/ProcessSteps";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { CTASection } from "@/components/ui/CTASection";
-import { RequestServiceForm } from "@/components/RequestServiceForm";
+import { LeadSmartForm } from "@/components/LeadSmartForm";
 import { LinkButton, CallButton } from "@/components/ui/Buttons";
 import { Icon } from "@/components/Icon";
 import type { IconName } from "@/lib/types";
@@ -341,7 +341,7 @@ export default function Home() {
               <CallButton variant="primary" source="home-form" />
             </div>
           </div>
-          <RequestServiceForm />
+          <LeadSmartForm variant="standard" />
         </Container>
       </Section>
 

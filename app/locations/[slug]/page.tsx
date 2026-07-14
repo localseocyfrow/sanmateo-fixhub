@@ -12,6 +12,7 @@ import { TextBlock } from "@/components/ui/ContentSections";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { CTASection } from "@/components/ui/CTASection";
 import { RelatedLinks } from "@/components/ui/RelatedLinks";
+import { LeadSmartForm } from "@/components/LeadSmartForm";
 import { Icon } from "@/components/Icon";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -93,7 +94,7 @@ export default async function LocationPage({ params }: Params) {
               )}
             </div>
 
-            <CTASection variant="band" heading={`Stove trouble in ${loc.city}?`} subheading="Call now or request service and we'll help you check availability and next steps." source={`location-${loc.slug}-mid`} />
+            <CTASection variant="band" heading={`Stove trouble in ${loc.city}?`} subheading="Call now or request service and we'll help you check availability and next steps." source={`location-${loc.slug}-mid`} requestHref="/contact#request-estimate" />
 
             <div>
               <h2 className="text-2xl font-extrabold tracking-tight text-navy-800">Common Stove Problems in {loc.city}</h2>
@@ -132,8 +133,12 @@ export default async function LocationPage({ params }: Params) {
             <div className="rounded-2xl border border-line bg-white p-6 shadow-card">
               <h2 className="text-lg font-bold text-navy-800">Request Stove Repair in {loc.city}</h2>
               <p className="mt-1.5 text-sm text-ink-soft">Tell us what your stove is doing and we&apos;ll help with next steps.</p>
+              {/* Desktop: embedded LeadSmart request form. Mobile funnels to the contact form. */}
+              <div className="mt-4 hidden lg:block">
+                <LeadSmartForm variant="compact" title={`Request stove repair in ${loc.city}`} />
+              </div>
               <div className="mt-4 space-y-3">
-                <a href="/contact/" className="flex min-h-[44px] w-full items-center justify-center rounded-xl bg-copper-600 px-5 font-semibold text-white hover:bg-copper-700">Request Service</a>
+                <a href="/contact#request-estimate" className="flex min-h-[44px] w-full items-center justify-center rounded-xl bg-copper-600 px-5 font-semibold text-white hover:bg-copper-700 lg:hidden">Request Service</a>
                 <a href="/service-areas/" className="flex min-h-[44px] w-full items-center justify-center rounded-xl border-2 border-navy-800 px-5 font-semibold text-navy-800 hover:bg-navy-800 hover:text-white">All Service Areas</a>
               </div>
             </div>
@@ -141,7 +146,7 @@ export default async function LocationPage({ params }: Params) {
         </Container>
       </Section>
 
-      <CTASection heading={`Stove Repair Help for ${loc.city}`} source={`location-${loc.slug}-footer`} />
+      <CTASection heading={`Stove Repair Help for ${loc.city}`} source={`location-${loc.slug}-footer`} requestHref="/contact#request-estimate" />
 
       <JsonLd
         data={[

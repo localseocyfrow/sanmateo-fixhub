@@ -10,6 +10,8 @@ type Props = {
   source?: string;
   /** Compact inline band vs full section. */
   variant?: "band" | "section";
+  /** Where the "Request Service" button points (e.g. deep-link to the request form). */
+  requestHref?: string;
 };
 
 /** Reusable conversion block. Placed after major sections and before FAQs. */
@@ -18,6 +20,7 @@ export function CTASection({
   subheading = "Call now for stove repair or request service and we'll help you check availability and next steps.",
   source = "cta-section",
   variant = "section",
+  requestHref = "/contact/",
 }: Props) {
   if (variant === "band") {
     return (
@@ -29,7 +32,7 @@ export function CTASection({
           </div>
           <div className="flex flex-shrink-0 flex-wrap gap-3">
             <CallButton variant="primary" source={source} label="Call Now" />
-            <LinkButton href="/contact/" variant="ghostLight">
+            <LinkButton href={requestHref} variant="ghostLight">
               Request Service
             </LinkButton>
           </div>
@@ -49,7 +52,7 @@ export function CTASection({
         <p className="mx-auto mt-4 max-w-2xl text-lg text-navy-100">{subheading}</p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <CallButton variant="primary" source={source} />
-          <LinkButton href="/contact/" variant="ghostLight">
+          <LinkButton href={requestHref} variant="ghostLight">
             Request Stove Service
           </LinkButton>
         </div>

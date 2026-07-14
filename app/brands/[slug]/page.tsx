@@ -87,7 +87,7 @@ export default async function BrandPage({ params }: Params) {
           />
         </Container>
       </Section>
-      <CTASection heading={`Need ${brand.name} Stove Repair in San Mateo?`} source={`brand-${brand.slug}`} />
+      <CTASection heading={`Need ${brand.name} Stove Repair in San Mateo?`} source={`brand-${brand.slug}`} requestHref="/contact#request-estimate" />
       <JsonLd
         data={serviceSchema({
           name: `${brand.name} Stove Repair in San Mateo, CA`,
