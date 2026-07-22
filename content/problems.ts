@@ -80,22 +80,22 @@ export const problems: Problem[] = [
     slug: "stove-clicking-but-not-lighting",
     name: "Stove Clicking But Not Lighting",
     primaryKeyword: "stove clicking but not lighting",
-    h1: "Stove Clicking But Not Lighting: Causes & Fixes",
-    metaTitle: "Stove Clicking But Not Lighting? Here's Why",
+    h1: "Stove Clicking But Not Lighting? Why a Gas Burner Won't Ignite",
+    metaTitle: "Stove Clicking But Not Lighting? Gas Burner Won't Ignite",
     metaDescription:
-      "A gas stove that clicks but won't light often points to a dirty or worn igniter. See the common causes and safe checks before booking a San Mateo repair.",
-    summary: "You hear the igniter clicking, but the gas burner won't catch a flame.",
+      "Gas stove clicking but not lighting? Why a burner keeps clicking and won't ignite — burner cap, ports, igniter, switch, gas supply — plus safe steps in San Mateo.",
+    summary: "You hear the burner clicking, but the gas won't catch a flame or ignite.",
     quickAnswer:
-      "Persistent clicking without a flame usually means the spark isn't igniting the gas. Common reasons include a wet or dirty igniter, a burner cap that's out of position, clogged burner ports, or a worn igniter that sparks weakly. Cleaning around a cool burner and reseating the cap can help; if clicking continues, a technician can check the igniter and wiring.",
+      "A gas stove that keeps clicking but won't light means the spark isn't igniting the gas. Common reasons include a wet or dirty burner cap, a cap that's out of position, blocked burner ports, a faulty igniter, an ignition switch or module fault, or a gas-supply problem. Stop repeated attempts if the burner won't catch, and if you smell gas that doesn't clear, ventilate and follow gas-safety steps. A technician can check the igniter, switch, and gas flow.",
     intro: [
-      "When a gas stove keeps clicking but the burner never lights, the spark igniter is firing but the gas isn't catching. Sometimes the burner eventually lights with a small delay; other times it clicks continuously and never ignites. SanMateo FixHub specializes in stoves, so we can help identify why the burner on your San Mateo range isn't lighting.",
-      "Many clicking issues trace back to moisture, food debris, or a misaligned burner cap, all of which can interfere with the spark. If cleaning and reseating the parts doesn't stop the clicking, the igniter or its wiring may be worn and need attention.",
+      "When a gas stove keeps clicking but the burner never lights, the spark igniter is firing but the gas isn't catching. Sometimes the burner lights after a short delay; other times it clicks continuously and won't ignite at all. SanMateo FixHub specializes in stoves, so we can help identify why the burner on your San Mateo range isn't lighting.",
+      "Many cases of a burner clicking but not igniting trace back to a wet or misaligned burner cap or debris in the ports, all of which can interfere with the spark. If drying and reseating the parts doesn't stop the clicking, the igniter, its switch or module, or the gas supply may need attention.",
     ],
     likelyCauses: [
       {
-        title: "Moisture around the igniter",
+        title: "Wet or dirty burner cap",
         detail:
-          "After cleaning or a boil-over, trapped moisture can keep the igniter clicking until it dries. Water on or around the burner is a frequent cause of nonstop clicking.",
+          "Moisture from a boil-over or cleaning, or food residue on the cap, can interfere with the spark and keep the burner clicking until the cap is dry and clean.",
       },
       {
         title: "Misaligned burner cap",
@@ -103,48 +103,60 @@ export const problems: Problem[] = [
           "If the burner cap sits crooked or off-center, the spark may not reach the gas properly, so the burner clicks without lighting.",
       },
       {
-        title: "Food debris or grease in the ports",
+        title: "Blocked burner ports",
         detail:
-          "Spilled food and grease can block the burner ports and the igniter gap, preventing the spark from reaching the gas.",
+          "Spilled food and grease can clog the burner ports and the igniter gap, preventing the spark or the gas from reaching where it's needed.",
       },
       {
-        title: "Worn spark igniter",
+        title: "Faulty igniter",
         detail:
-          "An aging igniter can produce a weak or inconsistent spark that struggles to light the gas, especially on a single burner.",
+          "A cracked or worn igniter can produce a weak or inconsistent spark that struggles to light the gas, especially on a single burner.",
       },
       {
-        title: "Damaged igniter wiring or module",
+        title: "Ignition switch or module issue",
         detail:
-          "A cracked igniter, frayed wire, or failing spark module can cause clicking that never results in a flame, and can sometimes make several burners click at once.",
+          "A failing spark switch or ignition module can cause clicking that never results in a flame, and can sometimes make several burners click at once.",
+      },
+      {
+        title: "Gas supply problem",
+        detail:
+          "If gas isn't reaching the burner — a closed shutoff valve or an interrupted supply — the igniter will keep sparking with nothing to ignite. This is checked, not repaired, at home.",
       },
     ],
     safety: [
-      "If a burner clicks for a while and you smell gas that doesn't clear, turn the knob off and stop using that burner.",
-      "Do not lean over the burner with your face or hair close while it is clicking.",
-      "If a strong gas odor persists, treat it as a gas leak and follow gas-safety steps rather than continuing to try to light the burner.",
+      "Stop repeated ignition attempts if the burner keeps clicking and won't light — repeated sparking lets unburned gas build up.",
+      "If you smell gas, turn the knob off and open windows and doors to ventilate the area.",
+      "Avoid open flames, matches, lighters, and anything that sparks — including light switches — until any gas smell clears.",
+      "For a strong or persistent gas odor, leave the home and call your gas utility or emergency services from outside; do not try to locate or repair a leak yourself.",
     ],
     nextSteps: [
-      "Turn all knobs off, then let the burner cool completely.",
-      "Dry the burner area and reseat the burner cap so it sits level and centered.",
-      "Gently clean debris from the burner ports and around the igniter when cool.",
+      "Turn all knobs off and let the burner cool completely before touching anything.",
+      "Dry the burner cap and base, then reseat the cap so it sits level and centered.",
+      "Gently clear food debris from the burner ports and the igniter gap when cool.",
+      "Check whether other burners light — if none do, the ignition module or gas supply may be involved.",
       "Test the burner once; if it still only clicks, stop and avoid repeated attempts.",
-      "Request service from SanMateo FixHub to check the igniter and wiring.",
+      "Request service from SanMateo FixHub to check the igniter, switch, and gas flow.",
     ],
     faqs: [
+      {
+        question: "Why does my gas stove keep clicking but not lighting?",
+        answer:
+          "Continuous clicking means the igniter is sparking but the gas isn't catching. Common reasons are a wet or dirty burner cap, a cap that's off-center, blocked burner ports, a faulty igniter, an ignition switch or module fault, or a gas-supply problem. Drying and reseating the cap can help; if it keeps clicking, have the igniter and switch checked.",
+      },
       {
         question: "Why does my stove keep clicking even when it's off?",
         answer:
           "Clicking with the knobs off is often caused by trapped moisture or a burner cap out of position keeping the spark circuit active. Drying the area and reseating the cap usually helps; if it continues, the igniter switch may be at fault.",
       },
       {
-        question: "Is it safe to use the stove while it's clicking?",
+        question: "One burner clicks but won't ignite — what does that mean?",
         answer:
-          "If the burner isn't releasing much gas and no odor lingers, brief clicking is usually not dangerous. But if you smell gas that doesn't clear, turn it off and stop using that burner.",
+          "A single burner clicking but not igniting usually points to that burner: a wet or misaligned cap, blocked ports, or a faulty igniter. If several burners click together, the ignition switch, module, or gas supply is the more likely cause.",
       },
       {
         question: "Can I fix a clicking burner myself?",
         answer:
-          "You can safely dry the area, reseat the burner cap, and clean debris when the burner is cool. Anything involving the igniter, wiring, or gas components is best left to a technician.",
+          "You can safely dry the area, reseat the burner cap, and clear debris when the burner is cool. Anything involving the igniter, wiring, gas valves, or the gas supply should be left to a technician — never attempt gas repairs yourself.",
       },
     ],
     serviceSlug: "igniter-repair-san-mateo-ca",
