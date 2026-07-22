@@ -391,16 +391,17 @@ export const problems: Problem[] = [
     slug: "electric-stove-not-heating",
     name: "Electric Stove Not Heating",
     primaryKeyword: "electric stove not heating",
-    h1: "Why Is My Electric Stove Not Heating?",
-    metaTitle: "Electric Stove Not Heating? Common Causes",
+    h1: "Electric Stove Not Heating or Burner Sparked and Stopped Working",
+    metaTitle: "Electric Stove Not Heating or Burner Sparked & Stopped",
     metaDescription:
-      "Electric burner won't get hot? Learn the common reasons an electric stove stops heating and the safe checks to try before booking a repair in San Mateo.",
-    summary: "An electric burner or element stays cold or won't reach cooking temperature.",
+      "Electric stove not heating or sparked and stopped working? Learn likely causes, safe next steps, and when to request stove inspection in San Mateo, CA.",
+    summary: "An electric burner or element stays cold, won't reach temperature, or sparked and then stopped working.",
     quickAnswer:
-      "An electric stove that won't heat often has a burned-out element, a poor connection at the coil socket or terminal block, a failed infinite switch, or a power-supply issue. Reseating a cool coil and confirming the breaker is on are safe first checks. If the element still won't heat, a technician can test the element and switch.",
+      "An electric stove that won't heat often has a burned-out heating element, a worn or arced burner receptacle, a loose wiring connection, a failed control switch, or a breaker/power-supply issue. If a burner sparked and then stopped working, switch it off, stop using it, and arrange a professional inspection rather than reusing it. A stove specialist can test the element, receptacle, and switch.",
     intro: [
-      "When an electric stove won't heat, the surface element may stay completely cold or warm only slightly. Because electric burners rely on continuous heating elements and their switches, the cause is usually a specific electrical part rather than a supply issue, especially if the oven or other burners still work. SanMateo FixHub specializes in stoves and can help diagnose your electric unit in San Mateo.",
-      "It helps to notice whether one element or all of them are affected. A single cold element points to that element or its connection, while all elements failing together points more toward power supply or the control. A few safe checks can narrow it down before a technician steps in.",
+      "When an electric stove won't heat, the surface element may stay completely cold or warm only slightly. Because electric burners rely on continuous heating elements and their switches, the cause is usually a specific electrical part rather than the whole supply — especially if the oven or other burners still work. SanMateo FixHub specializes in stoves and can help diagnose an electric burner that isn't heating in San Mateo.",
+      "It helps to notice whether one burner or all of them are affected. A single cold burner points to that element or its receptacle, while every element failing together points more toward the power supply or the control. A few safe checks can narrow it down before a technician steps in.",
+      "If an electric burner sparked, arced, or flashed and then stopped working, treat it as an electrical fault rather than a quirk. Switch the burner off, avoid using it again, and have it inspected before returning it to service — a burner that has sparked once can have a damaged element, receptacle, or wiring connection that is unsafe to keep using.",
     ],
     likelyCauses: [
       {
@@ -409,51 +410,65 @@ export const problems: Problem[] = [
           "A coil or radiant element that has burned through or blistered loses continuity and won't heat, even though power reaches the cooktop.",
       },
       {
-        title: "Poor coil or terminal connection",
+        title: "Worn or arced burner receptacle",
         detail:
-          "A plug-in coil that isn't fully seated, or a corroded socket or terminal block, can break the circuit so the element stays cold.",
+          "On plug-in cooktops the coil connects into a receptacle. Loose, corroded, or scorched contacts break the circuit and can spark or arc, after which the burner often stops heating entirely.",
       },
       {
-        title: "Failed infinite switch",
+        title: "Loose or damaged wiring connection",
         detail:
-          "The infinite switch controls how much power the element gets. When it fails, the burner may not heat at all or won't hold a setting.",
+          "Wiring behind the cooktop or at the terminal block can work loose or overheat over time, interrupting the power that should reach the element.",
       },
       {
-        title: "Partial power loss",
+        title: "Failed control switch",
         detail:
-          "Electric stoves use a 240-volt supply. If one leg of that supply is lost at the breaker, elements may not heat while the clock or lights still work.",
+          "The infinite (control) switch meters how much power the element receives. When it fails, the burner may not heat at all or won't hold a setting.",
       },
       {
-        title: "Control board fault",
+        title: "Breaker or power-supply issue",
         detail:
-          "On stoves with electronic controls, a board fault can stop the signal that powers the surface elements.",
+          "Electric stoves use a 240-volt supply. A tripped breaker or a lost leg of power can leave the elements cold while the clock and lights still work.",
       },
+    ],
+    safety: [
+      "If an electric burner sparks, arcs, or flashes, switch it off at the knob right away and stop using that burner.",
+      "Don't keep cooking on a burner that sparked and then went dead — a single spark can signal a damaged element, receptacle, or wiring connection.",
+      "If you smell burning, see scorch marks, or notice melted contacts, turn the stove off at the breaker and leave it off.",
+      "Arrange a professional inspection before returning the burner to service so the element, receptacle, and wiring can be checked.",
+      "Never force contact with tape, foil, or a wedged coil — that risks arcing and further damage.",
     ],
     nextSteps: [
-      "Check that the breaker for the stove is fully on, resetting it if clearly tripped.",
-      "Note whether one element or all of them fail to heat.",
-      "Let a plug-in coil cool, then unplug and reseat it firmly in its socket.",
-      "Try the element on a different working socket to see if it heats there.",
-      "If it still won't heat, request service from SanMateo FixHub to test the element and switch.",
+      "If a burner sparked, arced, or scorched, switch it off and leave it off until it has been inspected.",
+      "Check that the breaker for the stove is fully on, resetting it once if it's clearly tripped.",
+      "Note whether one burner or all of them fail to heat.",
+      "For a burner that simply won't heat (no sparking), let a plug-in coil cool, then unplug and reseat it firmly in its receptacle.",
+      "Try that element in a different working receptacle to see whether it heats there.",
+      "If it still won't heat — or if it sparked — request service from SanMateo FixHub to test the element, receptacle, and switch.",
     ],
     faqs: [
+      {
+        question: "What does it mean when an electric stove burner sparks and then stops working?",
+        answer:
+          "A spark or arc usually points to a damaged heating element or a worn burner receptacle where the coil plugs in. Once a burner has sparked and gone dead, switch it off and avoid using it — the element, receptacle, or wiring may be unsafe. Have it inspected before returning it to service.",
+      },
       {
         question: "Why won't any of my electric burners heat, but the clock works?",
         answer:
           "The clock and lights can run on part of the supply while the elements need the full 240 volts. If one leg of power is lost at the breaker, elements may stay cold. Have the circuit and stove checked if resetting the breaker doesn't restore heat.",
       },
       {
-        question: "How do I know if a heating element is bad?",
+        question: "How do I know if a heating element or receptacle is bad?",
         answer:
-          "A bad element often looks blistered or broken, or won't heat when others do. Swapping a cool coil to a working socket is a common test; if it heats there, the original socket or switch may be the problem.",
+          "A bad element often looks blistered or broken, or won't heat when others do. Moving a cool coil to a working receptacle is a common test: if it heats there, the original receptacle, wiring, or switch is the likely fault. Scorching or loose contacts in the receptacle also point to it.",
       },
       {
         question: "Can I replace an electric stove element myself?",
         answer:
-          "Plug-in coils are relatively simple, but hardwired radiant elements and switches involve stove wiring. If reseating a coil doesn't help, it's best to have a technician confirm and replace the faulty part.",
+          "Reseating a cool plug-in coil is simple, but a receptacle that has arced, hardwired radiant elements, and control switches involve stove wiring. If reseating doesn't help — or if the burner sparked — have a technician confirm and replace the faulty part rather than working on live wiring.",
       },
     ],
     serviceSlug: "electric-stove-repair-san-mateo-ca",
+    emergencyRelevant: true,
     relatedProblems: ["stove-not-heating", "burner-not-working"],
     icon: "bolt",
   },
