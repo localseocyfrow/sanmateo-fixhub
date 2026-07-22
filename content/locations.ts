@@ -573,43 +573,43 @@ export const locations: Location[] = [
   {
     slug: "stove-repair-south-san-francisco-ca",
     city: "South San Francisco",
-    h1: "Stove Repair in South San Francisco, CA",
-    metaTitle: "South San Francisco Stove Repair | Range Service",
+    h1: "Gas & Electric Stove Repair in South San Francisco, CA",
+    metaTitle: "Stove Repair in South San Francisco, CA | Gas & Electric",
     metaDescription:
-      "Stove repair in South San Francisco, CA for residential kitchens and small commercial stoves. Get a range or cooktop diagnosed by a stove specialist near you.",
+      "Gas and electric stove repair in South San Francisco, CA for burner, igniter, element, range, and cooktop problems. Request service or call today.",
     summary:
-      "Stove repair for South San Francisco homes and small commercial kitchen needs.",
+      "Gas and electric stove repair for South San Francisco homes.",
     quickAnswer:
-      "SanMateo FixHub provides stove repair in South San Francisco, CA, for both residential kitchens and small commercial spaces. When a range or cooktop stops performing, a technician can diagnose the fault and outline repair options suited to a home or a light-commercial setting.",
+      "SanMateo FixHub provides gas and electric stove repair in South San Francisco, CA. When a range or cooktop stops working — a gas burner that won't light, a dead electric element, or uneven heat — a stove specialist can diagnose the fault and explain your repair options. This serves South San Francisco homes, not San Francisco city.",
     intro: [
-      "SanMateo FixHub offers stove repair in South San Francisco for a city that blends steady residential neighborhoods with an active small-business presence. The stove-only focus means a range fault is handled directly, whether it is in a family kitchen or a small commercial space.",
-      "Known as the Industrial City, South San Francisco pairs its hillside homes with plenty of local eateries and small kitchens. That combination means stove calls span everyday household ranges and the light-commercial cooktops that keep small operations running.",
+      "SanMateo FixHub handles stove repair in South San Francisco for both gas and electric ranges. Because the focus is stoves only, a burner, igniter, or heating-element fault gets direct attention instead of a general appliance visit — whether the range is gas-fired or electric.",
+      "South San Francisco sits just south of the county line, and this page serves the Industrial City itself: Sign Hill, Sunshine Gardens, Westborough, and the rest of SSF — not San Francisco proper. Kitchens here run everyday gas and electric ranges, and each brings its own common stove faults.",
     ],
     localContext: {
-      heading: "Stove Repair for South San Francisco Kitchens",
+      heading: "Gas & Electric Stove Repair in South San Francisco",
       body: [
-        "South San Francisco's identity mixes residential streets on Sign Hill and Sunshine Gardens with a busy commercial and industrial base. Home kitchens here commonly run gas or electric ranges built for regular family use.",
-        "Alongside the homes, the city's many small food businesses rely on stoves and cooktops that see far heavier use. Light-commercial ranges wear faster, and burner, ignition, and temperature faults surface more often as a result.",
-        "The repair approach adapts to the setting: a residential range is diagnosed for household use, while a small-kitchen unit is assessed for the demands of steadier daily cooking. In both cases the focus stays on the stove itself.",
+        "South San Francisco spreads across residential neighborhoods like Sign Hill, Sunshine Gardens, and Westborough, where most kitchens cook on gas or electric ranges built for regular family use. This page covers those SSF homes, not San Francisco city across the county line.",
+        "Gas ranges are common here, and their typical faults are ignition-related: a burner that clicks without catching, a weak or uneven flame, or a clogged burner port. These are the everyday reasons a gas stove needs a look in South San Francisco.",
+        "Electric ranges turn up in updated kitchens and bring a different set of problems — a coil or radiant element that stops heating, or a control that no longer holds temperature. The diagnosis follows the actual appliance rather than a blanket assumption.",
       ],
       bullets: [
-        "Residential neighborhoods plus a strong small-business base",
-        "Everyday gas and electric ranges in homes",
-        "Heavier-use stoves in small commercial kitchens",
-        "Faster wear on frequently used burners and igniters",
+        "Gas and electric ranges across SSF neighborhoods",
+        "Ignition and flame faults on gas stoves",
+        "Element and heat faults on electric stoves",
+        "Stove-only focus, not a general appliance call",
       ],
     },
     commonProblems: [
-      "Burner failing to ignite on a heavily used range",
-      "Oven temperature drifting under steady use",
-      "Igniter wear from frequent daily cooking",
-      "Electric element that stops heating",
-      "Uneven flame across a gas cooktop",
-      "Control or knob failure on a busy stove",
+      "Gas burner clicking but not lighting",
+      "Weak or uneven flame on a gas cooktop",
+      "Clogged burner ports on a gas range",
+      "Electric element that will not heat",
+      "Range no longer holding a set temperature",
+      "Gas smell noticed while using the stove",
     ],
     whyLocal: [
-      "For a South San Francisco small kitchen, a down stove can stall the whole operation, so a prompt, focused repair carries real weight. Nearby stove service keeps that downtime as short as possible.",
-      "Residential households feel the same pressure on a smaller scale, since a working range is essential to daily meals. A specialist who understands both settings brings the right lens to each visit.",
+      "A stove is the center of daily cooking, so a gas burner that won't light or an electric element that stays cold is more than an inconvenience for a South San Francisco household. A focused, stove-only repair aims to restore the range without the delay of a broad appliance call.",
+      "Gas and electric ranges fail in different ways — ignition and flame issues on one, element and control faults on the other — so matching the diagnosis to the actual appliance matters. A stove specialist brings that lens to each South San Francisco visit.",
     ],
     neighborhoods: [
       "Sign Hill",
@@ -625,19 +625,19 @@ export const locations: Location[] = [
     ],
     faqs: [
       {
-        question: "Do you handle small commercial stoves in South San Francisco?",
+        question: "Do you repair gas stoves in South San Francisco?",
         answer:
-          "Yes. Small-kitchen ranges see heavier use and are assessed with that steadier daily demand in mind, while the work stays focused on the stove itself.",
+          "Yes. Gas stove repair in South San Francisco covers burners that won't ignite, weak or uneven flames, and clogged burner ports on ranges and cooktops. A specialist diagnoses the gas fault and explains the repair before any work.",
       },
       {
-        question: "Why do busy stoves fail more often?",
+        question: "Do you repair electric stoves in South San Francisco?",
         answer:
-          "Frequent use accelerates wear on igniters, burners, and controls, so faults appear sooner than on a lightly used home range. Regular diagnosis helps catch them early.",
+          "Yes. Electric stove repair covers coil and radiant elements that stop heating, along with controls that no longer hold temperature. The diagnosis follows the specific electric range rather than a general guess.",
       },
       {
-        question: "Do you cover both homes and small businesses citywide?",
+        question: "Is this South San Francisco or San Francisco city?",
         answer:
-          "Yes. Coverage spans South San Francisco's residential neighborhoods and its small commercial kitchens, with the repair matched to each setting.",
+          "South San Francisco — the separate Peninsula city that includes Sign Hill, Sunshine Gardens, and Westborough. This page is for stove repair in SSF, not San Francisco proper.",
       },
     ],
   },
