@@ -155,16 +155,16 @@ export const problems: Problem[] = [
     slug: "gas-smell-from-stove",
     name: "Gas Smell From Stove",
     primaryKeyword: "gas smell from stove",
-    h1: "Gas Smell From Your Stove? What to Do First",
-    metaTitle: "Gas Smell From Stove: Safety Steps to Take Now",
+    h1: "Gas Smell From Your Stove? Safety Steps to Take First",
+    metaTitle: "Gas Smell From Stove? Safety Steps for a Possible Leak",
     metaDescription:
-      "Smell gas near your stove? Safety comes first. Learn what to do immediately, common causes, and when to call PG&E or a stove technician in San Mateo.",
+      "Stove smells like gas? Safety comes first. What to do immediately, when a gas leak needs PG&E or 911, and how to get the stove checked in San Mateo.",
     summary: "You notice a gas odor near the stove, whether or not a burner is in use.",
     quickAnswer:
-      "A gas smell should always be taken seriously. Stop using the stove, avoid anything that could create a spark, and if the odor is strong, leave the area and call PG&E's emergency line at 1-800-743-5000 or 911. A faint smell only while lighting a burner can be normal, but a lingering or strong odor needs immediate attention.",
+      "If your stove smells like gas, take it seriously. Stop using the stove, avoid anything that could create a spark or flame, and if the odor is strong, leave the area and call PG&E's emergency line at 1-800-743-5000 or 911. A faint smell only while lighting a burner can be normal, but a lingering or strong gas odor, or gas you smell when no burner is on, needs immediate attention.",
     intro: [
-      "A gas odor near your stove means natural gas may be escaping, and it should never be ignored. The smell is a deliberately added scent, often described as rotten eggs or sulfur, that warns you of a possible leak. If you smell gas near your stove in San Mateo, your safety comes first; SanMateo FixHub can help diagnose the stove itself once the situation is confirmed safe.",
-      "A brief, faint whiff of gas as a burner lights is common and usually clears quickly. What warrants concern is an odor that lingers, grows stronger, or appears when no burner is on. In those cases, follow the safety steps below before anything else.",
+      "If your stove smells like gas, natural gas may be escaping, and it should never be ignored. That rotten-egg or sulfur odor is a scent deliberately added to natural gas so a possible leak is easy to notice. If you smell gas near your stove in San Mateo, your safety comes first; SanMateo FixHub can help diagnose the stove itself only after the gas utility has confirmed the situation is safe.",
+      "A brief, faint whiff of gas as a burner lights is common and usually clears within seconds. What warrants concern is an odor that lingers, grows stronger, appears when no burner is on, or comes with a burner that clicks but will not light. In those cases, follow the safety steps below before anything else.",
     ],
     likelyCauses: [
       {
@@ -196,6 +196,7 @@ export const problems: Problem[] = [
     safety: [
       "Stop using the stove immediately and turn off all burner knobs if you can do so safely.",
       "Do NOT operate light switches, appliances, or anything electrical, and do not use any flame, lighter, or match.",
+      "If the smell is faint, open a nearby window or door to ventilate the area; if it is strong, do not stop to do this and leave right away.",
       "Do not use your phone while inside the area where you smell gas.",
       "If the smell is strong, leave the area right away and take others with you, leaving a door open as you go.",
       "From a safe location away from the odor, call PG&E's gas emergency line at 1-800-743-5000, or call 911.",
@@ -205,7 +206,7 @@ export const problems: Problem[] = [
     nextSteps: [
       "Treat safety first: follow the steps above before troubleshooting anything.",
       "Check that all knobs are fully in the off position once it is safe to do so.",
-      "Note when the smell occurs, such as only while lighting a burner or constantly.",
+      "Note when the smell occurs, such as only while lighting a burner, when a burner will not light, or constantly.",
       "After the utility confirms the area is safe, contact SanMateo FixHub to inspect the stove.",
     ],
     faqs: [
@@ -224,10 +225,20 @@ export const problems: Problem[] = [
         answer:
           "No. Stop using the stove until the source is identified. A recurring gas smell can indicate a valve, seal, or connection issue that needs professional inspection.",
       },
+      {
+        question: "My gas stove won't light but I smell gas. What should I do?",
+        answer:
+          "Stop trying to light it. A burner that clicks but will not light can release unburned gas, and repeated attempts risk igniting it. Turn the knob fully off, avoid flames and sparks, ventilate or leave if the smell is strong, and call PG&E at 1-800-743-5000 or 911. Once the area is confirmed safe, have the burner's igniter and valve inspected.",
+      },
+      {
+        question: "How do I know if my stove has a gas leak?",
+        answer:
+          "A gas leak from a stove often shows up as a rotten-egg or sulfur smell that lingers or appears when no burner is on, sometimes with a hissing sound or a burner that smells of gas without lighting. Any of these means you should stop using the stove and follow the safety steps above; only PG&E or a qualified professional can confirm and locate a leak.",
+      },
     ],
     serviceSlug: "gas-stove-repair-san-mateo-ca",
     emergencyRelevant: true,
-    relatedProblems: ["stove-clicking-but-not-lighting", "burner-not-working"],
+    relatedProblems: ["stove-clicking-but-not-lighting", "burner-not-working", "uneven-burner-flame"],
     icon: "alert",
   },
   {
