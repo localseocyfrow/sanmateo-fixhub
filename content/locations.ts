@@ -5,10 +5,10 @@ export const locations: Location[] = [
     slug: "san-mateo-ca",
     city: "San Mateo",
     isParent: true,
-    h1: "Stove Repair in San Mateo, CA",
-    metaTitle: "Stove Repair in San Mateo, CA | Local Stove Service",
+    h1: "Stove Repair Across San Mateo's Neighborhoods",
+    metaTitle: "San Mateo Stove Repair | Neighborhood Coverage",
     metaDescription:
-      "Stove repair across San Mateo, CA for gas and electric ranges. From downtown bungalows to Bay-side condos, book a diagnostic visit for your cooktop today.",
+      "Gas and electric stove repair across San Mateo's neighborhoods — from downtown and San Mateo Park to Bay-side condos near Bridgepointe. Book a diagnostic visit.",
     summary:
       "Gas and electric stove repair for San Mateo's mix of older homes and newer condos across the whole city.",
     quickAnswer:

@@ -12,6 +12,9 @@ export const metadata: Metadata = buildMetadata({
   description:
     "SanMateo FixHub credentials and certifications. Any verified training or credentials will be listed here as they are documented — we never publish claims we can't back up.",
   path: "/certifications",
+  // Placeholder ("coming soon") page — keep out of the index until real,
+  // verified credentials exist. Re-enable indexing when populated.
+  noindex: true,
 });
 
 export default function CertificationsPage() {

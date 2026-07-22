@@ -12,6 +12,9 @@ export const metadata: Metadata = buildMetadata({
   description:
     "What to expect on stove repair terms with SanMateo FixHub. Parts, labor, and any workmanship assurances are discussed and confirmed per job before work begins.",
   path: "/warranty",
+  // Placeholder ("coming soon") page — keep out of the index until concrete
+  // repair-terms content exists. Re-enable indexing when populated.
+  noindex: true,
 });
 
 const faqs = [

@@ -84,7 +84,7 @@ export default function AboutPage() {
             links={[
               { label: "Our repair process", href: "/repair-process/", description: "How a stove diagnosis and repair works." },
               { label: "Common stove problems", href: "/problems/", description: "Symptoms we help diagnose." },
-              { label: "Brands we service", href: "/brands-we-service/", description: "Our approach to brand coverage." },
+              { label: "Brands we service", href: "/brands/", description: "Our approach to brand coverage." },
               { label: "Contact us", href: "/contact/", description: "Request stove service or ask a question." },
             ]}
           />

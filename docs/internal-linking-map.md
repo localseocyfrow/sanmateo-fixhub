@@ -2,10 +2,12 @@
 
 Principles: descriptive, varied anchor text (no exact-match spam); every page reachable within ≤3 clicks of home; silo cross-links plus deliberate hub↔spoke↔related links. Anchors mix brand, service, city, and natural phrasing.
 
+**Canonical hubs:** `/locations/` (location hub) and `/brands/` (brand hub). The former `/service-areas/` and `/brands-we-service/` hubs are now 308 permanent redirects into these; **no internal link targets a redirect** — anchors that read "All Service Areas" point to `/locations/`, and "Brands We Service" points to `/brands/`.
+
 ## Home (`/`) links out to
 - Stove Repair service (canonical) · Gas Stove Repair · Electric Stove Repair · Emergency Stove Repair · Range Repair · Cooktop Repair
 - Stove Repair Pricing (`/stove-repair-cost-san-mateo-ca/`)
-- Service Areas (`/service-areas/`) + parent San Mateo location
+- Locations hub (`/locations/`, anchor "All Service Areas") + parent San Mateo location
 - Problems hub + 3–4 top problem pages
 - Contact · Brands hub
 

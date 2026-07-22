@@ -282,7 +282,7 @@ export default function Home() {
             ))}
           </div>
           <div className="mt-8 text-center">
-            <LinkButton href="/service-areas/" variant="outline">All Service Areas</LinkButton>
+            <LinkButton href="/locations/" variant="outline">All Service Areas</LinkButton>
           </div>
         </Container>
       </Section>

@@ -11,9 +11,10 @@ Legend — Type: `home` `service` `location` `problem` `brand` `trust` `hub`. In
 | `/` | stove repair San Mateo CA | T | home | Stove Repair San Mateo CA by SanMateo FixHub |
 | `/services/` | stove repair services San Mateo | T | hub | Stove Repair Services in San Mateo, CA |
 | `/locations/` | stove repair service areas San Mateo County | T | hub | Where SanMateo FixHub Provides Stove Repair |
-| `/service-areas/` | stove repair near me San Mateo Peninsula | T | hub | Stove Repair Service Areas Across the Peninsula |
 | `/problems/` | common stove problems | I | hub | Common Stove Problems & What They Mean |
 | `/brands/` | stove brands we repair | T | hub | Stove & Range Brands We Service |
+
+**Redirected (308, not indexable — folded into the canonical hub):** `/service-areas/` → `/locations/`; `/brands-we-service/` → `/brands/`. No internal link targets these.
 
 ## Service pages
 
@@ -49,7 +50,7 @@ Legend — Type: `home` `service` `location` `problem` `brand` `trust` `hub`. In
 
 | URL | Primary keyword | Local angle |
 |---|---|---|
-| `/locations/san-mateo-ca/` | stove repair San Mateo CA (parent) | citywide, mixed housing |
+| `/locations/san-mateo-ca/` | San Mateo stove repair — neighborhood coverage (parent) | citywide neighborhoods; defers the bare "stove repair San Mateo, CA" term to `/services/stove-repair-san-mateo-ca/` to avoid cannibalization. H1: "Stove Repair Across San Mateo's Neighborhoods" |
 | `/locations/stove-repair-burlingame-ca/` | stove repair Burlingame CA | family homes, older appliances |
 | `/locations/stove-repair-foster-city-ca/` | stove repair Foster City CA | condos, modern electric/cooktop |
 | `/locations/stove-repair-belmont-ca/` | stove repair Belmont CA | hillside homes, gas/burner |
@@ -66,6 +67,10 @@ Legend — Type: `home` `service` `location` `problem` `brand` `trust` `hub`. In
 
 `/brands/[brand]-stove-repair-san-mateo-ca/` — target `[brand] stove repair`. Priority by TP/volume: GE, Samsung (TP ~30k), Whirlpool (vol 1k), Viking (vol 900, high CPC), then LG, Frigidaire, Bosch, KitchenAid, Thermador, Wolf.
 
-## Trust / legal (mostly noindex-friendly but kept indexable where useful)
+## Trust / legal
 
-`/about/`, `/contact/`, `/repair-process/`, `/emergency-stove-help/`, `/stove-repair-cost-san-mateo-ca/` (targets **stove repair cost**), `/warranty/`, `/safety/`, `/certifications/`, `/technicians/`, `/brands-we-service/`, `/case-studies/`, `/before-after/`, `/faq/`, `/privacy-policy/`, `/terms/`.
+**Indexable:** `/about/`, `/contact/`, `/repair-process/`, `/emergency-stove-help/`, `/stove-repair-cost-san-mateo-ca/` (targets **stove repair cost**), `/safety/`, `/faq/`, `/privacy-policy/`, `/terms/`.
+
+**`noindex` placeholders** (thin "coming soon" shells, excluded from the sitemap until verified content ships): `/warranty/`, `/certifications/`, `/technicians/`, `/case-studies/`, `/before-after/`.
+
+**Redirect** (no longer a page): `/brands-we-service/` → `/brands/`.

@@ -12,6 +12,9 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Before-and-after stove repair photos from SanMateo FixHub. We'll only ever publish real, customer-approved images — never stock or fabricated results.",
   path: "/before-after",
+  // Placeholder ("coming soon") page — keep out of the index until real,
+  // customer-approved before/after images exist. Re-enable when populated.
+  noindex: true,
 });
 
 export default function BeforeAfterPage() {

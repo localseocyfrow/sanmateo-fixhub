@@ -41,7 +41,7 @@ ${line("Stove Repair Cost & Pricing Guidance", "/stove-repair-cost-san-mateo-ca"
 ${line("Repair Process", "/repair-process")}
 ${line("Emergency Stove Help & Safety", "/emergency-stove-help")}
 ${line("Safety Information", "/safety")}
-${line("Brands We Service", "/brands-we-service")}
+${line("Brands We Service", "/brands")}
 ${line("Contact / Request Service", "/contact")}
 ${line("FAQ Hub", "/faq")}
 

@@ -12,6 +12,9 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Meet the SanMateo FixHub stove repair team. Technician profiles with real names and photos will be added here — we don't invent people or backgrounds.",
   path: "/technicians",
+  // Placeholder ("coming soon") page — keep out of the index until real
+  // technician profiles exist. Re-enable indexing when populated.
+  noindex: true,
 });
 
 export default function TechniciansPage() {

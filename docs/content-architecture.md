@@ -15,21 +15,34 @@
 │   ├─ igniter-repair-san-mateo-ca
 │   ├─ stove-control-board-repair-san-mateo-ca
 │   └─ pilot-light-repair-san-mateo-ca
-├─ /locations/ (location hub)
-│   ├─ san-mateo-ca                        ← parent city
+├─ /locations/ (location hub — sole canonical location hub)
+│   ├─ san-mateo-ca                        ← parent city (neighborhood-coverage angle;
+│   │                                          defers the bare "stove repair San Mateo"
+│   │                                          term to the service page above)
 │   ├─ stove-repair-{burlingame|foster-city|belmont|san-carlos|millbrae|
 │   │                 redwood-city|daly-city|south-san-francisco|san-bruno|half-moon-bay}-ca
 │   └─ san-mateo-county-stove-repair
-├─ /service-areas/ (Peninsula overview → locations)
 ├─ /problems/ (problem hub)
 │   └─ 10 symptom pages → matching service + emergency + pricing
-├─ /brands/ (brand hub)
+├─ /brands/ (brand hub — sole canonical brand hub)
 │   └─ [brand]-stove-repair-san-mateo-ca   ← only supported brands rendered/indexed
 └─ trust: about, contact, repair-process, emergency-stove-help,
-          stove-repair-cost-san-mateo-ca, warranty, safety, certifications,
-          technicians, brands-we-service, case-studies, before-after, faq,
-          privacy-policy, terms
+          stove-repair-cost-san-mateo-ca, safety, faq, privacy-policy, terms
+          (noindex placeholders until verified content exists:
+           warranty, certifications, technicians, case-studies, before-after)
 ```
+
+## Canonical hubs & permanent redirects (SEO Phase 2/3)
+
+Each duplicate hub was folded into a single canonical hub to remove keyword
+cannibalization. These sources are 308 permanent redirects in `next.config.ts`;
+**no internal link points at them** — every nav, footer, sidebar, hub, and CTA
+link targets the canonical hub directly.
+
+| Redirected source | Canonical hub (308 →) |
+|---|---|
+| `/service-areas/` | `/locations/` |
+| `/brands-we-service/` | `/brands/` |
 
 ## Page-type templates (shared components, unique data)
 
@@ -52,3 +65,5 @@ Every page is data-driven from `content/*` + `lib/*`. Templates guarantee struct
 ## Unverified-content policy (build the shell, don't fake the proof)
 
 Reviews, testimonials, ratings, job counts, years in business, technician names/photos, licenses, insurance, guarantees, certifications, case studies, before/after, real photos, exact prices, and confirmed emergency availability are **gated behind config flags** and rendered as clearly-labeled "future content area" placeholders until the business supplies verified data. No fabricated proof is ever shown.
+
+Placeholder trust pages (`warranty`, `certifications`, `technicians`, `case-studies`, `before-after`) are additionally set to `noindex` (via `buildMetadata({ noindex: true })`) and excluded from `sitemap.ts`, so thin "coming soon" shells are not indexed. Flip each back to indexable — and re-add it to the sitemap — only when its verified content ships.

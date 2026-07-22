@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getLocation, locationSlugs, parentLocation, getProblem } from "@/lib/content";
 import { buildMetadata } from "@/lib/seo";
@@ -139,7 +140,7 @@ export default async function LocationPage({ params }: Params) {
               </div>
               <div className="mt-4 space-y-3">
                 <a href="/contact#request-estimate" className="flex min-h-[44px] w-full items-center justify-center rounded-xl bg-copper-600 px-5 font-semibold text-white hover:bg-copper-700 lg:hidden">Request Service</a>
-                <a href="/service-areas/" className="flex min-h-[44px] w-full items-center justify-center rounded-xl border-2 border-navy-800 px-5 font-semibold text-navy-800 hover:bg-navy-800 hover:text-white">All Service Areas</a>
+                <Link href="/locations/" className="flex min-h-[44px] w-full items-center justify-center rounded-xl border-2 border-navy-800 px-5 font-semibold text-navy-800 hover:bg-navy-800 hover:text-white">All Service Areas</Link>
               </div>
             </div>
           </aside>

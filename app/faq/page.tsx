@@ -41,7 +41,7 @@ export default function FaqPage() {
               { label: "Common Stove Problems", href: "/problems/", description: "Symptom-by-symptom guides." },
               { label: "Stove Repair Cost", href: "/stove-repair-cost-san-mateo-ca/", description: "What affects pricing." },
               { label: "Our Repair Process", href: "/repair-process/", description: "What to expect." },
-              { label: "Service Areas", href: "/service-areas/", description: "Where we work." },
+              { label: "Service Areas", href: "/locations/", description: "Where we work." },
             ]}
           />
         </Container>

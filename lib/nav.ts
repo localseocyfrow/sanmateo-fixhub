@@ -35,7 +35,7 @@ export const headerNav: NavItem[] = [
       { label: "San Bruno", href: "/locations/stove-repair-san-bruno-ca/" },
       { label: "Half Moon Bay", href: "/locations/stove-repair-half-moon-bay-ca/" },
       { label: "San Mateo County", href: "/locations/san-mateo-county-stove-repair/" },
-      { label: "All Service Areas →", href: "/service-areas/" },
+      { label: "All Service Areas →", href: "/locations/" },
     ],
   },
   { label: "Problems", href: "/problems/" },
@@ -68,7 +68,7 @@ export const footerNav: { title: string; links: NavItem[] }[] = [
       { label: "Redwood City", href: "/locations/stove-repair-redwood-city-ca/" },
       { label: "Daly City", href: "/locations/stove-repair-daly-city-ca/" },
       { label: "San Mateo County", href: "/locations/san-mateo-county-stove-repair/" },
-      { label: "All Service Areas", href: "/service-areas/" },
+      { label: "All Service Areas", href: "/locations/" },
     ],
   },
   {
@@ -87,7 +87,7 @@ export const footerNav: { title: string; links: NavItem[] }[] = [
     title: "Company",
     links: [
       { label: "About", href: "/about/" },
-      { label: "Brands We Service", href: "/brands-we-service/" },
+      { label: "Brands We Service", href: "/brands/" },
       { label: "FAQ", href: "/faq/" },
       { label: "Safety", href: "/safety/" },
       { label: "Warranty", href: "/warranty/" },

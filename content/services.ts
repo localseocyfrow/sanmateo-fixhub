@@ -1176,16 +1176,16 @@ export const services: Service[] = [
     slug: "pilot-light-repair-san-mateo-ca",
     name: "Pilot Light Repair",
     primaryKeyword: "pilot light repair",
-    h1: "Pilot Light Repair in San Mateo, CA",
-    metaTitle: "Pilot Light Repair in San Mateo, CA",
+    h1: "Gas Stove Pilot Light Repair in San Mateo, CA",
+    metaTitle: "Gas Stove Pilot Light Repair in San Mateo, CA",
     metaDescription:
-      "Pilot light repair in San Mateo, CA for older gas stoves with pilots that will not stay lit. Careful, safety-minded diagnosis. Ask us for a quote.",
+      "Gas stove pilot light repair in San Mateo, CA for older gas stoves and ranges whose standing pilots won't stay lit. Careful, safety-minded diagnosis and quotes.",
     summary:
       "Pilot light repair for older gas stoves whose standing pilots will not stay lit in San Mateo.",
     quickAnswer:
       "Pilot light repair services the standing pilot system on older gas stoves that use a small always-on flame to light the burners. When a pilot will not stay lit, burns weakly, or keeps going out, the cause is often a clogged pilot orifice, a draft, or a gas-delivery issue. A specialist cleans and adjusts the pilot with safety in mind.",
     intro: [
-      "SanMateo FixHub offers pilot light repair for the older gas stoves still cooking in many San Mateo and Peninsula homes, where a standing pilot lights the burners instead of an electric spark. When that little pilot flame keeps going out, burns too small, or will not stay lit, the burners become slow or impossible to light, and the fix usually comes down to cleaning, adjustment, or gas delivery.",
+      "SanMateo FixHub offers gas stove pilot light repair for the older gas stoves and ranges still cooking in many San Mateo and Peninsula homes, where a standing pilot lights the burners instead of an electric spark. When that little pilot flame keeps going out, burns too small, or will not stay lit, the burners become slow or impossible to light, and the fix usually comes down to cleaning, adjustment, or gas delivery.",
       "Pilot systems are simple but deserve a careful, safety-minded hand, since they involve a continuously burning gas flame. We clean and adjust the pilot, check the path that feeds it, and confirm it holds steady, so your burners light the way they should without fuss.",
     ],
     definition: {

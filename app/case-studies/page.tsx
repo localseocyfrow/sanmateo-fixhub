@@ -12,6 +12,9 @@ export const metadata: Metadata = buildMetadata({
   description:
     "SanMateo FixHub stove repair case studies. Detailed, real repair examples will be published here as they're documented — we never invent stories or outcomes.",
   path: "/case-studies",
+  // Placeholder ("coming soon") page — keep out of the index until real,
+  // documented case studies exist. Re-enable indexing when populated.
+  noindex: true,
 });
 
 export default function CaseStudiesPage() {
