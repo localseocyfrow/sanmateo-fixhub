@@ -589,75 +589,94 @@ export const problems: Problem[] = [
     slug: "uneven-burner-flame",
     name: "Uneven Burner Flame",
     primaryKeyword: "uneven burner flame",
-    h1: "Why Is My Burner Flame Uneven?",
-    metaTitle: "Uneven Burner Flame? Causes and Safe Fixes",
+    h1: "Why Is My Gas Burner Flame Uneven, Yellow, or Weak?",
+    metaTitle: "Uneven Burner Flame? Yellow, Weak or High-Low Gas Flame",
     metaDescription:
-      "A weak, yellow, or lopsided gas flame usually means clogged ports or a misaligned cap. See the common causes and safe checks before a San Mateo repair.",
-    summary: "A gas burner produces a weak, lopsided, or yellow flame instead of an even blue ring.",
+      "Gas stove flame uneven, yellow, weak, or too high or low? Common causes, the safety signs that mean stop and get help, and stove repair in San Mateo.",
+    summary: "A gas burner produces a weak, lopsided, yellow, or too-high-or-low flame instead of an even blue ring.",
     quickAnswer:
-      "An uneven gas flame usually comes from clogged burner ports, a misaligned burner cap, or an air-gas mixture that's off. A healthy flame is steady and blue; yellow, weak, or partial flames point to blockage or airflow issues. Cleaning a cool burner and reseating the cap often helps. If the flame stays uneven, a technician should inspect the burner.",
+      "An uneven gas flame usually comes from dirty or blocked burner ports, a misaligned burner cap, or moisture in the burner — all safe to clean when the burner is cool. A yellow, weak, or too-high-or-low flame can also mean an incorrect air-gas mixture, a regulator or gas-supply issue, or damaged burner parts, which need a technician. Stop using the burner if it burns yellow or sooty, smells of gas, or won't stay stable, and have it inspected.",
     intro: [
-      "A gas burner should produce a steady, mostly blue ring of flame. When the flame looks lopsided, weak, yellow, or only lights on part of the ring, the burner isn't getting a clean, even mix of gas and air. SanMateo FixHub specializes in stoves and can help pinpoint why a burner on your San Mateo range is burning unevenly.",
-      "Most uneven-flame problems come down to clogged ports or a cap that's out of position, both of which are common after spills and cleaning. If cleaning and reseating the burner doesn't restore an even blue flame, the cause may be an airflow or gas-supply issue that needs professional attention.",
+      "A gas burner should light into a steady, mostly blue ring of flame. When the flame looks lopsided, weak, yellow, or burns too high or too low — or only lights on part of the ring — the burner isn't getting a clean, even mix of gas and air. SanMateo FixHub specializes in stoves and can help pinpoint why a burner on your San Mateo range is burning unevenly.",
+      "Most uneven-flame problems come down to dirty or blocked burner ports, a burner cap that's out of position, or moisture left after cleaning — all common after spills and cleaning, and safe to address with the burner cool. If cleaning and reseating don't restore an even blue flame, the cause may be an air-gas mixture problem, a regulator or gas-supply issue, or a damaged burner part that needs professional attention.",
+      "Some flame problems are a safety signal rather than a cleaning task. A flame that stays yellow or sooty, lifts off or burns outside the burner, comes with a gas smell, or keeps going unstable should be treated as a reason to stop using the burner and have it inspected — not something to keep adjusting yourself.",
     ],
     likelyCauses: [
       {
-        title: "Clogged burner ports",
+        title: "Dirty or blocked burner ports",
         detail:
-          "Food debris, grease, or cleaning residue blocking some of the small ports leaves part of the flame ring weak or missing.",
+          "Food debris, grease, or cleaning residue blocking some of the small ports around the burner leaves part of the flame ring weak, missing, or lopsided. This is one of the most common causes after spills and cleaning.",
       },
       {
         title: "Misaligned burner cap",
         detail:
-          "A cap that sits crooked or off-center can distort the flame pattern, producing an uneven or lopsided flame.",
-      },
-      {
-        title: "Incorrect air-to-gas mixture",
-        detail:
-          "If the air shutter or mixture is off, the flame can burn yellow or lift away from the burner instead of a clean blue.",
+          "A burner cap that sits crooked or off-center — easy to do after cleaning — distorts the flame so it burns lopsided or only lights part of the ring. Reseating the cool cap level and centered often restores an even flame.",
       },
       {
         title: "Moisture in the burner",
         detail:
-          "Water trapped in the burner after cleaning or a boil-over can cause sputtering and an uneven flame until it dries out.",
+          "Water trapped in the burner head or ports after cleaning or a boil-over can make the flame sputter and burn unevenly until it fully dries out.",
       },
       {
-        title: "Low or inconsistent gas supply",
+        title: "Incorrect air-to-gas mixture",
         detail:
-          "A partially closed valve or a supply issue can starve the burner of gas, leaving a small or weak flame across the ring.",
+          "If the air-to-gas mixture is off, the flame can burn yellow or orange, lift away from the burner, or roar instead of forming a clean blue ring. Correcting the mixture is a job for a technician, not a home adjustment.",
+      },
+      {
+        title: "Regulator or gas-supply issue",
+        detail:
+          "A pressure regulator that isn't delivering the right pressure, a partially closed valve, or an inconsistent supply can leave the flame too low and weak or, less often, too high — often across more than one burner. This needs professional diagnosis, never a DIY adjustment.",
+      },
+      {
+        title: "Damaged burner parts",
+        detail:
+          "A burner head, cap, or orifice that is cracked, corroded, or clogged with hardened residue can disrupt the flame even after cleaning and reseating. Worn parts like these usually need to be inspected and replaced.",
       },
     ],
     safety: [
-      "A persistently yellow or sooty flame can produce more carbon monoxide, so don't ignore it; ensure the kitchen is ventilated.",
-      "If you smell gas along with an uneven flame, turn the burner off and follow gas-safety steps before using it again.",
-      "Do not adjust the burner's air shutter or gas components yourself; leave those to a technician.",
+      "A steady blue flame is normal; a persistently yellow, orange, or sooty flame can mean incomplete combustion and more carbon monoxide, so stop using that burner and have it inspected.",
+      "If you see soot or black marks around the burner or on your cookware, treat it as a combustion problem that needs professional attention, not just another cleaning.",
+      "If the flame lifts off, burns outside the burner, or keeps going unstable no matter what you try, turn the burner off and stop using it until a technician has checked it.",
+      "If you smell gas, follow gas-safety steps: turn the knobs off, avoid flames, lighters, and light switches, ventilate or leave if the odor is strong, and call PG&E at 1-800-743-5000 or 911.",
+      "Do not adjust the air shutter, pressure regulator, gas valves, or any gas component yourself — those adjustments belong to a qualified technician.",
+      "Keep the kitchen ventilated whenever a burner has been burning yellow or sooty.",
     ],
     nextSteps: [
-      "Turn the burner off and let it cool completely.",
-      "Remove the cool burner cap and clean debris from the ports with a soft brush or pin.",
-      "Dry the burner fully and reseat the cap so it sits level and centered.",
-      "Relight the burner and check for a steady blue flame.",
-      "If the flame stays uneven or yellow, request service from SanMateo FixHub.",
+      "Turn the burner off and let it and the cap cool completely before touching anything.",
+      "Lift off the cool burner cap and clear debris from the ports with a soft brush or a pin, without widening them.",
+      "Dry the burner head and cap fully, then reseat the cap so it sits level and centered.",
+      "Relight the burner and check for a steady, mostly blue flame.",
+      "If the flame stays uneven, yellow, weak, or too high or low — or you notice soot or a gas smell — stop using the burner and request service from SanMateo FixHub.",
     ],
     faqs: [
       {
-        question: "What should a healthy gas flame look like?",
+        question: "What should a healthy gas burner flame look like?",
         answer:
-          "A healthy burner flame is steady, mostly blue, and even all the way around the ring. Yellow, orange, weak, or lopsided flames indicate a blockage, airflow, or mixture problem worth addressing.",
+          "A healthy burner flame is steady, mostly blue, and even all the way around the ring, often with a small blue-green inner cone. Yellow, orange, weak, lopsided, or flames that burn too high or too low point to a blockage, airflow, mixture, or gas-supply problem worth addressing.",
       },
       {
-        question: "Why is my burner flame yellow instead of blue?",
+        question: "Why is my gas stove flame yellow instead of blue?",
         answer:
-          "A yellow flame usually means the gas isn't mixing with enough air or the ports are dirty. Cleaning a cool burner can help; if it stays yellow, the air-gas mixture may need professional adjustment.",
+          "A yellow stove flame usually means the gas isn't mixing with enough air, often from dirty ports or an incorrect air-gas mixture. Cleaning a cool burner can help; if it stays yellow or leaves soot, stop using it and have the mixture and burner checked, since a yellow flame can produce more carbon monoxide.",
       },
       {
-        question: "Is an uneven flame dangerous?",
+        question: "Why is my gas burner flame weak or low?",
         answer:
-          "A persistently yellow or sooty flame can produce more carbon monoxide and cooks unevenly, so it's worth fixing. Ventilate the kitchen and have the burner checked if cleaning doesn't restore an even blue flame.",
+          "A weak or low flame across the ring often points to blocked ports starving the burner, or to a regulator or gas-supply issue delivering too little gas. Cleaning cool ports can fix a single weak burner; if several burners are weak, or cleaning doesn't help, a technician should check the pressure regulator and supply.",
+      },
+      {
+        question: "Why is my burner flame too high or uneven?",
+        answer:
+          "A flame that's too high, roars, or lifts off the burner can mean an air-gas mixture that's off or a regulator problem, while a lopsided flame usually comes from clogged ports or a misaligned cap. Reseating a cool cap and cleaning the ports helps with alignment; high flames or lifting point to a gas adjustment only a technician should make.",
+      },
+      {
+        question: "Is an uneven or yellow flame dangerous?",
+        answer:
+          "It can be. A persistently yellow or sooty flame burns incompletely and can produce more carbon monoxide, and flames outside the burner or a gas smell are clear stop signs. Ventilate the kitchen, stop using the burner, and have it inspected if cleaning doesn't restore a steady blue flame.",
       },
     ],
-    serviceSlug: "burner-repair-san-mateo-ca",
-    relatedProblems: ["burner-not-working", "stove-clicking-but-not-lighting"],
+    serviceSlug: "gas-stove-repair-san-mateo-ca",
+    relatedProblems: ["burner-not-working", "stove-clicking-but-not-lighting", "gas-smell-from-stove"],
     icon: "flame",
   },
   {
