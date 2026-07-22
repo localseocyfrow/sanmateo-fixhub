@@ -327,61 +327,68 @@ export const problems: Problem[] = [
     slug: "stove-wont-turn-on",
     name: "Stove Won't Turn On",
     primaryKeyword: "stove won't turn on",
-    h1: "Why Won't My Stove Turn On?",
-    metaTitle: "Stove Won't Turn On? Causes and Safe Checks",
+    h1: "Stove Won't Turn On? No Power or Stopped Working Suddenly",
+    metaTitle: "Stove Won't Turn On? No Power or Stopped Suddenly",
     metaDescription:
-      "A stove that's completely dead often has a power or control issue. Learn the common causes and safe checks before booking a stove repair in San Mateo.",
-    summary: "The stove is completely unresponsive, with no lights, display, or burner activity.",
+      "Stove won't turn on, has no power, or stopped working suddenly? Likely causes and safe checks — breaker, cord, control lock, control board — before a San Mateo repair.",
+    summary: "The stove is completely unresponsive — no power, lights, display, or burner activity, sometimes after stopping suddenly.",
     quickAnswer:
-      "A stove that won't turn on at all usually has a power-supply or control problem: a tripped breaker, an unplugged or loose cord, a failed control board, or a control lock engaged. Check the breaker and that the stove is plugged in. If power is present but the stove stays dead, the control board or wiring likely needs a technician.",
+      "A stove that won't turn on usually has no power reaching it or a control fault: a tripped breaker, an unplugged or loose cord, an engaged control lock, a failed control board, or damaged wiring. If it stopped working suddenly, check the breaker and that the stove is plugged in first. If power is present but the stove stays dead, the control board or wiring likely needs a technician.",
     intro: [
-      "When a stove won't turn on at all, with no display, indicator lights, or burner response, the problem is usually electrical rather than a single burner part. Even gas stoves rely on electricity for igniters and controls, so a power loss can leave the whole unit dead. SanMateo FixHub specializes in stoves and can help diagnose why yours won't power up in San Mateo.",
-      "The first things to rule out are the power supply and any control lock. If the breaker is fine, the stove is plugged in, and the controls are unlocked but it still won't respond, the issue often lies in the control board or internal wiring and needs professional attention.",
+      "When a stove won't turn on at all — no display, indicator lights, or burner response — the problem is usually electrical rather than a single burner part. Even gas stoves rely on electricity for igniters and controls, so a loss of power can leave the whole unit dead. SanMateo FixHub specializes in stoves and can help diagnose why yours has no power in San Mateo.",
+      "If the stove stopped working suddenly, that points first to the power supply or a control lock rather than a slowly failing part. Confirm the breaker is on, the stove is plugged in, and the controls are unlocked. If it still won't respond, the fault often lies in the control board or internal wiring and needs professional attention.",
     ],
     likelyCauses: [
       {
         title: "Tripped breaker or blown fuse",
         detail:
-          "A stove that gets no power will be completely dead. A tripped circuit breaker or blown fuse is a common and simple cause worth checking first.",
+          "A stove with no power will be completely dead, and a tripped circuit breaker or blown fuse is the most common reason a stove stops working suddenly. It's the first thing worth checking.",
       },
       {
-        title: "Loose or unplugged power cord",
+        title: "Loose cord or dead outlet",
         detail:
-          "A cord that has worked loose from the outlet, or a damaged connection, can cut all power to the stove.",
+          "A cord that has worked loose, a damaged connection, or an outlet that has lost power can cut all electricity to the stove so it won't turn on.",
       },
       {
         title: "Control lock engaged",
         detail:
-          "Many stoves have a control lock or child lock that disables the panel. If it's engaged, the stove may appear unresponsive until it's released.",
+          "Many stoves have a control lock or child lock that disables the panel. If it's engaged, the stove may appear dead or unresponsive until it's released.",
       },
       {
         title: "Failed control board",
         detail:
-          "A fault on the electronic control board can leave the stove with no display or response even when power is reaching it.",
+          "A fault on the electronic control board can leave the stove with no display or response even when power is reaching it — often why a stove suddenly stops working with power still on.",
       },
       {
-        title: "Faulty wiring or connection",
+        title: "Damaged wiring or connection",
         detail:
-          "A broken internal connection or damaged wiring harness can interrupt power to the controls, keeping the stove from turning on.",
+          "A broken internal connection or a damaged wiring harness can interrupt power to the controls, keeping the stove from turning on.",
       },
     ],
     safety: [
-      "If the stove's cord, plug, or outlet looks scorched, melted, or smells burnt, do not use it and keep it unplugged.",
+      "If the stove stopped suddenly and you smell burning or see smoke, switch off its breaker (or unplug it only if safe) and don't use it until it's inspected.",
+      "If the cord, plug, or outlet looks scorched or melted, or smells burnt, do not use the stove and keep it disconnected.",
       "Do not attempt repairs inside the electrical panel or the stove's wiring yourself.",
       "If a breaker trips again right after you reset it, stop and have the stove and circuit inspected by a professional.",
     ],
     nextSteps: [
-      "Check your electrical panel and reset the breaker if it is clearly tripped.",
-      "Make sure the stove is firmly plugged in and the outlet has power.",
+      "Note whether the stove stopped suddenly or faded gradually — a sudden dead stove usually points to lost power.",
+      "Check your electrical panel and reset the breaker once if it is clearly tripped.",
+      "Make sure the stove is firmly plugged in and confirm the outlet has power.",
       "Look for a control lock or child lock indicator and release it if engaged.",
       "Check the owner's guidance for any reset step specific to your model.",
-      "If the stove still won't turn on, request service from SanMateo FixHub.",
+      "If the stove still won't turn on, request service from SanMateo FixHub to check the control board and wiring.",
     ],
     faqs: [
       {
-        question: "Why is my stove completely dead with no lights?",
+        question: "Why is my stove completely dead with no power or lights?",
         answer:
-          "A totally unresponsive stove usually isn't receiving power, or its control board has failed. Start by checking the breaker and the plug; if power is present and it's still dead, the board or wiring likely needs service.",
+          "A totally unresponsive stove usually isn't receiving power, or its control board has failed. Start by checking the breaker and the plug; if power is present and it's still dead, the control board or wiring likely needs service.",
+      },
+      {
+        question: "My stove stopped working suddenly — what should I check first?",
+        answer:
+          "A sudden stop usually means power was interrupted. Check whether the breaker tripped, the cord is fully plugged in, and the outlet has power, and look for an engaged control lock. If power is present and the stove stays dead, the control board or wiring likely needs a technician.",
       },
       {
         question: "Can a control lock make my stove seem broken?",
