@@ -834,17 +834,17 @@ export const services: Service[] = [
     slug: "burner-repair-san-mateo-ca",
     name: "Burner Repair",
     primaryKeyword: "burner repair",
-    h1: "Burner Repair in San Mateo, CA",
-    metaTitle: "Burner Repair in San Mateo, CA - Gas & Electric",
+    h1: "Stove Burner Repair in San Mateo, CA",
+    metaTitle: "Stove Burner Repair in San Mateo, CA - Gas & Electric",
     metaDescription:
-      "Burner repair in San Mateo, CA for cold, weak or uneven burners on gas and electric stoves. Careful diagnosis, honest advice. Ask us for a quote.",
+      "Stove burner repair in San Mateo, CA for a gas or electric burner that won't light, won't heat, or burns unevenly. Careful diagnosis and a clear quote.",
     summary:
-      "Burner repair for cold, weak and uneven gas or electric burners across San Mateo.",
+      "Stove burner repair for gas and electric burners that won't light, won't heat, or burn unevenly across San Mateo.",
     quickAnswer:
-      "Burner repair fixes a single misbehaving burner, whether it is a gas burner that will not light or burns unevenly, or an electric element that stays cold or heats partway. A specialist isolates that burner, checks its igniter, ports, element, switch or connection, and repairs or replaces only the part responsible.",
+      "Stove burner repair fixes a single misbehaving burner, whether it is a gas stove burner that will not light or burns unevenly, or an electric stove burner that will not heat or heats only partway. A specialist isolates that burner, checks its igniter, ports, element, switch or connection, and repairs or replaces only the part responsible.",
     intro: [
-      "SanMateo FixHub handles burner repair across San Mateo and the Peninsula, focusing on the single burner or element that has stopped pulling its weight. Often the rest of the stove is perfectly fine and just one burner clicks without lighting, burns lopsided, or stays stubbornly cold. We isolate that burner and work out precisely why it is failing.",
-      "Because a burner fault can come from several small parts, from an igniter or clogged port on gas to an element or switch on electric, careful isolation matters. Fixing the actual weak link gets that burner back to a clean, even heat without disturbing the ones that already work.",
+      "SanMateo FixHub handles stove burner repair across San Mateo and the Peninsula, focusing on the single gas or electric burner that has stopped pulling its weight. Often the rest of the stove is perfectly fine and just one burner clicks without lighting, will not heat, or burns lopsided. We isolate that burner and work out precisely why it is failing.",
+      "Because a stove burner fault can come from several small parts, from an igniter or clogged port on a gas stove burner to an element or switch on an electric stove burner, careful isolation matters. Fixing the actual weak link gets that burner back to a clean, even heat without disturbing the ones that already work.",
     ],
     definition: {
       term: "Burner Repair",
@@ -908,7 +908,7 @@ export const services: Service[] = [
       "Across the Peninsula, from San Mateo to Belmont and San Carlos, the split between gas and electric stoves means burner faults show up in both forms, clogged gas ports here and tired coil elements there. Handling either keeps the fix small and specific.",
     ],
     costGuidance:
-      "Burner repair cost depends on whether the burner is gas or electric, which part has failed, and the brand and model of the stove. An igniter, element, or switch is typically a contained job, while a burnt receptacle or valve can add labor, and diagnosis is included. We give a clear estimate before any work begins. Reach out with your stove type and the burner symptom to request a quote.",
+      "Stove burner repair cost depends on whether the burner is gas or electric, which part has failed, and the brand and model of the stove. An igniter, element, or switch is typically a contained job, while a burnt receptacle or valve can add labor, and diagnosis is included. We give a clear estimate before any work begins. Tell us your stove type and whether the burner won't light or won't heat, and we'll send a clear quote.",
     faqs: [
       {
         question: "Can just one burner be repaired?",
@@ -921,9 +921,14 @@ export const services: Service[] = [
           "On gas, uneven heat often means clogged ports or a misaligned cap; on electric it can mean a partly failed element. Both are common and diagnosable.",
       },
       {
-        question: "My burner clicks but will not light. Is that fixable?",
+        question: "My gas stove burner clicks but won't light. Is that fixable?",
         answer:
-          "Usually, yes. Clicking without lighting typically points to a wet or misaligned cap, a dirty igniter, or an igniter fault, all of which are standard burner repairs.",
+          "Usually, yes. A gas burner clicking without lighting typically points to a wet or misaligned cap, a dirty igniter, or an igniter fault, all of which are standard stove burner repairs.",
+      },
+      {
+        question: "Why won't my electric stove burner heat up?",
+        answer:
+          "An electric burner that won't heat usually points to a failed element, a worn infinite switch, or a burnt coil receptacle. Swapping a known-good element into the position quickly shows whether the element, the switch, or the receptacle is at fault.",
       },
       {
         question: "Is a stuck-on burner an element or switch problem?",
@@ -941,6 +946,7 @@ export const services: Service[] = [
       "burner-not-working",
       "uneven-burner-flame",
       "stove-clicking-but-not-lighting",
+      "electric-stove-not-heating",
     ],
     icon: "burner",
   },
