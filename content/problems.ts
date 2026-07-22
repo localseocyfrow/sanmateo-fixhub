@@ -5,15 +5,16 @@ export const problems: Problem[] = [
     slug: "stove-not-heating",
     name: "Stove Not Heating",
     primaryKeyword: "stove not heating",
-    h1: "Why Is My Stove Not Heating?",
-    metaTitle: "Stove Not Heating? Common Causes & What to Check",
+    h1: "Stove Not Heating? Why a Gas or Electric Stove Won't Get Hot",
+    metaTitle: "Stove Not Heating? Gas & Electric Causes to Check",
     metaDescription:
-      "Your stove turns on but won't get hot? Learn the common reasons a stove stops heating and the safe checks to try before booking a repair in San Mateo.",
+      "Stove turns on but won't heat? Common reasons a gas or electric stove stops getting hot, safe checks to try, and when to book a stove repair in San Mateo.",
     summary: "Your stove powers on but the burners or elements stay cold or barely warm.",
     quickAnswer:
-      "A stove that won't heat usually points to a specific failed part: a worn igniter on a gas burner, a burned-out heating element or bad connection on an electric unit, or a control fault interrupting power. Simple checks include confirming the gas or power supply and knob position. If those are fine, a technician can pinpoint the cause.",
+      "A stove that turns on but won't heat usually points to one failed part: a worn igniter or clogged ports on a gas burner, a burned-out element or bad connection on an electric unit, or a control or power fault. Confirm the gas or power supply and that a knob is fully engaged first. If the basics are fine, a technician can pinpoint the cause — and our fuel-specific guides below cover electric burners, a single dead burner, and temperature faults in more detail.",
     intro: [
       "When a stove won't heat, the burner may click or glow faintly but never reach cooking temperature, or it may stay completely cold. It is one of the most common stove complaints, and the cause depends on whether you have a gas or electric unit. SanMateo FixHub focuses on stoves and cooktops, so we can help diagnose why yours isn't heating at homes across San Mateo and the Peninsula.",
+      "This page is the broad overview for a stove that powers on but won't get hot, whether it's gas or electric. If your situation is more specific, we have focused guides too: an electric burner that stays cold or sparked and went dead, a single burner that won't work while the others heat, or a burner that runs too hot or too cool. You'll find links to each of those below.",
       "Before assuming the worst, it helps to rule out the simple things: the gas supply valve, the power connection, and whether a knob is fully engaged. If the basics check out and the burner still won't warm, the issue is usually a worn or failed component that needs a closer look.",
     ],
     likelyCauses: [
@@ -48,18 +49,35 @@ export const problems: Problem[] = [
           "Food debris or grease blocking the burner ports can restrict gas flow, producing a weak flame or no flame at all on that burner.",
       },
     ],
+    safety: [
+      "If you smell gas near the stove, stop, turn all knobs off, avoid flames, lighters, and light switches, ventilate or leave if the odor is strong, and call PG&E at 1-800-743-5000 or 911 before troubleshooting further.",
+      "If an electric burner sparks or arcs and then goes cold, switch it off and stop using it until it has been inspected — a spark can mean a damaged element or receptacle.",
+      "Let any burner or element cool completely before cleaning it or reseating a plug-in coil.",
+      "Don't repeatedly reset a breaker that trips when you use the stove; leave it off and have the circuit and stove checked.",
+    ],
     nextSteps: [
       "Confirm the stove has power and, for gas units, that the gas supply valve is open.",
       "Check that the knob is turned fully to a heat setting and not stuck between positions.",
       "For electric coils, let the element cool, then make sure it is seated firmly in its socket.",
       "When a gas burner is cool, gently clean any debris from the burner cap and ports.",
+      "If your symptom is more specific — electric only, one dead burner, or a temperature problem — see the focused guides linked below.",
       "If the burner still won't heat, request service from SanMateo FixHub for a hands-on diagnosis.",
     ],
     faqs: [
       {
+        question: "Why is my gas stove not heating?",
+        answer:
+          "On a gas stove, no heat usually traces to the burner itself: a worn igniter that sparks but won't light, clogged ports restricting gas flow, a stuck valve, or a gas-supply problem. Confirm the supply valve is open and the cap is seated, then have the igniter and valve checked. If the burner clicks but never lights, see our stove clicking but not lighting guide below.",
+      },
+      {
+        question: "Why is my electric stove not heating?",
+        answer:
+          "An electric stove that won't heat often has a burned-out element, a worn or arced receptacle where a plug-in coil connects, a loose wiring connection, a failed infinite switch, or a lost leg of the 240-volt supply. Reseating a cool coil can help; if it still won't heat, our electric stove not heating guide below covers the specific checks and when to stop.",
+      },
+      {
         question: "Why does one burner not heat while the others work?",
         answer:
-          "A single cold burner usually points to that burner's own part: a failed element or igniter, a bad connection, or clogged ports. The shared power or gas supply is likely fine since the other burners work.",
+          "A single cold burner usually points to that burner's own part: a failed element or igniter, a bad connection, or clogged ports. The shared power or gas supply is likely fine since the other burners work. Our burner not working guide covers this pattern in detail.",
       },
       {
         question: "Can a tripped breaker stop my stove from heating?",
@@ -73,7 +91,7 @@ export const problems: Problem[] = [
       },
     ],
     serviceSlug: "stove-repair-san-mateo-ca",
-    relatedProblems: ["burner-not-working", "electric-stove-not-heating"],
+    relatedProblems: ["electric-stove-not-heating", "burner-not-working", "stove-temperature-issue"],
     icon: "thermometer",
   },
   {
