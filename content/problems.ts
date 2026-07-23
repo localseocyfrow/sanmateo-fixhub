@@ -101,7 +101,7 @@ export const problems: Problem[] = [
     h1: "Stove Clicking But Not Lighting? Why a Gas Burner Won't Ignite",
     metaTitle: "Stove Clicking But Not Lighting? Gas Burner Won't Ignite",
     metaDescription:
-      "Gas stove clicking but not lighting? Why a burner keeps clicking and won't ignite — burner cap, ports, igniter, switch, gas supply — plus safe steps in San Mateo.",
+      "Gas stove clicking but not lighting? Why a burner clicks and won't ignite — burner cap, ports, igniter, switch, gas supply — plus safe steps in San Mateo.",
     summary: "You hear the burner clicking, but the gas won't catch a flame or ignite.",
     quickAnswer:
       "A gas stove that keeps clicking but won't light means the spark isn't igniting the gas. Common reasons include a wet or dirty burner cap, a cap that's out of position, blocked burner ports, a faulty igniter, an ignition switch or module fault, or a gas-supply problem. Stop repeated attempts if the burner won't catch, and if you smell gas that doesn't clear, ventilate and follow gas-safety steps. A technician can check the igniter, switch, and gas flow.",
@@ -348,7 +348,7 @@ export const problems: Problem[] = [
     h1: "Stove Won't Turn On? No Power or Stopped Working Suddenly",
     metaTitle: "Stove Won't Turn On? No Power or Stopped Suddenly",
     metaDescription:
-      "Stove won't turn on, has no power, or stopped working suddenly? Likely causes and safe checks — breaker, cord, control lock, control board — before a San Mateo repair.",
+      "Stove won't turn on or has no power? Review likely causes and safe checks for the breaker, cord, control lock, and control board in San Mateo.",
     summary: "The stove is completely unresponsive — no power, lights, display, or burner activity, sometimes after stopping suddenly.",
     quickAnswer:
       "A stove that won't turn on usually has no power reaching it or a control fault: a tripped breaker, an unplugged or loose cord, an engaged control lock, a failed control board, or damaged wiring. If it stopped working suddenly, check the breaker and that the stove is plugged in first. If power is present but the stove stays dead, the control board or wiring likely needs a technician.",

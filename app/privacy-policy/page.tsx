@@ -11,6 +11,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     "How SanMateo FixHub collects and uses information from stove repair service requests. We use your details only to respond and we do not sell personal data.",
   path: "/privacy-policy",
+  titleAbsolute: true,
 });
 
 export default function PrivacyPolicyPage() {

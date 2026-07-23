@@ -14,6 +14,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     "See how SanMateo FixHub approaches stove repair in San Mateo: from your first description of the symptom to on-site diagnosis, a clear estimate, and a focused repair.",
   path: "/repair-process",
+  titleAbsolute: true,
 });
 
 const steps = [

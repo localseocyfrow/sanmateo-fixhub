@@ -11,6 +11,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     "The terms for using the SanMateo FixHub website. This site is informational, estimates are confirmed before work, and gas emergencies should go to your utility or 911.",
   path: "/terms",
+  titleAbsolute: true,
 });
 
 export default function TermsPage() {

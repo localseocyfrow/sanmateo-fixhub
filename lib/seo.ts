@@ -20,6 +20,12 @@ type BuildMetaArgs = {
   noindex?: boolean;
   /** Publication date for article OG. */
   publishedTime?: string;
+  /**
+   * Render the document <title> exactly as given, bypassing the root layout's
+   * `%s | SanMateo FixHub` template. Use on pages whose title already contains
+   * the brand, to avoid duplicating it.
+   */
+  titleAbsolute?: boolean;
 };
 
 /** Central metadata builder — canonical + Open Graph + Twitter, consistently. */
@@ -30,10 +36,11 @@ export function buildMetadata({
   ogType = "website",
   noindex = false,
   publishedTime,
+  titleAbsolute = false,
 }: BuildMetaArgs): Metadata {
   const url = absoluteUrl(path);
   return {
-    title,
+    title: titleAbsolute ? { absolute: title } : title,
     description,
     alternates: { canonical: url },
     robots: noindex

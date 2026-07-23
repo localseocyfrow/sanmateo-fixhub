@@ -16,6 +16,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     "SanMateo FixHub is a stove repair specialist for San Mateo and the Peninsula, focused only on gas and electric stoves, ranges, and cooktops. Learn our approach.",
   path: "/about",
+  titleAbsolute: true,
 });
 
 export default function AboutPage() {

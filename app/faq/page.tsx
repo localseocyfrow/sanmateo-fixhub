@@ -16,6 +16,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Answers to common questions about stove repair in San Mateo: service areas, gas vs electric stoves, brands, diagnosis, cost factors, and how to request service.",
   path: "/faq",
+  titleAbsolute: true,
 });
 
 export default function FaqPage() {

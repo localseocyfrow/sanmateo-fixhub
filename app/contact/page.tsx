@@ -16,6 +16,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Contact SanMateo FixHub for stove repair in San Mateo, CA. Call now or request service online for gas and electric stove, range, and cooktop help across the Peninsula.",
   path: "/contact",
+  titleAbsolute: true,
 });
 
 export default function ContactPage() {
