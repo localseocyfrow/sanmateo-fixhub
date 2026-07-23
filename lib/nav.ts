@@ -1,4 +1,10 @@
 import type { NavItem } from "./types";
+import { publishedBlogPosts } from "@/content/blogs";
+
+// Blog is surfaced in nav only once at least one published post exists; while
+// blogPosts is empty this evaluates to [] and the link stays hidden.
+const blogNav: NavItem[] =
+  publishedBlogPosts().length > 0 ? [{ label: "Blog", href: "/blog/" }] : [];
 
 // Primary header navigation. Slugs match content/* entries and route folders.
 export const headerNav: NavItem[] = [
@@ -40,6 +46,7 @@ export const headerNav: NavItem[] = [
   },
   { label: "Problems", href: "/problems/" },
   { label: "Brands", href: "/brands/" },
+  ...blogNav,
   { label: "Pricing", href: "/stove-repair-cost-san-mateo-ca/" },
   { label: "About", href: "/about/" },
   { label: "Contact", href: "/contact/" },

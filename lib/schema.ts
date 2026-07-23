@@ -213,3 +213,33 @@ export function collectionPageSchema(opts: {
     },
   };
 }
+
+/**
+ * BlogPosting schema for a single blog article. Author and publisher are the
+ * Organization (per the truthfulness rules above: no named-Person schema).
+ */
+export function blogPostingSchema(opts: {
+  headline: string;
+  description: string;
+  url: string;
+  datePublished: string;
+  dateModified?: string;
+  image?: string;
+}) {
+  const url = absoluteUrl(opts.url);
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: opts.headline,
+    description: opts.description,
+    url,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    datePublished: opts.datePublished,
+    dateModified: opts.dateModified ?? opts.datePublished,
+    image: opts.image ?? heroUrl,
+    inLanguage: "en-US",
+    isPartOf: { "@id": WEBSITE_ID },
+    author: { "@id": ORG_ID },
+    publisher: { "@id": ORG_ID },
+  };
+}

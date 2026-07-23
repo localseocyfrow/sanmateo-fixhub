@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { absoluteUrl } from "@/lib/seo";
 import { services, locations, problems, supportedBrandList, brandPageSlug } from "@/lib/content";
+import { publishedBlogPosts } from "@/content/blogs";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -42,6 +43,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Only supported brand pages are indexable.
   for (const b of supportedBrandList())
     entries.push({ url: absoluteUrl(`/brands/${brandPageSlug(b.slug)}`), lastModified: now, changeFrequency: "monthly", priority: 0.6 });
+
+  // Blog: include the hub and posts only once at least one published post exists.
+  const blogPosts = publishedBlogPosts();
+  if (blogPosts.length > 0) {
+    entries.push({ url: absoluteUrl("/blog/"), lastModified: now, changeFrequency: "weekly", priority: 0.6 });
+    for (const post of blogPosts)
+      entries.push({
+        url: absoluteUrl(`/blog/${post.slug}`),
+        lastModified: new Date(post.updatedTime ?? post.publishedTime),
+        changeFrequency: "monthly",
+        priority: 0.6,
+      });
+  }
 
   return entries;
 }
