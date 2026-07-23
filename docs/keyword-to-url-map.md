@@ -71,6 +71,6 @@ Legend — Type: `home` `service` `location` `problem` `brand` `trust` `hub`. In
 
 **Indexable:** `/about/`, `/contact/`, `/repair-process/`, `/emergency-stove-help/`, `/stove-repair-cost-san-mateo-ca/` (targets **stove repair cost**), `/safety/`, `/faq/`, `/privacy-policy/`, `/terms/`.
 
-**`noindex` placeholders** (thin "coming soon" shells, excluded from the sitemap until verified content ships): `/warranty/`, `/certifications/`, `/technicians/`, `/case-studies/`, `/before-after/`.
+**Removed** (these URLs now return 404 — not live pages, not in the sitemap): `/warranty/`, `/certifications/`, `/technicians/`, `/case-studies/`, `/before-after/`.
 
 **Redirect** (no longer a page): `/brands-we-service/` → `/brands/`.

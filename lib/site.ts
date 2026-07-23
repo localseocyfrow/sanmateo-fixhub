@@ -103,17 +103,6 @@ export const site = {
     /** Ringba JS tag URL (loaded only when enabled). */
     scriptUrl: process.env.NEXT_PUBLIC_RINGBA_SCRIPT_URL ?? "",
   },
-
-  // ── PROOF / TRUST FEATURE FLAGS — enable only with VERIFIED content ───────────
-  // These gate whether "proof" sections show real content or a clearly-labeled
-  // "future content area" placeholder. Never flip to true without real data.
-  features: {
-    caseStudies: false,
-    beforeAfter: false,
-    technicians: false,
-    certifications: false,
-    warranty: false,
-  },
 } as const;
 
 // ── SUPPORTED BRANDS ───────────────────────────────────────────────────────────

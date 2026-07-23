@@ -45,8 +45,8 @@ npm run lint     # ESLint
 ## Content integrity
 
 No fabricated reviews, ratings, credentials, technicians, job counts, prices, or availability claims.
-Unverified "proof" areas (case studies, technicians, certifications, before/after, recent jobs) render as
-clearly-labeled **future content** placeholders, gated behind flags in `lib/site.ts` (`features.*`). Brand pages only
+Unverified "proof" areas (case studies, technicians, certifications, before/after, recent jobs) are never
+fabricated; their former placeholder pages were removed and those URLs now return 404. Brand pages only
 publish/index when a brand is `supported: true`.
 
 See `docs/` for keyword research, content architecture, internal linking, and the pre-launch checklist.

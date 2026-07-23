@@ -9,7 +9,7 @@
 - [ ] `address` — leave `null` unless a real, public, staffed address exists (affects LocalBusiness schema)
 - [ ] `brands[].supported` — enable only brands actually serviced
 - [ ] `email`, `social` profiles
-- [ ] Proof flags (`features.caseStudies`, `.technicians`, `.certifications`, `.warranty`) — enable only with verified content
+- [ ] Placeholder trust pages (warranty, certifications, technicians, case-studies, before-after) were **removed** — those URLs return 404; recreate a route only with verified content
 - [ ] `siteUrl` — production domain (used for canonical, OG, sitemap)
 
 ## Technical SEO

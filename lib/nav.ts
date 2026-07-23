@@ -90,8 +90,6 @@ export const footerNav: { title: string; links: NavItem[] }[] = [
       { label: "Brands We Service", href: "/brands/" },
       { label: "FAQ", href: "/faq/" },
       { label: "Safety", href: "/safety/" },
-      { label: "Warranty", href: "/warranty/" },
-      { label: "Certifications", href: "/certifications/" },
       { label: "Contact", href: "/contact/" },
     ],
   },
@@ -100,6 +98,4 @@ export const footerNav: { title: string; links: NavItem[] }[] = [
 export const legalNav: NavItem[] = [
   { label: "Privacy Policy", href: "/privacy-policy/" },
   { label: "Terms", href: "/terms/" },
-  { label: "Warranty", href: "/warranty/" },
-  { label: "Certifications", href: "/certifications/" },
 ];

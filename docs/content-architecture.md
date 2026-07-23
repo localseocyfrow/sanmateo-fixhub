@@ -28,7 +28,7 @@
 │   └─ [brand]-stove-repair-san-mateo-ca   ← only supported brands rendered/indexed
 └─ trust: about, contact, repair-process, emergency-stove-help,
           stove-repair-cost-san-mateo-ca, safety, faq, privacy-policy, terms
-          (noindex placeholders until verified content exists:
+          (removed — these URLs now return 404, not live pages:
            warranty, certifications, technicians, case-studies, before-after)
 ```
 
@@ -64,6 +64,6 @@ Every page is data-driven from `content/*` + `lib/*`. Templates guarantee struct
 
 ## Unverified-content policy (build the shell, don't fake the proof)
 
-Reviews, testimonials, ratings, job counts, years in business, technician names/photos, licenses, insurance, guarantees, certifications, case studies, before/after, real photos, exact prices, and confirmed emergency availability are **gated behind config flags** and rendered as clearly-labeled "future content area" placeholders until the business supplies verified data. No fabricated proof is ever shown.
+Reviews, testimonials, ratings, job counts, years in business, technician names/photos, licenses, insurance, guarantees, certifications, case studies, before/after, real photos, exact prices, and confirmed emergency availability are **never fabricated** — they are simply omitted until the business supplies verified data. No fabricated proof is ever shown.
 
-Placeholder trust pages (`warranty`, `certifications`, `technicians`, `case-studies`, `before-after`) are additionally set to `noindex` (via `buildMetadata({ noindex: true })`) and excluded from `sitemap.ts`, so thin "coming soon" shells are not indexed. Flip each back to indexable — and re-add it to the sitemap — only when its verified content ships.
+The former placeholder trust pages (`warranty`, `certifications`, `technicians`, `case-studies`, `before-after`) have been **removed** — these URLs now return a normal 404 and are not in the sitemap. Recreate a route only when genuine, verified content for it exists.
