@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { PageHero } from "@/components/Hero";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Container, Section } from "@/components/ui/Layout";
+import { QuickAnswer } from "@/components/ui/QuickAnswer";
 import { ContentSections } from "@/components/ui/ContentSections";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { RelatedLinks } from "@/components/ui/RelatedLinks";
@@ -53,6 +54,12 @@ export default async function BlogPostPage({ params }: Params) {
 
   const related = relatedPublicPosts(post, now);
 
+  // Split the body so a CTA band lands mid-article rather than only at the end.
+  // Rounds down, so a short post keeps the CTA past the halfway point.
+  const splitAt = Math.floor(post.content.length / 2);
+  const firstHalf = post.content.slice(0, splitAt);
+  const secondHalf = post.content.slice(splitAt);
+
   return (
     <>
       <Breadcrumbs
@@ -71,9 +78,28 @@ export default async function BlogPostPage({ params }: Params) {
             {post.updatedTime ? ` · Updated ${formatDate(post.updatedTime)}` : ""}
           </p>
 
-          <ContentSections sections={post.content} />
+          <QuickAnswer>{post.quickAnswer}</QuickAnswer>
+
+          <ContentSections sections={firstHalf} />
+
+          {/* Mid-article CTA. Omitted on posts too short to have a midpoint. */}
+          {firstHalf.length > 0 && (
+            <CTASection
+              variant="band"
+              source={`blog-${post.slug}-mid`}
+              heading="Not sure what your stove needs?"
+              subheading="Call for the fastest answer, or send the model and symptom and we'll take it from there."
+            />
+          )}
+
+          <ContentSections sections={secondHalf} />
 
           {post.faqs && post.faqs.length > 0 && <FAQAccordion faqs={post.faqs} />}
+
+          {/* Internal links to the pages that own this topic's primary intent. */}
+          {post.relatedLinks && post.relatedLinks.length > 0 && (
+            <RelatedLinks title="Where to go next" links={post.relatedLinks} />
+          )}
 
           {related.length > 0 && (
             <RelatedLinks
