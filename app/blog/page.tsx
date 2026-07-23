@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { publishedBlogPosts } from "@/content/blogs";
+import { publicBlogPosts } from "@/content/blogs";
 import { buildMetadata } from "@/lib/seo";
 import { PageHero } from "@/components/Hero";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
@@ -16,7 +16,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Practical stove, range, and cooktop repair guides from SanMateo FixHub — how to spot common faults, what causes them, and when to call a specialist in San Mateo.",
   path: "/blog",
-  noindex: publishedBlogPosts().length === 0,
+  noindex: publicBlogPosts().length === 0,
 });
 
 /** Short, locale-stable date for the byline (avoids hydration drift). */
@@ -30,7 +30,7 @@ function formatDate(iso: string): string {
 }
 
 export default function BlogIndex() {
-  const posts = publishedBlogPosts();
+  const posts = publicBlogPosts();
 
   return (
     <>

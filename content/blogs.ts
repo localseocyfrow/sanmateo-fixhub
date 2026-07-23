@@ -1,7 +1,9 @@
 // Blog content — the single source of truth for blog posts.
-// Foundation only: `blogPosts` is intentionally empty. Adding a post here with
-// `published: true` makes it live, indexable, statically generated, and listed
-// on the hub. Anything unpublished (or absent) 404s and is never listed.
+// Foundation only: `blogPosts` is intentionally empty. A post becomes PUBLIC
+// only when it is manually `published` AND its scheduled `publishedTime` has
+// arrived (publishedTime <= now). A future-dated post stays hidden everywhere
+// — hub, route, related links, navigation, sitemap, metadata, and schema — and
+// its route returns 404 until the scheduled time passes.
 import type { ContentSection, Faq } from "@/lib/types";
 
 export type BlogPost = {
@@ -13,39 +15,65 @@ export type BlogPost = {
   metaDescription: string;
   /** One-line summary for cards, related-link lists, and OG description. */
   excerpt: string;
-  /** ISO 8601 publish date, e.g. "2026-01-15". Used for article OG + byline. */
+  /**
+   * ISO 8601 publish datetime and the SCHEDULE time, e.g. "2026-01-15" or
+   * "2026-01-15T09:00:00-08:00". The post is hidden until this moment passes.
+   * Also used for article OG, byline, and sitemap lastModified.
+   */
   publishedTime: string;
-  /** ISO 8601 last-updated date, optional. */
+  /** ISO 8601 last-updated datetime, optional. */
   updatedTime?: string;
   /** Byline author name. */
   author?: string;
   /**
-   * Gates publish + indexing. A post that is not `published` is never listed,
-   * never statically generated, and returns 404 — mirrors brand `supported`.
+   * Manual publish switch. Must be `true` AND `publishedTime` must have passed
+   * for the post to be public. Setting this `false` hides the post regardless
+   * of its scheduled time.
    */
   published: boolean;
   /** Body sections rendered in order. */
   content: ContentSection[];
   /** Optional FAQ block appended below the body. */
   faqs?: Faq[];
-  /** Slugs of related posts to cross-link. */
+  /** Slugs of related posts to cross-link (each still gated by the public rule). */
   relatedPosts?: string[];
 };
 
 // No posts yet — the blog foundation ships empty on purpose.
 export const blogPosts: BlogPost[] = [];
 
-// ── Access helpers (only published posts are ever public) ────────────────────
-/** Published posts, newest first. */
-export const publishedBlogPosts = (): BlogPost[] =>
+// ── Public-visibility gate ───────────────────────────────────────────────────
+/**
+ * A post is public only when it is manually `published` AND its scheduled
+ * `publishedTime` is at or before `now`. This single predicate backs every
+ * surface (hub, route, related links, nav, sitemap, metadata, schema).
+ */
+export const isPublic = (post: BlogPost, now: Date = new Date()): boolean =>
+  post.published && new Date(post.publishedTime).getTime() <= now.getTime();
+
+// ── Access helpers (only public posts are ever exposed) ──────────────────────
+/** Public posts (published + scheduled time reached), newest first. */
+export const publicBlogPosts = (now: Date = new Date()): BlogPost[] =>
   blogPosts
-    .filter((p) => p.published)
+    .filter((p) => isPublic(p, now))
     .sort((a, b) => b.publishedTime.localeCompare(a.publishedTime));
 
-/** A single published post by slug, or undefined (unpublished/invalid → undefined). */
-export const getPublishedBlogPost = (slug: string): BlogPost | undefined =>
-  blogPosts.find((p) => p.slug === slug && p.published);
+/** A single public post by slug, or undefined (unpublished/scheduled/invalid). */
+export const getPublicBlogPost = (
+  slug: string,
+  now: Date = new Date(),
+): BlogPost | undefined =>
+  blogPosts.find((p) => p.slug === slug && isPublic(p, now));
 
-/** Slugs of published posts — the set of statically generated blog routes. */
-export const blogPostSlugs = (): string[] =>
-  publishedBlogPosts().map((p) => p.slug);
+/** Public posts referenced by another post's `relatedPosts`, gated + in order. */
+export const relatedPublicPosts = (
+  post: BlogPost,
+  now: Date = new Date(),
+): BlogPost[] =>
+  (post.relatedPosts ?? [])
+    .map((slug) => getPublicBlogPost(slug, now))
+    .filter((p): p is BlogPost => p !== undefined);
+
+/** Slugs of currently public posts. */
+export const publicBlogPostSlugs = (now: Date = new Date()): string[] =>
+  publicBlogPosts(now).map((p) => p.slug);

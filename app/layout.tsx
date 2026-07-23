@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
+import { getHeaderNav } from "@/lib/nav";
 import { absoluteUrl } from "@/lib/seo";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/JsonLd";
@@ -45,7 +46,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           Skip to content
         </a>
         <EmergencyBar />
-        <Header />
+        {/* Nav computed here (server, per render) so the cron's layout
+            revalidation can surface Blog once the first post is due. */}
+        <Header headerNav={getHeaderNav()} />
         <main id="main" className="flex-1">
           {children}
         </main>

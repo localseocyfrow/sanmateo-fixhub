@@ -1,13 +1,17 @@
 import type { NavItem } from "./types";
-import { publishedBlogPosts } from "@/content/blogs";
+import { publicBlogPosts } from "@/content/blogs";
 
-// Blog is surfaced in nav only once at least one published post exists; while
-// blogPosts is empty this evaluates to [] and the link stays hidden.
-const blogNav: NavItem[] =
-  publishedBlogPosts().length > 0 ? [{ label: "Blog", href: "/blog/" }] : [];
+// Blog is surfaced in nav only once at least one PUBLIC post exists (published +
+// scheduled time reached); while none qualify this returns [] and the link stays
+// hidden. Evaluated per render — NOT at module scope — so the daily cron
+// revalidation (app/api/cron/publish-blogs) picks up a newly due post instead of
+// reusing a value frozen when the module was first loaded.
+const blogNav = (now?: Date): NavItem[] =>
+  publicBlogPosts(now).length > 0 ? [{ label: "Blog", href: "/blog/" }] : [];
 
-// Primary header navigation. Slugs match content/* entries and route folders.
-export const headerNav: NavItem[] = [
+// Static part of the header navigation. Slugs match content/* entries and route
+// folders. Use `getHeaderNav()` to render — it splices in the gated Blog link.
+const baseHeaderNav: NavItem[] = [
   {
     label: "Services",
     href: "/services/",
@@ -46,11 +50,25 @@ export const headerNav: NavItem[] = [
   },
   { label: "Problems", href: "/problems/" },
   { label: "Brands", href: "/brands/" },
-  ...blogNav,
   { label: "Pricing", href: "/stove-repair-cost-san-mateo-ca/" },
   { label: "About", href: "/about/" },
   { label: "Contact", href: "/contact/" },
 ];
+
+/**
+ * Header navigation for the current moment, with Blog inserted after Brands
+ * once at least one post is public. Called from the root layout (a Server
+ * Component) and passed to <Header> as a prop, so the gate is evaluated on the
+ * server at render time rather than baked into the client bundle at build time.
+ */
+export const getHeaderNav = (now?: Date): NavItem[] => {
+  const brandsIndex = baseHeaderNav.findIndex((item) => item.label === "Brands");
+  return [
+    ...baseHeaderNav.slice(0, brandsIndex + 1),
+    ...blogNav(now),
+    ...baseHeaderNav.slice(brandsIndex + 1),
+  ];
+};
 
 // Footer link columns.
 export const footerNav: { title: string; links: NavItem[] }[] = [

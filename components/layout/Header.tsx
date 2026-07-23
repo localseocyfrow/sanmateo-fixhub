@@ -2,13 +2,15 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { headerNav } from "@/lib/nav";
+import type { NavItem } from "@/lib/types";
 import { site } from "@/lib/site";
 import { Logo } from "../Logo";
 import { CallButton } from "../ui/Buttons";
 import { Icon } from "../Icon";
 
-export function Header() {
+// Nav items arrive as a prop from the root layout (Server Component) so the
+// scheduled Blog link reflects render time, not client-bundle build time.
+export function Header({ headerNav }: { headerNav: NavItem[] }) {
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
 
