@@ -22,7 +22,7 @@ export const metadata: Metadata = buildMetadata({
 const factors = [
   { icon: "wrench", title: "The Failed Part", detail: "An igniter, surface element, switch, valve, or control board each carry different part costs and labor." },
   { icon: "range", title: "Brand & Model", detail: "Mainstream brands often have widely available parts; pro-style and specialty ranges can require specific components." },
-  { icon: "flame", title: "Gas vs. Electric", detail: "Gas repairs range from an igniter or spark module to a valve or gas-flow fault, while electric work covers elements, receptacles, or wiring — each differs in complexity and safety steps." },
+  { icon: "flame", title: "Gas vs. Electric", detail: "Gas repairs range from an igniter, spark module, or burner issue to a valve or gas-flow fault, while electric work covers elements, receptacles, or wiring — each differs in complexity and safety steps." },
   { icon: "search", title: "Diagnosis & Access", detail: "Time to diagnose the fault and reach the component affects the overall repair." },
 ] as const;
 
