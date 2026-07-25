@@ -8,7 +8,7 @@ import { PageHero } from "@/components/Hero";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Container, Section } from "@/components/ui/Layout";
 import { QuickAnswer } from "@/components/ui/QuickAnswer";
-import { ContentSections } from "@/components/ui/ContentSections";
+import { BlogBlocks, BlogToc, blogToc } from "@/components/ui/BlogBlocks";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { RelatedLinks } from "@/components/ui/RelatedLinks";
 import { CTASection } from "@/components/ui/CTASection";
@@ -40,7 +40,10 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return buildMetadata({
     title: post.metaTitle,
     description: post.metaDescription,
-    path: `/blog/${post.slug}`,
+    // A post may defer its primary search URL to the page that already owns the
+    // intent (canonicalPath) — the article stays reachable and listed, but
+    // points search engines at the owner instead of competing with it.
+    path: post.canonicalPath ?? `/blog/${post.slug}`,
     ogType: "article",
     publishedTime: post.publishedTime,
   });
@@ -53,12 +56,7 @@ export default async function BlogPostPage({ params }: Params) {
   if (!post) notFound();
 
   const related = relatedPublicPosts(post, now);
-
-  // Split the body so a CTA band lands mid-article rather than only at the end.
-  // Rounds down, so a short post keeps the CTA past the halfway point.
-  const splitAt = Math.floor(post.content.length / 2);
-  const firstHalf = post.content.slice(0, splitAt);
-  const secondHalf = post.content.slice(splitAt);
+  const toc = blogToc(post.blocks);
 
   return (
     <>
@@ -69,7 +67,7 @@ export default async function BlogPostPage({ params }: Params) {
           { name: post.title, href: `/blog/${post.slug}/` },
         ]}
       />
-      <PageHero eyebrow="Stove Repair Blog" title={post.h1} showCall={false} />
+      <PageHero eyebrow="Stove Repair Blog" title={post.h1} intro={post.heroIntro} showCall={false} />
       <Section tint="white">
         <Container className="max-w-3xl space-y-8">
           <p className="text-sm font-semibold uppercase tracking-wide text-ink-faint">
@@ -80,19 +78,11 @@ export default async function BlogPostPage({ params }: Params) {
 
           <QuickAnswer>{post.quickAnswer}</QuickAnswer>
 
-          <ContentSections sections={firstHalf} />
+          <BlogToc entries={toc} />
 
-          {/* Mid-article CTA. Omitted on posts too short to have a midpoint. */}
-          {firstHalf.length > 0 && (
-            <CTASection
-              variant="band"
-              source={`blog-${post.slug}-mid`}
-              heading="Not sure what your stove needs?"
-              subheading="Call for the fastest answer, or send the model and symptom and we'll take it from there."
-            />
-          )}
-
-          <ContentSections sections={secondHalf} />
+          {/* Structured blocks: prose, tables, stat rows, comparisons, callouts,
+              checklists, and inline CTA bands. All plain data — see BlogBlock. */}
+          <BlogBlocks blocks={post.blocks} />
 
           {post.faqs && post.faqs.length > 0 && <FAQAccordion faqs={post.faqs} />}
 
@@ -121,6 +111,8 @@ export default async function BlogPostPage({ params }: Params) {
           url: `/blog/${post.slug}`,
           datePublished: post.publishedTime,
           dateModified: post.updatedTime ?? post.publishedTime,
+          // Matches the rendered canonical tag.
+          canonicalUrl: post.canonicalPath,
         })}
       />
       {/* FAQPage JSON-LD only when visible FAQs exist (same gate as the accordion). */}

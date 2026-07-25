@@ -225,15 +225,22 @@ export function blogPostingSchema(opts: {
   datePublished: string;
   dateModified?: string;
   image?: string;
+  /**
+   * Primary search URL for this article when it deliberately defers to an
+   * existing page (see `canonicalPath` on BlogPost). Defaults to the article's
+   * own URL; when set it must match the rendered canonical tag.
+   */
+  canonicalUrl?: string;
 }) {
   const url = absoluteUrl(opts.url);
+  const canonical = opts.canonicalUrl ? absoluteUrl(opts.canonicalUrl) : url;
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: opts.headline,
     description: opts.description,
     url,
-    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
     datePublished: opts.datePublished,
     dateModified: opts.dateModified ?? opts.datePublished,
     image: opts.image ?? heroUrl,

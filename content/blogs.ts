@@ -1,13 +1,19 @@
 // Blog content — the single source of truth for blog posts.
-// Foundation only: `blogPosts` is intentionally empty. A post becomes PUBLIC
-// only when it is manually `published` AND its scheduled `publishedTime` has
-// arrived (publishedTime <= now). A future-dated post stays hidden everywhere
-// — hub, route, related links, navigation, sitemap, metadata, and schema — and
-// its route returns 404 until the scheduled time passes.
-import type { ContentSection, Faq } from "@/lib/types";
+// A post becomes PUBLIC only when it is manually `published` AND its scheduled
+// `publishedTime` has arrived (publishedTime <= now). A future-dated post stays
+// hidden everywhere — hub, route, related links, navigation, sitemap, metadata,
+// and schema — and its route returns 404 until the scheduled time passes.
+//
+// The five articles below are faithful reproductions of the supplied source
+// drafts (one per tab), converted into the reusable BlogBlocks presentation.
+// Only the HTML shell, inline CSS, scripts, source JSON-LD, duplicated site
+// chrome, and base64 images were removed; wording, section order, tables,
+// pricing ranges, checklists, comparisons, safety steps, FAQs, and internal
+// links are preserved from the source. Each post is self-canonical.
+import type { BlogBlock, Faq } from "@/lib/types";
 
 export type BlogPost = {
-  slug: string; // e.g. "how-to-tell-if-a-stove-igniter-is-failing"
+  slug: string;
   /** Short card / list label. */
   title: string;
   h1: string;
@@ -15,12 +21,13 @@ export type BlogPost = {
   metaDescription: string;
   /** One-line summary for cards, related-link lists, and OG description. */
   excerpt: string;
-  /** 40–70 word answer-first paragraph, rendered above the body. */
+  /** Longer hero standfirst rendered under the H1. */
+  heroIntro?: string;
+  /** Answer-first paragraph, rendered above the body. */
   quickAnswer: string;
   /**
-   * ISO 8601 publish datetime and the SCHEDULE time, e.g. "2026-01-15" or
-   * "2026-01-15T09:00:00-08:00". The post is hidden until this moment passes.
-   * Also used for article OG, byline, and sitemap lastModified.
+   * ISO 8601 publish datetime and the SCHEDULE time. The post is hidden until
+   * this moment passes. Also used for article OG, byline, and sitemap.
    */
   publishedTime: string;
   /** ISO 8601 last-updated datetime, optional. */
@@ -29,549 +36,1180 @@ export type BlogPost = {
   author?: string;
   /**
    * Manual publish switch. Must be `true` AND `publishedTime` must have passed
-   * for the post to be public. Setting this `false` hides the post regardless
-   * of its scheduled time.
+   * for the post to be public.
    */
   published: boolean;
-  /** Body sections rendered in order. */
-  content: ContentSection[];
+  /**
+   * Primary search URL when a post deliberately defers to another page. Leave
+   * undefined for a self-canonical post (the default for all posts here).
+   */
+  canonicalPath?: string;
+  /** Structured article body: prose, tables, stats, comparisons, callouts. */
+  blocks: BlogBlock[];
   /** Optional FAQ block appended below the body. */
   faqs?: Faq[];
-  /**
-   * Internal links to existing site pages, rendered by the shared RelatedLinks
-   * card list. Keeps supporting articles pointing at the pages that own the
-   * commercial and problem intent instead of competing with them.
-   */
+  /** Internal links rendered by the shared RelatedLinks card list. */
   relatedLinks?: { label: string; href: string; description?: string }[];
   /** Slugs of related posts to cross-link (each still gated by the public rule). */
   relatedPosts?: string[];
 };
 
-// Supporting articles. Each one deliberately takes a narrower angle than the
-// service, problem, and pricing pages so those pages stay the primary owners of
-// their commercial and problem intent.
 export const blogPosts: BlogPost[] = [
-  // ── 1. Repair-or-replace decision guide ────────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+  // POST 1 — Tab 1: How Much Does Stove Repair Cost in San Mateo, CA?
+  // ═══════════════════════════════════════════════════════════════════════════
   {
-    slug: "repair-or-replace-stove-factors",
-    title: "Repair or Replace Your Stove? 7 Factors to Check",
-    h1: "Should You Repair or Replace Your Stove? 7 Factors to Check",
-    metaTitle: "Repair or Replace Your Stove? 7 Factors to Check",
+    slug: "stove-repair-cost-san-mateo-2026-guide",
+    title: "How Much Does Stove Repair Cost in San Mateo, CA? 2026 Local Price Guide",
+    h1: "How Much Does Stove Repair Cost in San Mateo, CA?",
+    metaTitle: "How Much Does Stove Repair Cost in San Mateo, CA? 2026 Guide",
     metaDescription:
-      "Deciding whether to repair or replace a stove? Weigh age, repeat breakdowns, part availability, safety, and how big the repair is before you buy a new one.",
+      "Most stove repairs in San Mateo, CA cost $150 to $500+, depending on the stove type, failed part, labor time, appliance brand, and whether the repair is urgent.",
     excerpt:
-      "A practical way to weigh age, repair history, part availability, and safety before you decide to fix a stove or replace it.",
+      "A 2026 local price guide: what stove repair costs in San Mateo, what affects pricing, gas vs electric, repair-vs-replace, and when a repair is an emergency.",
+    heroIntro:
+      "Most stove repairs in San Mateo, CA cost $150 to $500+, depending on the stove type, failed part, labor time, appliance brand, and whether the repair is urgent.",
     quickAnswer:
-      "Repair usually makes sense when the stove still has useful life, one identifiable part has failed, and the fix is small next to replacing the appliance. Replacement becomes the stronger option when breakdowns keep returning, parts are no longer available, or a safety fault cannot be fully corrected. Diagnose the stove before you decide.",
+      "Most stove repairs in San Mateo, CA cost $150 to $500+, depending on the stove type, failed part, labor time, appliance brand, and how urgent the repair is. Simple issues like a loose knob, burner problem, igniter replacement, or heating element repair are usually more affordable. Gas valve problems, control board failure, electrical issues, or emergency repairs can cost more.",
     publishedTime: "2026-07-23T13:00:00.000Z",
     author: "SanMateo FixHub",
     published: true,
-    content: [
+    blocks: [
       {
-        heading: "Start with the fault, not the appliance",
+        kind: "prose",
+        heading: "Quick Answer: Stove Repair Cost in San Mateo, CA",
+        anchor: "quick-answer",
         body: [
-          "When a burner stops working, the first question most people ask is whether the stove is worth keeping. That is hard to answer before anyone knows what actually failed. A burner that will not ignite might need one replaceable part, or it might be the visible symptom of a control, wiring, or gas-flow problem that affects the whole appliance.",
-          "The seven factors below are the ones worth checking before you spend money either way. None of them decides the question alone — they matter as a pattern. A stove that scores well on most of them is usually worth repairing; one that fails several, especially on safety or parts, is where replacement starts to make sense.",
+          "For San Mateo homeowners, the best first step is to schedule a local diagnostic visit. A technician can inspect the stove, explain the exact problem, provide a clear estimate, and help you decide whether repair or replacement makes more sense.",
+          "If your stove smells like gas, sparks, smokes, trips the breaker, or has a burner that will not shut off, treat it as urgent and request emergency stove repair right away.",
         ],
       },
       {
-        heading: "Factor 1: How old the stove is",
-        body: [
-          "Age is a guide, not an expiration date. A newer stove with its first isolated failure is usually straightforward to justify repairing. As appliances get older, more of their components have shared the same heat, moisture, and use, so a single failure is more likely to be followed by others.",
-          "There is no fixed cutoff at which a stove stops being repairable. A well-maintained older stove with one failed switch can be a better repair candidate than a much newer appliance with heat-damaged wiring and a history of ignition faults. Treat age as context for the other six factors rather than a rule on its own.",
+        kind: "stats",
+        heading: "Quick Stove Repair Pricing Summary in San Mateo",
+        anchor: "pricing-summary",
+        items: [
+          { value: "$75–$150+", label: "Basic diagnostic visit" },
+          { value: "$150–$350", label: "Common stove repair" },
+          { value: "$250–$500", label: "Moderate repair" },
+          { value: "$400–$700+", label: "Complex repair" },
+          { value: "$250–$650+", label: "Emergency repair" },
         ],
+        footnote:
+          "These ranges are planning estimates. Your final price depends on diagnosis, parts, labor, urgency, and the condition of the appliance.",
       },
       {
-        heading: "Factor 2: How often it has needed repair",
+        kind: "prose",
         body: [
-          "Repair history tells you more than age does. One fault in an otherwise reliable appliance is a normal event. Several repairs within a year or two — particularly involving different burners or different controls — suggest a number of parts are wearing out at a similar rate.",
-          "Write down what has been fixed and when. If the same fault has come back after previous service, that is a different situation from a new and unrelated failure, and it is worth raising during diagnosis.",
+          "If your stove is not heating, clicking without ignition, giving off a gas smell, or tripping the breaker, request a Stove Repair Estimate San Mateo before the problem gets worse.",
         ],
+        links: [{ label: "Request a local estimate", href: "/contact/" }],
       },
       {
-        heading: "Factor 3: How big the repair is next to replacing",
+        kind: "prose",
+        heading: "What Stove Repair Usually Costs in San Mateo",
+        anchor: "usual-costs",
         body: [
-          "Compare the repair estimate against the full cost of replacing, not just the sticker price of a new stove. Replacement also involves delivery, removal of the old appliance, installation, and sometimes gas, electrical, countertop, or cabinetry work.",
-          "Many homeowners use a rough screening idea: the closer a repair gets to a large share of that all-in replacement cost, the more carefully replacement deserves a look — especially on an older appliance. Treat that as a way to frame the comparison, not a threshold that decides it. Condition, safety, and how long the repair should last still matter.",
-        ],
-      },
-      {
-        heading: "Factor 4: Whether the right parts are still available",
-        body: [
-          "A repair is only practical if the correct component can still be sourced. Model-specific parts — control boards, valves, and some ignition assemblies — are discontinued eventually, and a stove can become impractical to repair well before it stops working.",
-          "This is worth confirming early. If a critical part is unavailable or subject to a long wait, that changes the decision even when everything else points toward repair.",
-        ],
-      },
-      {
-        heading: "Factor 5: Safety signs that outrank cost",
-        body: [
-          "Some symptoms come before any cost comparison. A gas smell, sparking, an electrical burning odor, visibly damaged wiring, or repeated breaker trips all need to be resolved before the appliance is used normally again, whatever you decide about repair or replacement.",
-          "If you smell gas, stop using the stove, avoid flames and electrical switches, leave the area if the odor is strong, and call PG&E at 1-800-743-5000 or 911 from a safe location. Only once the area is confirmed safe does the repair-or-replace conversation make sense.",
-        ],
-      },
-      {
-        heading: "Factor 6: One fault, or a pattern",
-        body: [
-          "There is a real difference between an appliance that broke and an appliance that keeps breaking. A single failed igniter, element, switch, or connection on a stove that has otherwise been dependable is a contained problem with a contained fix.",
-          "Different components failing close together points at general wear rather than one bad part. That pattern tends to continue, and each new repair gets harder to justify.",
+          "The Average Stove Repair Cost in San Mateo is usually in the low-to-mid hundreds for common problems. Many local homeowners call for stove service because one burner stops working, the stove will not ignite, the electric element is not heating, or the cooktop is acting unpredictably.",
+          "Simple repairs usually cost less because they involve common parts and shorter labor time. More complex repairs cost more when the technician has to access internal components, test electrical systems, check gas flow, replace a board, or order a brand-specific part.",
+          "Common Local Cost Ranges:",
         ],
         bullets: [
-          "One part failed, first fault in years — repair is usually the sensible route",
-          "Same fault returning after previous service — ask what the underlying cause is",
-          "Different parts failing within a short period — compare replacement seriously",
-          "Damage affecting several connections or the wiring — needs assessment before either choice",
+          "$75–$150+ for diagnosis",
+          "$150–$350 for common part replacement",
+          "$250–$500 for moderate repairs",
+          "$400–$700+ for complex electronic or control problems",
+          "$250–$650+ for urgent or emergency stove repair",
+        ],
+        footnote:
+          "For general local service, start with Stove Repair San Mateo if you need help with a burner, igniter, stove top, range, or cooktop issue.",
+        links: [{ label: "Stove Repair San Mateo", href: "/services/stove-repair-san-mateo-ca/" }],
+      },
+      {
+        kind: "prose",
+        heading: "What Affects Stove Repair Pricing?",
+        anchor: "pricing-factors",
+        body: [
+          "1. The Type of Stove. Gas and electric stoves have different repair needs. A gas stove may involve burners, igniters, spark modules, gas valves, flame adjustment, or gas safety checks. An electric stove may involve heating elements, burner switches, sockets, wiring, thermostats, or control boards.",
+          "For gas-related symptoms, use Gas Stove Repair San Mateo. For heating, power, breaker, or element problems, use Electric Stove Repair San Mateo.",
+          "2. The Failed Part. A knob or burner cap is usually less expensive than a control board or gas valve. A small part can still cause a big problem, so diagnosis matters.",
+        ],
+        links: [
+          { label: "Gas Stove Repair San Mateo", href: "/services/gas-stove-repair-san-mateo-ca/" },
+          { label: "Electric Stove Repair San Mateo", href: "/services/electric-stove-repair-san-mateo-ca/" },
         ],
       },
       {
-        heading: "Factor 7: What you need from the kitchen",
+        kind: "compare",
+        left: {
+          title: "Common Lower-Cost Parts",
+          items: ["Knobs and control parts", "Burner caps", "Burner sockets", "Some igniters", "Basic switches"],
+        },
+        right: {
+          title: "Parts That Can Cost More",
+          items: ["Gas valves", "Control boards", "Spark modules", "Wiring harnesses", "Brand-specific components"],
+        },
+      },
+      {
+        kind: "prose",
         body: [
-          "The practical side matters too. A repair can often restore cooking sooner when the part is available, while replacing means shopping, delivery scheduling, and installation. If the stove is the only cooking appliance in the home, that difference is worth weighing.",
-          "Set against that, replacing once can be less disruptive overall than a series of repairs on an appliance that has become unpredictable. The question is which option gives you a working kitchen you can rely on for the longest.",
+          "3. Labor, Brand, Urgency, and Appliance Age. Some repairs are quick. Others require taking apart the stove, testing circuits, checking gas flow, or confirming that the appliance is safe to use after repair. Standard parts are usually easier to price than high-end, imported, discontinued, or older appliance parts. Emergency or same-day service may also cost more, especially if there is gas smell, smoke, sparks, or a stove that will not shut off.",
         ],
       },
       {
-        heading: "A checklist before you spend money",
+        kind: "table",
+        heading: "Detailed Stove Repair Cost Table",
+        anchor: "pricing-table",
+        caption: "Typical stove repair ranges in San Mateo by problem, with the factors that affect price",
+        columns: ["Problem or Issue", "Typical Repair Range", "What Affects the Price", "Urgent?", "Usually Worth Repairing?"],
+        rows: [
+          ["Igniter repair or replacement", "$175–$350", "Igniter type, gas model, burner access, labor time", "Sometimes", "Yes, usually"],
+          ["Burner not working", "$150–$325", "Clogged burner, failed switch, wiring, socket, burner element", "Usually not", "Yes"],
+          ["Gas valve issue", "$250–$600+", "Valve type, gas testing, leak risk, part availability", "Yes", "Often"],
+          ["Heating element replacement", "$175–$375", "Element type, wiring condition, electric stove model", "Sometimes", "Yes"],
+          ["Control board issue", "$350–$700+", "Board cost, model, programming, part availability", "Sometimes", "Depends on age"],
+          ["Thermostat or sensor issue", "$175–$400", "Sensor type, calibration, oven access, part cost", "Usually not", "Yes"],
+          ["Clicking but no flame", "$150–$350", "Moisture, dirty burner, weak igniter, spark module", "Sometimes", "Yes"],
+          ["Emergency repair", "$250–$650+", "Urgency, gas smell, smoke, sparks, after-hours needs", "Yes", "Yes for safety"],
+        ],
+        footnote:
+          "A table can help you plan, but it cannot replace diagnosis. The same symptom can have different causes. For example, a burner that will not light may be caused by food buildup, a weak igniter, a loose connection, or a gas flow issue.",
+      },
+      {
+        kind: "table",
+        heading: "Gas vs Electric Stove Repair Cost Differences",
+        anchor: "gas-vs-electric",
+        caption: "How gas, electric, range, and cooktop repairs compare",
+        columns: ["Service Type", "Common Problems", "Typical Price Tendency", "Urgency Level", "Best Next Step"],
+        rows: [
+          ["Gas stove repair", "Clicking, no ignition, uneven flame, gas smell, burner won't light", "Medium to high if valves or safety testing are involved", "High if gas smell is present", "Stop using the burner and schedule gas stove service"],
+          ["Electric stove repair", "Burner not heating, bad element, switch failure, breaker tripping", "Low to high depending on part", "High if sparks or burning smell occur", "Schedule electrical diagnosis"],
+          ["Range repair", "Oven and cooktop problems in one appliance", "Medium", "Depends on symptom", "Identify whether oven, cooktop, or controls failed"],
+          ["Cooktop repair", "Glass top issue, built-in burner failure, touchpad problem", "Medium to high", "High if glass is cracked or wiring is exposed", "Compare repair cost with replacement"],
+        ],
+      },
+      {
+        kind: "prose",
         body: [
-          "Run through these before committing either way. Mostly positive answers point toward repair. Several negatives — especially around safety, repeat failures, and parts — mean replacement deserves a proper comparison.",
+          "If your appliance includes both an oven and stovetop, schedule Range Repair San Mateo. If your issue is with a built-in cooktop, glass top, or surface burner system, schedule Cooktop Repair San Mateo.",
+        ],
+        links: [
+          { label: "Range Repair San Mateo", href: "/services/range-repair-san-mateo-ca/" },
+          { label: "Cooktop Repair San Mateo", href: "/services/cooktop-repair-san-mateo-ca/" },
+        ],
+      },
+      {
+        kind: "cta",
+        heading: "Need a price for your stove repair?",
+        subheading: "Get a local estimate before replacing your stove, range, or cooktop.",
+      },
+      {
+        kind: "prose",
+        heading: "Should You Repair or Replace Your Stove?",
+        anchor: "repair-vs-replace",
+        body: [
+          "Repair usually makes sense when the stove still has useful life left and the problem is isolated. Replacement may make more sense when the appliance is older, unsafe, or has repeated major failures.",
+        ],
+      },
+      {
+        kind: "compare",
+        left: {
+          title: "Repair Is Usually Better When",
+          items: [
+            "The stove is less than 10 years old",
+            "The repair costs less than 50% of replacement",
+            "Only one part has failed",
+            "Parts are available",
+            "The appliance has been reliable",
+            "The problem is clear and fixable",
+            "The issue is common, like an igniter, burner, switch, sensor, or heating element",
+          ],
+        },
+        right: {
+          title: "Replacement May Be Better When",
+          items: [
+            "The stove is very old",
+            "The same problem keeps returning",
+            "Multiple parts are failing",
+            "Parts are discontinued or expensive",
+            "The control board repair is close to replacement cost",
+            "The glass cooktop is badly cracked",
+            "There is repeated gas or electrical safety risk",
+          ],
+        },
+      },
+      {
+        kind: "table",
+        heading: "Fast Decision Guide",
+        anchor: "decision-guide",
+        caption: "Common stove situations and the choice they usually point to",
+        columns: ["Situation", "Best Choice"],
+        rows: [
+          ["One burner stopped working", "Repair"],
+          ["Igniter failed on a working gas stove", "Repair"],
+          ["Electric element burned out", "Repair"],
+          ["Stove is old and needs a costly control board", "Compare replacement"],
+          ["Multiple recent repairs", "Consider replacement"],
+          ["Repeated gas smell or electrical hazard", "Safety inspection first"],
+          ["Repair is under half the cost of replacement", "Usually repair"],
+        ],
+        footnote:
+          "The safest next step is to get a local diagnosis before buying a new appliance. A repair may be much cheaper than replacement, especially when the issue is limited to one part.",
+      },
+      {
+        kind: "checklist",
+        heading: "Common Stove Problems in San Mateo Homes",
+        anchor: "common-problems",
+        intro: ["San Mateo homeowners often request stove repair for problems like:"],
+        items: [
+          "Stove not heating",
+          "Burner not igniting",
+          "Clicking but no flame",
+          "Gas smell near the stove",
+          "Uneven flame",
+          "Yellow or orange flame",
+          "Broken knobs",
+          "Loose controls",
+          "Electrical failure",
+          "Breaker tripping",
+          "Temperature inconsistency",
+          "Control panel not responding",
+          "Burner turning on and off",
+          "Cooktop surface damage",
+          "Stove heating too slowly",
+          "Power or display failure",
+        ],
+        footnote:
+          "Some of these issues are simple. Others need fast attention. For example, an electric burner that will not heat may be a failed element, switch, socket, or wiring issue. A gas burner that keeps clicking may be caused by moisture, food debris, a misaligned burner cap, a weak igniter, or spark module failure.",
+      },
+      {
+        kind: "prose",
+        body: [
+          "If you have more than one stove, range, or cooktop issue in the kitchen, Stove Repair San Mateo may be the better service option.",
+        ],
+        links: [{ label: "Stove Repair San Mateo", href: "/services/stove-repair-san-mateo-ca/" }],
+      },
+      {
+        kind: "prose",
+        heading: "When Is Stove Repair an Emergency?",
+        anchor: "emergency-repair",
+        body: [
+          "A stove problem becomes urgent when there is a safety risk, gas risk, electrical risk, or loss of control over the appliance.",
+          "Call for Emergency Stove Repair San Mateo if you notice gas smell, rotten egg odor, hissing near the stove, sparks, smoke, burning electrical smell, a burner that will not shut off, exposed wiring, repeated breaker trips, unstable flame, overheating, or controls that do not respond.",
+        ],
+        links: [{ label: "Emergency Stove Repair San Mateo", href: "/services/emergency-stove-repair-san-mateo-ca/" }],
+      },
+      {
+        kind: "callout",
+        tone: "safety",
+        heading: "If You Suspect a Gas Leak",
+        body: [
+          "If you suspect a gas leak, do not keep testing the burner. Leave the area, avoid flames and electrical switches, and contact the proper utility or emergency service from a safe location. Consumer safety guidance warns that gas leaks can create fire and explosion risks, so suspected leaks should be handled immediately by trained professionals.",
+        ],
+        links: [{ label: "PG&E gas safety guidance", href: "https://www.pge.com/en/outages-and-safety/safety/gas-safety.html" }],
+      },
+      {
+        kind: "prose",
+        heading: "Why Local San Mateo Stove Repair Matters",
+        anchor: "local-service",
+        body: [
+          "Local service matters because stove problems are time-sensitive. When a cooking appliance fails, most homeowners do not want a long delay, vague estimate, or technician who is unfamiliar with the area.",
+          "Choosing local San Mateo service can help with:",
         ],
         bullets: [
-          "Is only one burner or one part affected?",
-          "Is this the first significant repair in the last year or two?",
-          "Is the repair small relative to the full cost of replacing and installing?",
-          "Are the correct parts still available without a long wait?",
-          "Has the stove otherwise worked reliably?",
-          "Is there no unresolved gas or electrical safety concern?",
-          "Does the diagnosis explain the cause, not just the symptom?",
+          "Faster response when scheduling allows",
+          "Better familiarity with local homes, condos, apartments, and rental properties",
+          "More practical estimate guidance",
+          "Easier follow-up service if a part needs to be ordered",
+          "Better understanding of Peninsula and Bay Area scheduling needs",
+          "Clearer communication for urgent stove problems",
         ],
       },
       {
-        heading: "Repair the fault, replace the pattern",
+        kind: "prose",
         body: [
-          "The short version: repair when the fault is isolated, the parts exist, useful life remains, and the work should restore dependable operation. Replace when age, repeated failures, missing parts, or a safety problem that cannot be fully corrected make another repair poor value.",
-          "If you are unsure which side of that line your stove falls on, get it diagnosed before buying a new one. SanMateo FixHub works on gas and electric stoves, ranges, and cooktops across San Mateo and the nearby Peninsula, and a diagnosis is what turns this from guesswork into a decision.",
+          "Whether you are near Downtown San Mateo, Hillsdale, Bay Meadows, Beresford, Hayward Park, Shoreview, or nearby Peninsula neighborhoods, local repair support can make the process easier.",
+          "People searching Stove Repair Near Me San Mateo usually want three things: fast help, a fair estimate, and confidence that the stove can be fixed safely. That is why a local estimate is often the best next step.",
+        ],
+      },
+      {
+        kind: "callout",
+        tone: "info",
+        heading: "Illustrative Example: Gas Burner Clicking but Not Lighting in San Mateo",
+        body: [
+          "This example describes a common repair scenario and is not a claim about a specific customer job.",
+          "Problem: A San Mateo homeowner had a front gas burner that kept clicking but would not ignite consistently. The burner occasionally lit after several attempts, but the flame looked weak and uneven.",
+          "Diagnosis: The technician inspected the burner cap, igniter, spark connection, burner ports, and gas flow. The issue was a weak igniter combined with buildup around the burner area.",
+          "Repair Approach: The technician cleaned the burner assembly, adjusted the burner cap, tested the spark, and replaced the weak igniter.",
+          "Estimated Cost Range: The estimated repair range was $200–$350, depending on the igniter part, labor time, and stove model.",
+          "Result: The burner started lighting normally. The clicking stopped after ignition, and the flame returned to a steady blue pattern.",
+          "This type of repair is common because the symptom seems simple, but the cause can be cleaning, alignment, ignition failure, wiring, or a part issue. A diagnostic visit prevents guesswork and helps avoid unnecessary replacement.",
+        ],
+      },
+      {
+        kind: "prose",
+        heading: "Request a Stove Repair Estimate in San Mateo, CA",
+        anchor: "estimate",
+        body: [
+          "If your stove is not heating, your burner will not ignite, your electric cooktop is failing, or you smell gas near the appliance, do not wait for the issue to get worse.",
+          "A local diagnostic visit can help you find out what failed, whether the stove is safe to use, what the repair may cost, whether repair or replacement makes more sense, and how soon the repair can be completed.",
+          "Contact Stove Repair San Mateo CA today for stove repair, gas stove repair, electric stove repair, range repair, cooktop repair, emergency stove repair, and local appliance repair help in San Mateo and nearby Peninsula areas.",
         ],
       },
     ],
     faqs: [
       {
-        question: "How old is too old to repair a stove?",
+        question: "How much does stove repair cost in San Mateo, CA?",
         answer:
-          "There is no exact cutoff. As a stove gets older it becomes more worthwhile to compare each significant repair against replacement, because more components have aged together. A small repair on an otherwise reliable older stove can still be sensible.",
+          "Stove repair cost in San Mateo, CA usually ranges from $150 to $500+, depending on the stove problem, parts, labor, brand, and urgency. Simple burner, knob, igniter, or heating element repairs may cost less, while gas valve, control board, or emergency repairs may cost more.",
+      },
+      {
+        question: "What is the average stove repair cost?",
+        answer:
+          "The Average Stove Repair Cost is usually in the low-to-mid hundreds for common problems. In San Mateo, the final cost depends on the failed part, stove type, local labor, parts availability, and whether you need standard or urgent service.",
+      },
+      {
+        question: "How much is a stove diagnostic fee?",
+        answer:
+          "A stove diagnostic fee commonly ranges from $75 to $150+, depending on the service provider, location, and urgency. The diagnostic visit confirms the problem before you approve parts and labor.",
       },
       {
         question: "Is it cheaper to repair or replace a stove?",
         answer:
-          "Repair is usually the lower-cost option for a single contained fault. Replacement can be better value when failures keep repeating or when the repair is large relative to the full cost of replacing and installing a comparable appliance.",
+          "It is usually cheaper to repair a stove if the appliance is under 10 years old, the repair cost is less than half the cost of replacement, and only one part has failed. Replacement may make more sense for older stoves with repeated failures or expensive control board problems.",
       },
       {
-        question: "What stove problems are usually not worth repairing?",
+        question: "Do you repair both gas and electric stoves?",
         answer:
-          "Several major failures at once, extensive heat damage, a discontinued critical part, or a recurring gas or electrical fault that cannot be fully corrected are the situations where another repair is hardest to justify.",
+          "Yes. Local stove repair service can cover gas stoves, electric stoves, ranges, and cooktops. Common repairs include igniters, burners, elements, switches, thermostats, sensors, knobs, control panels, and wiring.",
       },
       {
-        question: "Should I repair a gas stove or replace it?",
+        question: "Do you offer emergency stove repair in San Mateo?",
         answer:
-          "Repair often suits a gas stove with one failed igniter, switch, or burner component and no history of related faults. Replacement becomes the better option when problems recur or safe operation cannot be restored with confidence.",
+          "Emergency stove repair is recommended for gas smell, sparks, smoke, burning odors, exposed wiring, repeated breaker trips, or a burner that will not shut off. These issues should be handled quickly because they can create safety risks.",
       },
       {
-        question: "Is repairing an electric stove worth it?",
+        question: "What affects Stove Repair Cost San Mateo CA the most?",
         answer:
-          "Often yes, when a single element, coil, socket, switch, or connection has failed. Repeated breaker trips or damage across the wiring point to something broader that needs assessment before deciding.",
+          "The biggest factors are the failed part, stove type, appliance age, brand, labor time, part availability, and urgency. Gas-related repairs may also require safety testing, which can affect the estimate.",
       },
       {
-        question: "Do I need a diagnosis before deciding?",
+        question: "Do you service ranges and cooktops too?",
         answer:
-          "It is the step that makes the decision informed. Without knowing which part failed and why, it is impossible to compare the repair against replacement or to know whether the fix will last.",
+          "Yes. If your appliance combines an oven and stovetop, request Range Repair San Mateo. If the issue is with a built-in or glass-top cooking surface, request Cooktop Repair San Mateo.",
       },
     ],
     relatedLinks: [
-      {
-        label: "What affects stove repair cost",
-        href: "/stove-repair-cost-san-mateo-ca/",
-        description: "How diagnosis, parts, and access shape an estimate.",
-      },
-      {
-        label: "Stove repair in San Mateo",
-        href: "/services/stove-repair-san-mateo-ca/",
-        description: "Gas and electric stove, range, and cooktop repair.",
-      },
-      {
-        label: "How the repair process works",
-        href: "/repair-process/",
-        description: "What happens from first call to completed repair.",
-      },
-      {
-        label: "Request a diagnosis",
-        href: "/contact/",
-        description: "Send the model, symptom, and how to reach you.",
-      },
+      { label: "Gas Stove Repair San Mateo", href: "/services/gas-stove-repair-san-mateo-ca/", description: "Igniters, valves, and gas-flow faults." },
+      { label: "Electric Stove Repair San Mateo", href: "/services/electric-stove-repair-san-mateo-ca/", description: "Elements, sockets, switches, and controls." },
+      { label: "Range Repair San Mateo", href: "/services/range-repair-san-mateo-ca/", description: "Appliances combining an oven and cooktop." },
+      { label: "Cooktop Repair San Mateo", href: "/services/cooktop-repair-san-mateo-ca/", description: "Built-in, glass-top, and surface burner systems." },
+      { label: "Emergency Stove Repair San Mateo", href: "/services/emergency-stove-repair-san-mateo-ca/", description: "Gas odor, sparking, smoke, or a burner that will not stop." },
+      { label: "Request a Stove Repair Estimate", href: "/contact/", description: "Get a local estimate for your stove." },
     ],
   },
 
-  // ── 2. Clicking after cleaning or a spill ──────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+  // POST 2 — Tab 2: Gas Stove Clicking But Not Lighting?
+  // ═══════════════════════════════════════════════════════════════════════════
   {
     slug: "gas-stove-clicking-after-cleaning-spill",
-    title: "Gas Stove Clicking After Cleaning or a Spill?",
-    h1: "Why Is My Gas Stove Clicking After Cleaning or a Spill?",
-    metaTitle: "Gas Stove Clicking After Cleaning or a Spill?",
+    title: "Gas Stove Clicking But Not Lighting? Gas Stove Repair San Mateo",
+    h1: "Gas Stove Clicking But Not Lighting? Gas Stove Repair San Mateo",
+    metaTitle: "Gas Stove Clicking But Not Lighting? Gas Stove Repair San Mateo",
     metaDescription:
-      "Clicking that starts right after you clean the cooktop or a pot boils over usually points to moisture or a burner cap that has shifted. What is safe to check.",
+      "Learn why your gas stove clicks but does not light, what safety steps to take right now, and when a local technician should inspect the burner, igniter, or controls.",
     excerpt:
-      "Clicking that begins right after cleaning or a boil-over usually has a different cause than clicking that has been building for weeks.",
+      "Why a gas stove clicks but does not light, the immediate gas-safety steps, DIY limits, and when to call a local San Mateo stove repair technician.",
+    heroIntro:
+      "Learn why your gas stove clicks but does not light, what safety steps to take right now, and when a local technician should inspect the burner, igniter, gas flow, or controls.",
     quickAnswer:
-      "Clicking that starts straight after cleaning or a spill is most often moisture around the burner, a burner cap knocked out of position, or debris across the burner ports. Let everything dry fully, check the cooled cap sits flat, and clear loose debris. If clicking continues once it is dry and seated, the ignition system needs inspection.",
+      "Gas Stove Clicking But Not Lighting usually means the igniter is trying to spark, but the burner is not catching flame. If you need Gas Stove Repair San Mateo, the issue often comes from moisture, grease buildup, burner cap misalignment, weak ignition parts, or a gas flow problem. If you smell gas, turn the stove off immediately and stop trying to relight the burner.",
     publishedTime: "2026-07-24T14:00:00.000Z",
     author: "SanMateo FixHub",
     published: true,
-    content: [
+    blocks: [
       {
-        heading: "Why timing points to the cause",
+        kind: "prose",
+        heading: "About This Blog",
+        anchor: "about",
         body: [
-          "A gas burner clicks because the ignition system is producing a spark. That spark is meant to light gas arriving at the burner ports. When clicking continues without a flame, something is interrupting that sequence.",
-          "When the clicking starts immediately after you cleaned the cooktop, washed removable burner parts, or a pot boiled over, the timing itself is a clue. The most likely causes are the ones cleaning and spills create: water where the spark needs to jump, a cap that was lifted and not put back flat, or debris pushed into the burner ports. Clicking that has been getting worse over weeks is a different situation, covered on our page about a stove that clicks but will not light.",
-        ],
-      },
-      {
-        heading: "Moisture around the burner",
-        body: [
-          "Water is the single most common reason a burner clicks after cleaning. It does not take much — a damp burner cap, water sitting in the burner head, or moisture around the igniter tip is enough to stop the spark doing its job.",
-          "The fix is patience rather than tools. Turn the burner off, leave the area to dry completely, and give removable parts time to air-dry fully before putting them back. Warm rooms and airflow help. If the burner lights normally once everything is properly dry, moisture was the problem.",
-        ],
-      },
-      {
-        heading: "A burner cap that has shifted",
-        body: [
-          "The burner cap needs to sit flat and centered on the burner head. Cleaning is exactly when caps get lifted, rotated, put back at a slight angle, or occasionally set down upside down. When the cap is not seated properly, gas does not reach the spark the way it should.",
-          "Once the stove is completely cool, look at the cap and confirm it sits level and central, with no visible gap or tilt. Reseating a cool cap that is simply out of place is a normal homeowner check. If the burner still fails after the cap is properly seated and dry, stop there — the cause is something else.",
-        ],
-      },
-      {
-        heading: "Debris across the burner ports",
-        body: [
-          "Burner ports are the small openings gas passes through before it ignites. A boil-over can leave sauce, sugar, or food residue across them, which stops gas spreading evenly around the burner. That can show up as slow lighting, a flame on one side only, or a weak flame.",
-          "Clearing loose, visible debris from a cool burner surface is reasonable. What is not reasonable is going further: do not scrape or dig into the ports, do not soak or bend the igniter, and do not take gas components apart. If the ports still look blocked after light cleaning, that is a job for a technician rather than a screwdriver.",
-        ],
-      },
-      {
-        heading: "Safe checks, and where they stop",
-        body: [
-          "Everything below assumes the stove is off, fully cool, and there is no gas smell. If there is any gas odor, none of it applies — skip to the safety section.",
+          "This local guide explains why a gas stove may keep clicking without lighting and what San Mateo homeowners should do next.",
         ],
         bullets: [
-          "Let the burner area and any washed parts dry completely before trying again",
-          "Confirm the cooled burner cap sits flat, level, and centered",
-          "Clear loose, visible debris from around the burner without disassembling anything",
-          "Check whether one burner is affected or several — it changes what is likely",
-          "Stop and call for inspection if clicking continues once everything is dry and seated",
+          "Common burner and igniter causes",
+          "Immediate gas-safety steps",
+          "DIY limits and professional repair options",
+          "When to call a local stove repair technician",
         ],
       },
       {
-        heading: "When clicking is no longer about moisture",
+        kind: "prose",
         body: [
-          "If the burner is dry, the cap is seated, the ports are clear, and it still clicks without lighting, the cause has moved beyond anything cleaning caused. At that point the ignition system itself is the likely candidate — a worn or cracked igniter, a weak spark, a failing switch, or a problem in the spark module or its wiring.",
-          "That is also the point to stop testing. Repeated clicking with no flame can release unburned gas around the cooktop, so continuing to try the burner adds risk without adding information. Igniter and spark components need testing rather than guesswork, which is what igniter repair covers.",
+          "Repeated clicking with no flame can allow unburned gas to build up around the cooktop, which makes this a safety issue instead of a simple cooking inconvenience. In San Mateo, CA, this problem may be solved with careful cleaning, drying wet burner parts, igniter repair, burner service, or stove igniter replacement. A local stove repair technician can inspect the burner, confirm whether the igniter is sparking correctly, and restore safe ignition.",
+          "For direct service support, visit Gas Stove Repair San Mateo or call (650) 525-2329.",
+        ],
+        links: [{ label: "Gas Stove Repair San Mateo", href: "/services/gas-stove-repair-san-mateo-ca/" }],
+      },
+      {
+        kind: "prose",
+        heading: "Why a gas stove clicks but does not light",
+        anchor: "why-clicks",
+        body: [
+          "A gas stove clicks because the ignition system is creating a spark. That spark is supposed to light the gas coming through the burner ports. When the stove clicks but no flame appears, the ignition system is trying to work, but one part of the process is failing.",
+          "The clicking sound is normal for a few seconds when a burner lights. It becomes a problem when the Gas Stove Keeps Clicking, the burner does not ignite, or the flame starts and goes out. If one burner fails but the others work, the problem is often local to that burner. If multiple burners fail, the issue may involve gas supply, controls, wiring, or a larger appliance problem.",
         ],
       },
       {
-        heading: "If you smell gas, stop",
+        kind: "table",
+        heading: "Main causes of the problem",
+        anchor: "causes",
+        caption: "Common clicking symptoms, likely causes, and the best action for each",
+        columns: ["Symptom", "Likely Cause", "What It Means", "Best Action"],
+        rows: [
+          ["Burner clicks after cleaning", "Wet burner cap", "Moisture is interrupting ignition", "Turn off stove and dry parts"],
+          ["Burner clicks but flame is weak", "Dirty burner ports", "Gas is not flowing evenly", "Clean visible debris or request burner service"],
+          ["Spark appears but burner will not light", "Burner cap misalignment", "Gas is not reaching the spark correctly", "Reseat cap when cool"],
+          ["No visible spark", "Igniter not sparking", "Electrical ignition issue", "Schedule professional diagnosis"],
+          ["Weak spark or delayed flame", "Faulty igniter", "Igniter may be worn or damaged", "Igniter repair or replacement"],
+          ["Burner lights then dies", "Gas supply issue", "Flame cannot stay stable", "Stop use and request repair"],
+          ["All burners click oddly", "Control or wiring issue", "Ignition circuit may be failing", "Call a local technician"],
+        ],
+      },
+      {
+        kind: "prose",
+        heading: "Wet burner cap",
         body: [
-          "A gas smell changes the situation entirely. Do not keep trying to light the burner, do not use matches or lighters, and do not operate electrical switches near the stove.",
-          "Turn the knob fully off if you can do so safely, leave the area if the odor is strong or spreading, and call PG&E at 1-800-743-5000 or 911 from a safe location. Arrange for the stove to be looked at only after the area has been confirmed safe.",
+          "A wet burner cap is one of the most common reasons a gas stove will not light. This often happens after cleaning the cooktop, washing removable burner parts, wiping around the burner with too much water, or after a pot boils over. This is often minor if there is no gas smell and only one burner is affected. If the stove still clicks after drying, the issue is likely deeper than moisture.",
+        ],
+      },
+      {
+        kind: "prose",
+        heading: "Dirty burner ports",
+        body: [
+          "Burner ports are the small openings where gas exits before ignition. Grease, crumbs, sauce, and cooked-on debris can block those openings and stop gas from spreading evenly. Dirty ports can cause Gas Burner Not Igniting, weak flame, delayed ignition, or a burner that lights only on one side. Professional gas stove burner repair is safer when the blockage is not visible or the burner still fails after cleaning.",
+        ],
+      },
+      {
+        kind: "prose",
+        heading: "Burner cap misalignment",
+        body: [
+          "The burner cap must sit flat and centered on the burner head. If it is tilted, loose, upside down, or slightly off-center, gas may not flow toward the spark correctly. This is usually minor if the cap is simply out of place, but repeated failure after reseating points to an igniter, burner head, or gas flow issue.",
+        ],
+      },
+      {
+        kind: "prose",
+        heading: "Faulty igniter",
+        body: [
+          "A faulty igniter is a common reason a Gas Stove Won't Light. The igniter creates the spark that lights the gas. Over time, it can become weak, cracked, dirty, loose, or worn. When the igniter is damaged, cleaning the burner will not restore reliable ignition. For this issue, use Stove Igniter Repair San Mateo.",
+        ],
+        links: [{ label: "Stove Igniter Repair San Mateo", href: "/services/igniter-repair-san-mateo-ca/" }],
+      },
+      {
+        kind: "prose",
+        heading: "Igniter not sparking",
+        body: [
+          "If the Gas Stove Igniter Not Sparking, the burner cannot light normally. The problem may involve the igniter electrode, spark wire, spark switch, ignition module, or electrical connection. This is a serious repair issue because gas may still be released even when the ignition system is not working.",
+        ],
+      },
+      {
+        kind: "prose",
+        heading: "Gas supply issue",
+        body: [
+          "A gas supply issue can affect one burner, several burners, or the full appliance. Signs include weak flame, no flame, flame that starts and dies, or a Gas Burner Won't Stay Lit. If gas odor is present, stop using the stove and follow safety steps. For broader emergency and home fire-safety guidance, see Ready.gov Home Fire Safety.",
+        ],
+        links: [{ label: "Ready.gov Home Fire Safety", href: "https://www.ready.gov/home-fires" }],
+      },
+      {
+        kind: "prose",
+        heading: "Electrical or control issue",
+        body: [
+          "Modern gas ranges and cooktops use electrical ignition parts. If a switch, wire, spark module, or control board fails, the burner may click incorrectly or fail to spark. This usually needs professional diagnosis by a local technician.",
+        ],
+      },
+      {
+        kind: "callout",
+        tone: "safety",
+        heading: "Is it safe to keep trying?",
+        body: [
+          "No. It is not safe to keep trying if the stove repeatedly clicks but does not light, especially if there is gas odor, hissing, or repeated failed ignition.",
+          "Repeated clicking with no ignition can release unburned gas. If the burner knob is open and the flame does not start, gas may collect around the stove. A spark, flame, or electrical source can create danger.",
+        ],
+        bullets: [
+          "Rotten egg or sulfur-like smell",
+          "Hissing near the appliance",
+          "Clicking with no flame",
+          "Burner knob left on accidentally",
+          "Flame that lights and goes out",
+          "Gas burner that will not stay lit",
+        ],
+      },
+      {
+        kind: "checklist",
+        heading: "What to do right now",
+        anchor: "checklist",
+        ordered: true,
+        items: [
+          "Turn the stove off. Make sure the burner knob is fully in the OFF position.",
+          "Stop trying to ignite the burner repeatedly. Repeated attempts can release more gas if ignition is failing.",
+          "Open windows or improve ventilation. If gas smell is strong, leave the area instead of staying inside.",
+          "Check for visible moisture or debris. Look for spills, wet burner parts, grease, or food around the burner.",
+          "If gas smell is present, stop using the stove. Do not test the burner again. Do not use matches, lighters, or open flames.",
+          "Shut off gas only if it is safe to do so. Do not move the appliance or force valves if the odor is strong.",
+          "Call a local stove repair technician in San Mateo. For Stove Repair San Mateo, call (650) 525-2329.",
+        ],
+      },
+      {
+        kind: "cta",
+        heading: "Need fast stove repair in San Mateo?",
+        subheading: "Call (650) 525-2329 for local service.",
+      },
+      {
+        kind: "prose",
+        heading: "Gas Stove Repair San Mateo: Repair options",
+        anchor: "repair-options",
+        body: [
+          "Repair depends on whether the failure is moisture, debris, cap alignment, ignition weakness, a gas flow issue, or an electrical control problem. The right fix starts with diagnosis, not guessing.",
+        ],
+        bullets: [
+          "Drying wet parts — if the problem started after cleaning or a boil-over, the burner parts may need full drying. The cap, burner head, igniter tip, and surrounding area must be dry before the spark can work correctly.",
+          "Burner cap reseating — A misaligned burner cap can stop gas from reaching the spark. A technician checks the cap position, burner head fit, and flame pattern after reseating.",
+          "Professional diagnosis — Professional diagnosis is needed when cleaning and drying do not solve the issue. The technician checks spark strength, wiring, gas flow, ignition components, and burner condition before replacing parts.",
+        ],
+      },
+      {
+        kind: "table",
+        heading: "Repair vs DIY vs replacement",
+        anchor: "diy-table",
+        caption: "Which clicking problems are safe to handle yourself and which need a technician",
+        columns: ["Problem", "DIY possible?", "Safety risk", "Best action", "Professional help needed?"],
+        rows: [
+          ["Wet burner cap after cleaning", "Yes, if no gas smell", "Low", "Turn off stove and dry parts fully", "No, unless clicking continues"],
+          ["Burner cap misalignment", "Yes, if burner is cool", "Low to medium", "Reseat the cap correctly", "No, unless burner still fails"],
+          ["Light food debris", "Limited", "Medium", "Clean visible debris only", "Yes, if ports remain clogged"],
+          ["Faulty igniter", "No", "Medium to high", "Schedule igniter repair", "Yes"],
+          ["Igniter not sparking", "No", "High", "Stop testing and request diagnosis", "Yes"],
+          ["Gas burner will not stay lit", "No", "High", "Stop using burner", "Yes"],
+          ["Gas smell while clicking", "No", "High", "Stop use and leave if odor is strong", "Yes, emergency help may be needed"],
+          ["Multiple burners not lighting", "No", "Medium to high", "Request appliance diagnosis", "Yes"],
+        ],
+      },
+      {
+        kind: "checklist",
+        heading: "How a technician diagnoses the issue",
+        anchor: "diagnosis",
+        ordered: true,
+        items: [
+          "Confirms the symptom: The technician checks whether one burner, several burners, or the entire stove is affected.",
+          "Checks the burner cap and ports: The cap must sit flat, and the burner ports must allow gas to flow evenly.",
+          "Tests spark strength: A strong spark should appear at the correct point near the burner.",
+          "Inspects the igniter: The igniter is checked for cracks, grease, moisture, weak spark, loose mounting, or wear.",
+          "Checks wiring and gas flow: The technician checks the spark wire, switch, ignition module, and burner gas flow.",
+          "Verifies flame behavior: The flame should light quickly, burn evenly, and stay on without sputtering.",
+          "Completes the repair: The fix may include cleaning, adjustment, igniter repair, burner service, or replacement of a failed ignition part.",
+          "Tests the burner again: The technician confirms the burner lights properly, stops clicking after ignition, and shuts off safely.",
+        ],
+      },
+      {
+        kind: "prose",
+        body: [
+          "For freestanding ranges, visit Gas Range Repair San Mateo. For built-in cooktops, visit Gas Cooktop Repair San Mateo.",
+        ],
+      },
+      {
+        kind: "prose",
+        heading: "Why local San Mateo stove repair matters",
+        anchor: "local",
+        body: [
+          "Local response matters when a gas stove will not light. San Mateo homeowners rely on their stove for daily cooking, and a clicking burner can quickly become stressful when there is gas odor or repeated ignition failure.",
+        ],
+        bullets: [
+          "Same-day service: Faster scheduling when the stove is needed today.",
+          "Local technician access: A nearby technician can diagnose the issue without long delays.",
+          "Neighborhood convenience: Local service supports homes, apartments, condos, and rentals across San Mateo, CA.",
+          "Focused appliance repair: Gas stove clicking, gas burner not igniting, igniter failure, and cooktop problems require specific appliance knowledge.",
+          "Clear repair path: Homeowners searching for Gas Stove Repair Near Me need a direct call option and practical repair guidance.",
+        ],
+      },
+      {
+        kind: "prose",
+        body: [
+          "Stove Repair San Mateo CA provides Gas Stove Repair San Mateo, local stove repair support, igniter service, burner repair, gas cooktop repair, and gas range repair for local homeowners who need fast help.",
+        ],
+      },
+      {
+        kind: "prose",
+        body: [
+          "If your gas stove is clicking but not lighting, do not keep forcing the burner to ignite. Stove Repair San Mateo CA provides Gas Stove Repair San Mateo, igniter repair, gas burner repair, gas range repair, gas cooktop repair, and emergency stove repair in San Mateo, CA.",
+          "For fast local service, call now and explain whether the burner is clicking, not sparking, not lighting, or producing a gas smell. Call: (650) 525-2329.",
         ],
       },
     ],
     faqs: [
       {
-        question: "Why did my gas stove start clicking right after I cleaned it?",
+        question: "Why does my gas stove keep clicking?",
         answer:
-          "Cleaning introduces the two most common causes at once: moisture around the burner and igniter, and a burner cap that was lifted and not reseated flat. Both interrupt the spark or the gas reaching it.",
+          "Your gas stove keeps clicking because the ignition system is still trying to spark. This can happen when the burner is wet, dirty, misaligned, or not sensing a proper flame. If clicking continues after cleaning and drying, the switch, igniter, or spark module may need service.",
       },
       {
-        question: "How long should I let a wet burner dry?",
+        question: "Why won't my gas stove light?",
         answer:
-          "Long enough that the cap, burner head, igniter area, and surrounding surface are completely dry to the touch, with washed parts fully air-dried before they go back. Rushing this is the usual reason the clicking seems to persist.",
+          "A gas stove will not light when spark, gas flow, or burner alignment is not working correctly. Common causes include wet burner parts, clogged burner ports, a weak igniter, burner cap misalignment, or a gas supply issue.",
       },
       {
-        question: "Is it safe to keep trying the burner while it clicks?",
+        question: "Why is my gas burner not igniting?",
         answer:
-          "No. Repeated attempts with no flame can release unburned gas around the cooktop. Turn the knob fully off and let the burner area dry, then try once. If it still clicks without lighting, stop and arrange an inspection.",
+          "A gas burner is not igniting because the spark is not lighting the gas at the burner. The ports may be blocked, the cap may be misaligned, or the igniter may be weak or not sparking.",
+      },
+      {
+        question: "Why is my gas stove igniter not sparking?",
+        answer:
+          "A gas stove igniter may stop sparking because of a damaged igniter, loose wire, failed switch, bad spark module, moisture, or an electrical connection issue. Professional testing confirms the failed part.",
       },
       {
         question: "Can I clean the igniter myself?",
         answer:
-          "You can gently clear visible food or grease from around the burner when the stove is off and cool. Do not bend, scrape, soak, or force the igniter itself — it is fragile and it is part of the ignition system.",
+          "You can gently clean visible food or grease around the burner when the stove is off and cool. Do not bend, scrape, soak, or force the igniter. If cleaning does not restore ignition, call for Stove Igniter Repair San Mateo.",
       },
       {
-        question: "What if the clicking continues after everything is dry?",
+        question: "When do I need stove igniter replacement?",
         answer:
-          "That points away from moisture and toward the ignition components — the igniter, spark wire, switch, or module. These need proper testing to identify which part has failed, so the burner should be inspected rather than tested repeatedly.",
+          "You need stove igniter replacement when the igniter is cracked, worn, not sparking, sparking weakly, or failing professional testing. Replacement restores reliable lighting when cleaning or adjustment is not enough.",
       },
       {
-        question: "All my burners started clicking oddly — is that different?",
+        question: "Do I need emergency stove repair in San Mateo?",
         answer:
-          "Yes. When several burners behave strangely at once, the cause is more likely to sit in the shared ignition circuit or controls than in one burner's cap or ports, and it needs appliance-level diagnosis.",
+          "You need emergency stove repair in San Mateo if you smell gas, hear hissing, have repeated clicking with no flame, cannot shut the burner off, or the gas burner will not stay lit. Stop using the stove and call for urgent help.",
       },
     ],
     relatedLinks: [
-      {
-        label: "Stove clicking but not lighting",
-        href: "/problems/stove-clicking-but-not-lighting/",
-        description: "The full problem guide when clicking is not cleaning-related.",
-      },
-      {
-        label: "Gas stove repair in San Mateo",
-        href: "/services/gas-stove-repair-san-mateo-ca/",
-        description: "Burner, ignition, and gas-flow faults on gas stoves.",
-      },
-      {
-        label: "Igniter repair",
-        href: "/services/igniter-repair-san-mateo-ca/",
-        description: "When the spark is weak, intermittent, or absent.",
-      },
-      {
-        label: "Gas smell from a stove",
-        href: "/problems/gas-smell-from-stove/",
-        description: "Safety steps if you can smell gas at any point.",
-      },
-      {
-        label: "Request an inspection",
-        href: "/contact/",
-        description: "Tell us which burner, and what you have already checked.",
-      },
+      { label: "Gas Stove Repair San Mateo", href: "/services/gas-stove-repair-san-mateo-ca/", description: "Burner, ignition, and gas-flow faults." },
+      { label: "Stove Igniter Repair San Mateo", href: "/services/igniter-repair-san-mateo-ca/", description: "Weak, worn, or non-sparking igniters." },
+      { label: "Emergency Stove Repair San Mateo", href: "/services/emergency-stove-repair-san-mateo-ca/", description: "Gas smell, hissing, or unsafe flame behavior." },
+      { label: "Contact Us", href: "/contact/", description: "Request local gas stove service." },
     ],
+    relatedPosts: ["brief-gas-smell-vs-possible-leak", "one-stove-burner-not-heating"],
   },
 
-  // ── 3. One burner cold while the others work ───────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+  // POST 3 — Tab 3: Stove Not Heating in San Mateo? 7 Common Causes
+  // ═══════════════════════════════════════════════════════════════════════════
   {
     slug: "one-stove-burner-not-heating",
-    title: "One Stove Burner Not Heating? What It Usually Means",
-    h1: "One Stove Burner Not Heating While the Others Work?",
-    metaTitle: "One Stove Burner Not Heating? What It Usually Means",
+    title: "Stove Not Heating in San Mateo? 7 Common Causes",
+    h1: "Stove Not Heating in San Mateo? 7 Common Causes",
+    metaTitle: "Stove Not Heating in San Mateo? 7 Common Causes & Repair Help",
     metaDescription:
-      "When a single burner stays cold and the rest of the stove works, the fault is usually local to that burner. What that means on gas and electric stoves.",
+      "Learn why your gas or electric stove stopped heating, what you can safely check, and when to call a local stove repair technician in San Mateo, CA.",
     excerpt:
-      "A single cold burner narrows the search considerably — here is what it points to on gas and on electric, and when it means something broader.",
+      "Why a gas or electric stove stops heating, the 7 common causes, what you can safely check, and when to call a local San Mateo technician.",
+    heroIntro:
+      "Learn why your gas or electric stove stopped heating, what you can safely check, and when to call a local stove repair technician in San Mateo, CA.",
     quickAnswer:
-      "When one burner stays cold and the others work normally, the fault is usually local to that burner rather than the appliance. On electric stoves that most often means the element, its socket, or the switch behind it. On gas stoves it points to the burner cap, ports, or igniter. Several failed burners suggest something shared.",
+      "If your stove is not heating in San Mateo, the cause may be a faulty igniter, broken heating element, bad burner connection, gas supply issue, thermostat problem, wiring fault, or control board malfunction. Homeowners can safely check the plug, breaker, burner alignment, and light debris, but gas odors, sparks, burning smells, repeated breaker trips, or control failures need a professional stove repair technician.",
     publishedTime: "2026-07-25T14:00:00.000Z",
     author: "SanMateo FixHub",
     published: true,
-    content: [
+    blocks: [
       {
-        heading: "Why one cold burner is useful information",
+        kind: "prose",
         body: [
-          "A stove that has stopped heating altogether and a stove with one dead burner are different problems, even though they feel similar in the kitchen. If the other burners light and heat normally, the gas supply, the power supply, and most of the shared controls are demonstrably working.",
-          "That narrows things considerably. It means the fault is most likely in the parts belonging to that one burner — and which parts those are depends on whether the stove is electric or gas. Our broader guide to a stove not heating covers the case where nothing works at all.",
+          "For homeowners in San Mateo, CA, a stove heating problem can quickly interrupt daily cooking. Whether you have a gas stove not heating, an electric stove not heating, or only one stove burner not heating, the key is to identify whether the issue is simple, urgent, or unsafe.",
+          "SanMateo FixHub provides stove repair San Mateo support for gas stoves, electric stoves, ranges, cooktops, burners, igniters, and control problems across San Mateo and nearby Peninsula areas.",
         ],
+        links: [{ label: "Stove Repair San Mateo", href: "/services/stove-repair-san-mateo-ca/" }],
       },
       {
-        heading: "One electric element staying cold",
+        kind: "prose",
+        heading: "Why Your Stove May Stop Heating",
+        anchor: "why-stop-heating",
         body: [
-          "On an electric stove, each burner has its own element and its own path for power. When a single element stays cold while the others glow normally, the element itself, the socket it plugs into, or the switch controlling it are the usual candidates.",
-          "Typical signs are a burner that stays completely cold, one that glows unevenly or only in patches, or one that takes noticeably longer than the others to do the same job. On a coil stove you may also see visible blistering or damage on the coil itself.",
-        ],
-      },
-      {
-        heading: "Burner socket and switch symptoms",
-        body: [
-          "A coil burner plugs into a receptacle, and that connection is a common failure point because it carries a high load and gets moved. A burner that works intermittently, heats only when the coil is nudged, or has a socket that looks darkened or burned is showing connection symptoms rather than element symptoms.",
-          "The switch behind the burner is the other candidate: a burner stuck on one heat level, or one that ignores the knob entirely, points there. Reseating a cool, removable coil that is designed to come out is a reasonable check. Anything involving a burned socket, the wiring behind it, or opening the cooktop is not — those carry high current and need a technician.",
-        ],
-      },
-      {
-        heading: "One gas burner not lighting",
-        body: [
-          "On a gas stove, a single burner that will not light while the others do points at that burner's own hardware. The cap may be sitting badly, the ports may be blocked, or the igniter serving it may be weak or failing.",
-          "The pattern helps identify which. A burner that clicks but never catches suggests the spark is happening but gas is not reaching it properly, or the igniter is too weak to light it. A burner that lights and then goes out, or burns with a weak or uneven flame, points more toward gas flow through blocked ports.",
-        ],
-      },
-      {
-        heading: "Burner cap, port, and igniter symptoms",
-        body: [
-          "These three are worth separating because only one of them is a homeowner check.",
+          "A stove heats by using either gas ignition or electric resistance. A gas stove needs gas flow, a working burner, and a functioning igniter or pilot system. An electric stove needs steady power, a working element, a good burner connection, and a switch or control board that sends power correctly.",
+          "When one part fails, the stove may still look like it is on, but the burner may stay cold, heat weakly, click without lighting, or shut off during use.",
         ],
         bullets: [
-          "Cap out of position: gas does not reach the spark correctly — reseating a cool cap is safe to check",
-          "Blocked ports: uneven flame, one-sided lighting, or slow ignition — clear only loose, visible debris",
-          "Weak or failing igniter: clicking with no flame, or a spark that looks faint — needs testing, not cleaning",
-          "No spark at all: the igniter, wiring, switch, or module needs professional diagnosis",
+          "Gas stoves often have ignition, burner, gas valve, or flame issues.",
+          "Electric coil stoves often have coil, socket, or switch problems.",
+          "Smooth-top electric stoves may have radiant element, wiring, or control issues.",
+          "Modern ranges may develop control board, display, sensor, or switch faults.",
         ],
       },
       {
-        heading: "When more than one burner fails",
+        kind: "prose",
+        heading: "7 Common Causes of a Stove Not Heating",
+        anchor: "causes",
         body: [
-          "The picture changes as soon as a second burner is involved. Multiple burners failing together points away from individual components and toward something they share — the gas supply, the ignition circuit, the wiring, or the control board.",
-          "The same applies if the stove also trips the breaker, shows error codes, or has unresponsive controls. Those are appliance-level symptoms and need appliance-level diagnosis rather than burner-by-burner troubleshooting.",
+          "1. Faulty Igniter. A faulty igniter is one of the most common reasons a gas stove burner clicks but does not light. The igniter creates the spark that lights the gas. If it is weak, dirty, cracked, wet, or failing, the burner may click repeatedly without producing a flame.",
+          "Common symptoms: clicking but no flame, weak spark, one burner failing while others work, or clicking that continues after the knob is turned.",
+          "Safe homeowner check: confirm the burner cap is seated correctly and remove light food debris around the burner after the stove is cool. Do not remove sealed gas parts or keep testing if you smell gas.",
+          "When to call: if the clicking continues or the burner will not light after basic cleaning, stove igniter repair may be needed. Urgency is medium to high if gas odor is present.",
+        ],
+        links: [{ label: "Stove igniter repair", href: "/services/igniter-repair-san-mateo-ca/" }],
+      },
+      {
+        kind: "prose",
+        heading: "2. Broken Heating Element",
+        body: [
+          "A broken heating element is a common reason for an electric stove not heating. On a coil stove, the coil may burn out. On a glass-top stove, the radiant element below the surface may fail.",
+          "Common symptoms: burner stays cold, element glows unevenly, food takes longer to cook, or one burner fails while others work.",
+          "Safe homeowner check: visually inspect a cooled coil for obvious damage, blistering, or loose seating. Do not open the cooktop or touch internal wiring.",
+          "When to call: if the element is cracked, the socket looks burned, or the burner remains cold, request electric stove repair San Mateo. Urgency is medium, but higher if there is a burning smell or breaker issue.",
+        ],
+        links: [{ label: "Electric stove repair San Mateo", href: "/services/electric-stove-repair-san-mateo-ca/" }],
+      },
+      {
+        kind: "prose",
+        heading: "3. Bad Burner Connection",
+        body: [
+          "A bad burner connection can stop power or gas flow from reaching the burner properly. On an electric coil stove, the burner plugs into a receptacle. If the receptacle is loose or burned, the burner may not heat consistently.",
+          "Common symptoms: burner works only sometimes, heats when moved, flame is weak or uneven, or one burner is weaker than the rest.",
+          "Safe homeowner check: make sure removable burner parts are seated correctly after the stove is completely cool. Light cleaning around the burner is also safe.",
+          "When to call: if the connection looks burned, the receptacle is loose, or the same burner keeps failing, burner repair is usually the right service. Urgency is medium.",
+        ],
+        links: [{ label: "Burner repair", href: "/services/burner-repair-san-mateo-ca/" }],
+      },
+      {
+        kind: "prose",
+        heading: "4. Gas Supply Issue",
+        body: [
+          "A gas stove not heating may have a gas supply problem. The gas valve may be partly closed, burner ports may be blocked, the pilot system may be out, or gas flow may be restricted.",
+          "Common symptoms: no flame, weak flame, yellow or uneven flame, burner lights then goes out, multiple burners have low heat, or rotten-egg gas odor near the stove.",
+          "Safe homeowner check: check whether the burner cap is aligned and whether the appliance gas shutoff valve is open if it is safely accessible. Do not keep turning the burner on if you smell gas.",
+          "When to call: if flame is weak, gas flow seems inconsistent, or the burner will not ignite, request gas stove repair San Mateo. If there is a gas smell, treat it as urgent and use emergency stove repair San Mateo only after the immediate safety steps are handled.",
+        ],
+        links: [
+          { label: "Gas stove repair San Mateo", href: "/services/gas-stove-repair-san-mateo-ca/" },
+          { label: "Emergency stove repair San Mateo", href: "/services/emergency-stove-repair-san-mateo-ca/" },
         ],
       },
       {
-        heading: "What you can safely check",
+        kind: "prose",
+        heading: "5. Thermostat Problem",
         body: [
-          "With the stove off and completely cool, and only if there is no gas smell, sparking, smoke, or burning odor:",
+          "A thermostat or temperature sensor helps control how much heat the stove or range produces. If it fails, the appliance may not reach the selected temperature or may heat inconsistently.",
+          "Common symptoms: wrong temperature, heat too low or too high, burner cycling strangely, uneven cooking, or settings that do not match actual heat.",
+          "Safe homeowner check: note whether the problem affects one burner, all burners, or the oven section of a range. Avoid opening control panels or bypassing sensors.",
+          "When to call: if temperature control is unreliable or a range is not heating correctly, range repair San Mateo may be needed. Urgency is usually medium.",
+        ],
+        links: [{ label: "Range repair San Mateo", href: "/services/range-repair-san-mateo-ca/" }],
+      },
+      {
+        kind: "prose",
+        heading: "6. Wiring or Electrical Fault",
+        body: [
+          "A wiring or electrical fault can cause a stove to stop heating, trip the breaker, shut off, or become completely unresponsive. Electric stoves use high electrical loads, so damaged wires, terminals, switches, or outlets should be handled carefully.",
+          "Common symptoms: repeated breaker trips, burner heats briefly then stops, flickering display, burning plastic smell, sparks, buzzing, or the stove not working properly at all.",
+          "Safe homeowner check: check whether the breaker has tripped once. If it trips again, stop resetting it.",
+          "When to call: sparks, burning smells, repeated breaker trips, or melted parts make this urgent. Request same-day stove repair San Mateo availability.",
+        ],
+        links: [{ label: "Same-day stove repair San Mateo", href: "/services/emergency-stove-repair-san-mateo-ca/" }],
+      },
+      {
+        kind: "prose",
+        heading: "7. Control Board or Switch Malfunction",
+        body: [
+          "Modern stoves often use switches, relays, touch panels, and control boards to manage heat. If one of these parts fails, the burner may not turn on, may stay stuck on one setting, or may stop responding.",
+          "Common symptoms: burner will not turn on, burner stuck on high or low, unresponsive touch controls, error codes, or multiple functions failing at once.",
+          "Safe homeowner check: try a basic power reset only if there is no gas smell, smoke, spark, or burning odor.",
+          "When to call: if the problem returns, the display shows errors, or controls behave unpredictably, control board repair may be needed. Urgency is medium to high.",
+        ],
+        links: [{ label: "Control board repair", href: "/services/stove-control-board-repair-san-mateo-ca/" }],
+      },
+      {
+        kind: "table",
+        heading: "Stove Not Heating Troubleshooting Table",
+        anchor: "troubleshooting",
+        caption: "Cause, symptoms, DIY safety, technician need, and urgency",
+        columns: ["Cause", "Common Symptoms", "DIY Safe?", "Technician Needed?", "Urgency"],
+        rows: [
+          ["Faulty igniter", "Clicking but no flame, weak spark", "Limited cleaning only", "Yes, if clicking continues", "Medium to high"],
+          ["Broken heating element", "Electric burner cold or uneven", "Visual check only", "Yes, if damaged or dead", "Medium"],
+          ["Bad burner connection", "Burner works sometimes, loose or weak heat", "Basic reseating when cool", "Yes, if burned or loose", "Medium"],
+          ["Gas supply issue", "Weak flame, no flame, gas smell", "Only basic valve/cap check", "Yes, urgent if gas odor", "High"],
+          ["Thermostat problem", "Wrong temperature, uneven heating", "Observe symptoms only", "Yes, for testing", "Medium"],
+          ["Wiring or electrical fault", "Breaker trips, sparks, burning smell", "Breaker check only", "Yes", "High"],
+          ["Control board or switch malfunction", "Error codes, unresponsive controls", "Basic reset only if safe", "Yes", "Medium to high"],
+        ],
+      },
+      {
+        kind: "checklist",
+        heading: "What You Can Safely Check Yourself",
+        anchor: "safe-checks",
+        intro: ["Before calling a stove repair company San Mateo homeowners trust, you can do a few safe checks:"],
+        items: [
+          "Confirm the stove is plugged in.",
+          "Check whether the breaker has tripped once.",
+          "Make sure the burner knob is fully turned off, then try again.",
+          "Check whether the appliance gas shutoff valve is open, if safely accessible.",
+          "Let the stove cool, then clean light debris around burner parts.",
+          "Reseat a removable coil-style burner if it is cool and designed to be removable.",
+          "Check whether the problem affects one burner or the entire stove.",
+          "Try a basic power reset only if there are no safety warning signs.",
+        ],
+      },
+      {
+        kind: "prose",
+        heading: "When to Call a Professional Stove Repair Technician",
+        anchor: "when-call",
+        body: [
+          "Call a professional technician when the issue is unsafe, technical, or recurring. A local stove repair expert can test parts safely and confirm whether the issue is with the igniter, element, wiring, switch, gas flow, or control board.",
+          "You should schedule stove repair service San Mateo CA if your stove is on but not heating, a burner is not working, multiple burners are weak or cold, your gas stove clicks but will not ignite, your electric burner stays cold, or the stove trips the breaker.",
+          "Searching for stove repair near me usually means you need help soon, not a long technical explanation. If the stove heating problem is interrupting cooking or creating safety concerns, professional diagnosis is the fastest path to a clear answer.",
+        ],
+      },
+      {
+        kind: "cta",
+        heading: "Need fast stove repair in San Mateo?",
+        subheading: "If your burner is cold, your gas stove keeps clicking, or your electric stove will not heat, call SanMateo FixHub for local stove repair help.",
+      },
+      {
+        kind: "prose",
+        heading: "Repair or Replace?",
+        anchor: "repair-replace",
+        body: [
+          "A stove that is not heating does not always need replacement. Many heating problems are caused by one failed part, such as an igniter, burner, heating element, socket, switch, or control board.",
+          "Repair is often the better choice when only one burner is affected, the stove is otherwise in good condition, parts are available, the repair cost is reasonable, and the appliance still fits your kitchen needs.",
+          "Replacement may be smarter when the stove is very old, multiple major parts are failing, parts are unavailable, repair costs approach replacement cost, or the stove has repeated safety issues.",
+          "For many San Mateo homeowners, a diagnosis is the best first step. A technician can explain whether the problem is minor, urgent, or not worth repairing. If you are comparing options, review the site's stove repair pricing guidance to understand what affects cost.",
+        ],
+        links: [{ label: "Stove repair pricing guidance", href: "/stove-repair-cost-san-mateo-ca/" }],
+      },
+      {
+        kind: "prose",
+        heading: "Why San Mateo Homeowners Choose Local Repair",
+        anchor: "local-repair",
+        body: [
+          "Choosing local stove repair in San Mateo can make the process easier and faster. A nearby repair team understands the local service area, common appliance problems, and the urgency of restoring a working kitchen.",
         ],
         bullets: [
-          "Confirm whether it really is one burner or more — try each one deliberately",
-          "Reseat a cool, removable coil burner that is designed to be removable",
-          "Check that a cool gas burner cap sits flat and centered",
-          "Clear light, visible debris from around the burner",
-          "Note whether the burner fails every time or only sometimes",
+          "Faster response when availability allows.",
+          "Easier scheduling in San Mateo, CA.",
+          "Service coverage across San Mateo County and nearby Peninsula areas.",
+          "Familiarity with local homes, condos, rentals, and small kitchens.",
+          "Clear communication before repair.",
+          "Convenient support for gas and electric stove issues.",
         ],
       },
       {
-        heading: "Where troubleshooting should stop",
+        kind: "prose",
         body: [
-          "Stop and call for service if you notice a gas smell, sparks, smoke, a burning smell, repeated breaker trips, melted or discolored parts, or a burner that will not switch off. Do not open the cooktop, work on wiring, test at the electrical panel, or take gas components apart.",
-          "One dead burner is rarely an emergency, but it is worth having looked at rather than working around. A burned socket or a failing connection tends to get worse, and the diagnosis is usually quick once someone can test the burner properly. SanMateo FixHub covers burner faults on gas and electric stoves across San Mateo and the nearby Peninsula.",
+          "SanMateo FixHub serves San Mateo and nearby Peninsula communities. Check the service areas page to confirm coverage around San Mateo County, Burlingame, Foster City, Belmont, San Carlos, Millbrae, Redwood City, and nearby areas.",
+          "For broader appliance repair San Mateo and San Mateo appliance repair searches, this website is especially focused on stove, range, cooktop, burner, igniter, and control issues. You can also learn more about our team before requesting service.",
+        ],
+        links: [
+          { label: "Service areas", href: "/locations/" },
+          { label: "About our team", href: "/about/" },
+        ],
+      },
+      {
+        kind: "prose",
+        heading: "Call to Action",
+        anchor: "cta",
+        body: [
+          "Is your stove not heating in San Mateo or is one burner not working properly? Call SanMateo FixHub at (650) 525-2329 for local stove repair help in San Mateo, CA. We help with gas stoves, electric stoves, burners, igniters, ranges, cooktops, and control issues.",
         ],
       },
     ],
     faqs: [
       {
-        question: "Can I keep using the stove if one burner does not work?",
+        question: "Why is my stove on but not heating?",
         answer:
-          "Usually yes, provided there is no gas smell, sparking, smoke, burning odor, or breaker problem. The failed burner should still be checked, because a bad connection or a failing switch tends to get worse rather than settle.",
+          "Your stove may be on but not heating because the burner, igniter, heating element, switch, wiring, gas flow, or control board is failing. If lights or the display work but the burner stays cold, the issue is usually inside the heating or control system.",
       },
       {
-        question: "Why would one electric burner stay cold when the others work?",
+        question: "Can I still use a stove if one burner is not heating?",
         answer:
-          "The element itself may have failed, the socket it plugs into may be loose or burned, or the switch controlling that burner may not be sending power. All three affect only that burner, which is why the rest of the cooktop is unaffected.",
+          "You may be able to use the other burners if there is no gas smell, sparking, smoke, burning odor, or breaker problem. However, one failed burner should still be checked because a bad connection, igniter, element, or switch can get worse.",
       },
       {
-        question: "Why does one gas burner click but never light?",
+        question: "Why does my gas stove click but not ignite?",
         answer:
-          "The spark is being produced but gas is not reaching it properly, or the igniter is too weak to ignite it. A misaligned cap, blocked ports, or a worn igniter are the common explanations for a single burner behaving this way.",
+          "A gas stove may click but not ignite because the igniter is dirty, wet, misaligned, weak, or failing. It can also happen when the burner cap is not seated correctly or the burner ports are blocked. If basic cleaning does not help, schedule gas stove repair.",
       },
       {
-        question: "Does one failed burner mean the stove is failing?",
+        question: "How much does stove repair cost in San Mateo?",
         answer:
-          "Not usually. A single burner fault is normally contained to that burner's own components. It is when several burners fail together, or the appliance trips the breaker or shows errors, that something broader is more likely.",
+          "Stove repair cost in San Mateo depends on the stove type, failed part, brand, access difficulty, and whether parts are available. Igniter, burner, and element repairs are often more straightforward than wiring or control board repairs. A diagnosis gives the most accurate estimate.",
       },
       {
-        question: "Is it safe to swap a coil burner to another socket to test it?",
+        question: "How long does stove repair usually take?",
         answer:
-          "Reseating a cool, removable coil in its own socket is a normal check. Beyond that, leave testing to a technician — a burned or loose receptacle carries a high electrical load and is not a place to experiment.",
+          "Many stove heating problems can be diagnosed during the first visit. Some repairs can be completed the same day if the issue is simple and the part is available. More complex repairs may require ordering a specific part.",
       },
       {
-        question: "How is a single burner fault diagnosed?",
+        question: "Is it safe to repair a stove myself?",
         answer:
-          "By testing that burner's own components in sequence — element, socket, and switch on an electric stove, or cap, ports, spark, and gas flow on a gas stove — and confirming afterwards that the burner heats and shuts off correctly.",
+          "Basic cleaning, checking the breaker once, confirming the plug, and reseating removable burner parts may be safe when the stove is cool. Gas work, wiring, control board repair, repeated breaker trips, sparks, smoke, or burning smells should be handled by a technician.",
+      },
+      {
+        question: "When should I replace instead of repair?",
+        answer:
+          "Consider replacement if the stove is very old, has repeated safety problems, needs several expensive parts, or the repair cost is close to replacement cost. If only one part has failed, repair may still be the better option.",
       },
     ],
     relatedLinks: [
-      {
-        label: "Stove not heating",
-        href: "/problems/stove-not-heating/",
-        description: "When the whole stove has stopped producing heat.",
-      },
-      {
-        label: "Electric stove not heating",
-        href: "/problems/electric-stove-not-heating/",
-        description: "Elements, sockets, switches, and power faults.",
-      },
-      {
-        label: "Burner not working",
-        href: "/problems/burner-not-working/",
-        description: "The full problem guide for an unresponsive burner.",
-      },
-      {
-        label: "Burner repair",
-        href: "/services/burner-repair-san-mateo-ca/",
-        description: "Burner, socket, and switch repair on gas and electric stoves.",
-      },
-      {
-        label: "Book a burner diagnosis",
-        href: "/contact/",
-        description: "Tell us which burner and what it does when you try it.",
-      },
+      { label: "Stove Repair San Mateo", href: "/services/stove-repair-san-mateo-ca/", description: "Core gas and electric stove repair." },
+      { label: "Gas Stove Repair San Mateo", href: "/services/gas-stove-repair-san-mateo-ca/", description: "Ignition, burner, and gas-flow faults." },
+      { label: "Electric Stove Repair San Mateo", href: "/services/electric-stove-repair-san-mateo-ca/", description: "Elements, sockets, switches, and controls." },
+      { label: "Emergency Stove Repair San Mateo", href: "/services/emergency-stove-repair-san-mateo-ca/", description: "Urgent gas or electrical safety issues." },
+      { label: "Burner Repair", href: "/services/burner-repair-san-mateo-ca/", description: "Burner, socket, and switch repair." },
+      { label: "Stove Igniter Repair", href: "/services/igniter-repair-san-mateo-ca/", description: "Weak or non-sparking igniters." },
+      { label: "Control Board Repair", href: "/services/stove-control-board-repair-san-mateo-ca/", description: "Switches, relays, and control boards." },
+      { label: "Contact Us / Schedule Service", href: "/contact/", description: "Book a local stove diagnosis." },
     ],
+    relatedPosts: ["gas-stove-clicking-after-cleaning-spill", "repair-or-replace-stove-factors"],
   },
 
-  // ── 4. Brief ignition odor vs a possible leak ─────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+  // POST 4 — Tab 4: Gas Smell From Stove? What to Do Immediately
+  // ═══════════════════════════════════════════════════════════════════════════
   {
     slug: "brief-gas-smell-vs-possible-leak",
-    title: "Brief Gas Smell or Possible Leak? Know the Difference",
-    h1: "Brief Gas Smell During Ignition or a Possible Gas Leak?",
-    metaTitle: "Brief Gas Smell or Possible Leak? Know the Difference",
+    title: "Gas Smell From Stove? What to Do Immediately",
+    h1: "Gas Smell From Stove? What to Do Immediately in San Mateo, CA",
+    metaTitle: "Gas Smell From Stove? What to Do Immediately in San Mateo, CA",
     metaDescription:
-      "A one-second gas smell as a burner lights is not the same as an odor that lingers, spreads, or appears with the stove off. How to tell, and what to do first.",
+      "If your stove smells like gas, treat it as a safety issue first. A local San Mateo guide to acting fast, understanding the risk, and when to call for stove repair.",
     excerpt:
-      "A momentary odor as a burner catches is not the same as gas you can smell with the stove off. The difference decides what you do next.",
+      "If your stove smells like gas, act on safety first. Immediate steps, common causes, a mild-smell-vs-serious-leak guide, and when to call a professional.",
+    heroIntro:
+      "If your stove smells like gas, treat it as a safety issue first. Use this local San Mateo guide to act fast, understand the risk, and know when to call for stove repair.",
     quickAnswer:
-      "A faint odor for a second as a burner lights can be normal. Gas you can smell when the stove is off, an odor that lingers, strengthens, or spreads, or any smell with hissing means stop. Do not test the burner again, avoid flames and switches, leave if it is strong, and call PG&E at 1-800-743-5000 or 911 from a safe location.",
+      "If you notice a gas smell from stove San Mateo CA, turn the stove off if it is safe, avoid flames or electrical switches, ventilate only if safe, and leave the area immediately if the odor is strong or spreading. A stove that smells like gas can sometimes be caused by brief residual gas or delayed ignition, but it can also point to a serious gas leak from stove parts, a faulty valve, a loose connection, poor combustion, or a damaged gas line.",
     publishedTime: "2026-07-26T14:00:00.000Z",
     author: "SanMateo FixHub",
     published: true,
-    content: [
+    blocks: [
       {
-        heading: "The difference that matters",
+        kind: "callout",
+        tone: "safety",
         body: [
-          "Gas has an added rotten-egg odor precisely so people notice it. That means a brief trace as a burner lights is not unusual — a small amount of gas leaves the burner in the moment before the flame catches, and you may smell it for a second.",
-          "What matters is what happens next. A normal ignition odor is faint, tied to the moment of lighting, and gone almost immediately. An odor that lingers after the flame is established, gets stronger, spreads beyond the stove, or is present when nothing is switched on is a different thing entirely, and it should be treated as a possible leak until someone qualified says otherwise.",
+          "Strong gas smell, hissing, or symptoms like dizziness mean leave first and call emergency help. After the space is safe, request local stove diagnosis.",
         ],
       },
       {
-        heading: "What a brief ignition odor looks like",
+        kind: "prose",
+        anchor: "intro",
         body: [
-          "The pattern is specific: you turn the knob, there is a faint smell for roughly a second, the burner lights, and the smell disappears. The flame then burns steadily and mostly blue.",
-          "Even this is worth watching. If the same burner starts taking several clicks to catch, or the smell becomes noticeable every time you use it, the ignition is getting slower — often from moisture, debris in the burner ports, a cap that is not seated, or a weakening igniter. That is a repair conversation rather than an emergency, but it should not be left indefinitely.",
+          "Do not keep using the stove to “see if it goes away.” In San Mateo homes, apartments, rentals, and small kitchens, a gas smell from stove should be treated as a safety issue first and a repair issue second. Once the immediate danger is handled, call a local stove repair professional before using the appliance again.",
         ],
       },
       {
-        heading: "Signs that point to a possible leak",
+        kind: "checklist",
+        heading: "What Should You Do Right Now If Your Stove Smells Like Gas?",
+        anchor: "safety-steps",
+        ordered: true,
+        intro: ["If your gas stove smells like gas, follow these steps in order."],
+        items: [
+          "Turn off the stove if it is safe. If a burner knob was accidentally left on, turn it fully off only if you can do it without moving toward a strong gas odor.",
+          "Avoid flames immediately. Do not use matches, candles, cigarettes, lighters, or another burner.",
+          "Avoid electrical switches and devices. Do not turn lights on or off. Do not use outlets, fans, appliance switches, garbage disposals, or anything that could create a spark near the suspected gas leak.",
+          "Ventilate only if safe. If the smell is mild and you can safely open a nearby door or window, do so. If the smell is strong, leave first.",
+          "Leave immediately if the smell is strong or spreading. Get people and pets out of the home. Do not stay inside trying to find the source.",
+          "Call emergency help or the gas utility if needed.",
+          "After the area is safe, call a local professional. Once the emergency risk is handled, schedule gas stove repair or contact our team for stove diagnosis in San Mateo, CA.",
+        ],
+      },
+      {
+        kind: "callout",
+        tone: "safety",
         body: [
-          "Any of the following moves the situation from maintenance to safety. If you are unsure which category you are in, treat it as the more serious one.",
+          "For gas-safety guidance, the U.S. Department of Transportation's Pipeline and Hazardous Materials Safety Administration advises people who suspect or detect a gas leak to leave the area immediately, call 9-1-1 from a safe location, and avoid flames, electrical switches, or other ignition sources.",
+        ],
+        links: [
+          {
+            label: "U.S. DOT PHMSA gas leak safety guidance",
+            href: "https://www.phmsa.dot.gov/safety-awareness/pipeline/pipeline-leak-recognition-and-what-do",
+          },
+          { label: "Schedule gas stove repair", href: "/services/gas-stove-repair-san-mateo-ca/" },
+          { label: "Contact our team", href: "/contact/" },
+        ],
+      },
+      {
+        kind: "prose",
+        heading: "What Causes a Gas Smell From a Stove?",
+        anchor: "causes",
+        body: [
+          "A stove smells like gas for different reasons. Some causes are minor and related to normal ignition. Others are serious and should be handled quickly.",
+          "Residual Gas After Burner Use. A very brief gas odor can happen when a small amount of gas is released before the burner fully lights. This smell should fade quickly. It should not be strong, constant, or present when the stove is off. If the smell keeps coming back, stop using the burner and schedule stove repair in San Mateo.",
+          "Delayed Ignition. Delayed ignition happens when gas flows but the flame does not light right away. You may hear clicking for several seconds before the burner lights. This can leave a noticeable stove gas smell around the burner. Common reasons include moisture, food debris, blocked burner ports, a weak igniter, or a burner cap that is not seated correctly.",
+          "Faulty Igniter. A weak or failing igniter may click without lighting the gas properly. If the burner keeps clicking, smells like gas, and does not catch a flame, the stove should not be repeatedly tested. This is a common reason people request gas stove repair San Mateo service, especially when one burner has the same problem again and again.",
+          "Dirty Burner Cap or Blocked Burner Ports. Grease, food spills, and debris can block burner ports or stop the burner cap from sitting evenly. This can cause slow lighting, uneven flame, weak flame, or a smell of gas from stove during ignition. A simple visible cleaning may help if the stove is fully off, cool, and there is no active gas smell. However, do not disassemble gas components yourself.",
+          "Loose Burner Connection. A loose or misaligned burner assembly can affect how gas moves and ignites. If the smell happens near one burner only, the burner may need professional inspection.",
+          "Gas Valve Issue. A worn, stuck, or faulty gas valve can allow gas to pass when it should not. This is more serious than a dirty burner or delayed ignition. If you smell gas when the stove is off, stop using the stove and get emergency guidance first. After the space is safe, call for professional repair.",
+          "Damaged Gas Line or Connector. A damaged connector, loose fitting, or gas line issue can create a dangerous gas leak from stove or near the stove connection. If the odor is strong, constant, or near the back of the appliance, leave the area and call emergency help first.",
+          "Poor Combustion. A healthy gas flame is usually steady and mostly blue. A weak, yellow, orange, lifting, or uneven flame may mean the gas is not burning properly. Poor combustion can come from blocked ports, dirty burners, air mixture issues, or other gas flow problems. This should be checked before the stove is used heavily again.",
+        ],
+        links: [{ label: "Stove repair in San Mateo", href: "/services/stove-repair-san-mateo-ca/" }],
+      },
+      {
+        kind: "table",
+        heading: "Gas Smell From Stove San Mateo CA: Mild Smell vs Serious Leak",
+        anchor: "risk-table",
+        intro: [
+          "Use this table to understand risk levels, but do not use it as a replacement for emergency help. If you are unsure, treat the smell as serious.",
+        ],
+        caption: "Gas smell situations, their likely meaning, and what to do",
+        columns: ["Situation", "Likely Meaning", "What to Do"],
+        rows: [
+          ["Mild smell for one second when burner lights", "Brief residual gas or slightly delayed ignition", "Turn the burner off if needed, ventilate safely, and watch for repeat issues"],
+          ["Smell happens every time one burner is used", "Igniter, burner cap, blocked port, or gas flow issue", "Stop using that burner and schedule repair"],
+          ["Burner clicks but does not light", "Possible faulty igniter or delayed ignition", "Avoid repeated ignition attempts and call for stove diagnosis"],
+          ["Smell near the back of the stove", "Possible connector, valve, or line issue", "Stop using the stove and get professional help"],
+          ["Strong constant gas smell", "Possible active gas leak", "Leave immediately and call emergency help"],
+          ["Gas smell throughout the kitchen or home", "Higher-risk leak situation", "Evacuate people and pets immediately"],
+          ["Gas smell with hissing sound", "Possible active leak from appliance or line", "Leave the area right away"],
+          ["Gas smell with headache, dizziness, or nausea", "Possible unsafe exposure", "Leave immediately and seek emergency help"],
+        ],
+      },
+      {
+        kind: "prose",
+        heading: "Why This Matters in San Mateo, CA",
+        anchor: "san-mateo",
+        body: [
+          "In San Mateo, CA, many households rely on their stove every day. A gas smell can affect single-family homes, apartments, condos, rental properties, and small kitchens across San Mateo County, the Bay Area, and the Peninsula.",
+          "Speed matters because a stove gas smell can move from “minor ignition issue” to “unsafe appliance” quickly if the stove keeps being used. For renters and property managers, fast action also helps document the issue and reduce tenant risk. For homeowners, it protects the kitchen, the household, and the appliance.",
+          "Local service also matters. A nearby technician can inspect the stove, explain whether the issue is related to the burner, igniter, gas valve, connection, or combustion, and help you decide whether urgent repair is needed. If the immediate safety risk has already been handled, SanMateo FixHub can help with same-day stove repair availability near San Mateo.",
+        ],
+        links: [{ label: "Same-day stove repair", href: "/services/emergency-stove-repair-san-mateo-ca/" }],
+      },
+      {
+        kind: "cta",
+        heading: "Need Help After the Safety Steps?",
+        subheading: "If the gas smell is strong, leave first and call emergency help. If the area is safe but the stove still needs inspection, call SanMateo FixHub at (650) 525-2329.",
+      },
+      {
+        kind: "prose",
+        heading: "DIY vs Professional Help",
+        anchor: "diy-professional",
+        body: [
+          "There are a few safe things you can check, but gas-related repair work should be left to a professional.",
+        ],
+      },
+      {
+        kind: "checklist",
+        heading: "What You Can Safely Check",
+        intro: ["Only check these if the smell is mild, the stove is off, and the area feels safe:"],
+        items: [
+          "Are all knobs fully off?",
+          "Did the smell start after cleaning or a spill?",
+          "Is the burner cap visibly crooked?",
+          "Does one burner smell worse than the others?",
+          "Does the burner click but fail to light?",
+          "Is the flame weak, yellow, orange, or uneven?",
+          "Does the smell stop after the burner lights?",
+          "Is the odor present even when the stove is off?",
+        ],
+        footnote: "These details can help a technician understand the problem faster.",
+      },
+      {
+        kind: "callout",
+        tone: "safety",
+        heading: "What You Should Never Attempt Yourself",
+        bullets: [
+          "Gas line repair.",
+          "Gas valve adjustment.",
+          "Connector replacement.",
+          "Leak testing with flame.",
+          "Internal gas component disassembly.",
+          "Repeated ignition attempts.",
+          "Moving the stove to inspect the gas line while odor is present.",
+          "Repairing a burner while you still smell gas.",
+        ],
+      },
+      {
+        kind: "prose",
+        body: [
+          "A gas smell from stove may seem simple, but guessing can be risky. Professional diagnosis helps separate a dirty burner or weak igniter from a serious gas leak.",
+        ],
+      },
+      {
+        kind: "checklist",
+        heading: "When Should You Call a Professional?",
+        anchor: "call-professional",
+        intro: ["Call a professional after emergency safety steps are handled if:"],
+        items: [
+          "The smell keeps returning.",
+          "The stove smells like gas when it is off.",
+          "A burner will not light.",
+          "A burner clicks but does not ignite.",
+          "The flame is weak, yellow, orange, or uneven.",
+          "You hear a hissing sound near the stove.",
+          "The smell is near the back of the stove.",
+          "The smell is spreading through the kitchen.",
+          "Someone feels headache, dizziness, nausea, or unusual symptoms near the stove.",
+          "A tenant reports repeated gas odor.",
+          "The issue started after cleaning, moving, or reinstalling the appliance.",
+        ],
+        footnote:
+          "If the smell is strong or spreading, emergency services come first. After the space is safe, schedule emergency stove repair San Mateo service before using the stove again.",
+      },
+      {
+        kind: "prose",
+        heading: "Why Professional Stove Repair Is the Safer Choice",
+        anchor: "why-professional",
+        body: [
+          "A local stove repair professional can inspect the appliance, identify the likely source, and explain the next step clearly. That matters because the same symptom can have different causes.",
+          "A gas smell may come from:",
         ],
         bullets: [
-          "You can smell gas when the stove is completely off",
-          "The odor lingers after the burner has lit, or keeps returning",
-          "It is getting stronger, or spreading beyond the kitchen",
-          "There is a hissing sound near the appliance or behind it",
-          "The smell is strongest at the back of the stove or near the connection",
-          "A burner clicks repeatedly without lighting while you can smell gas",
-          "Anyone in the home has a headache, dizziness, or nausea near the stove",
+          "A weak igniter.",
+          "A dirty burner.",
+          "A blocked burner port.",
+          "A misaligned burner cap.",
+          "A loose connection.",
+          "A worn gas valve.",
+          "A damaged connector.",
+          "Poor combustion.",
+        ],
+        links: [{ label: "Appliance repair in San Mateo, CA", href: "/services/" }],
+      },
+      {
+        kind: "prose",
+        body: [
+          "SanMateo FixHub focuses on gas and electric stoves, ranges, and cooktops. That stove-specific focus keeps the repair aligned with burners, igniters, valves, elements, controls, and cooking-surface problems instead of broad, unrelated appliance work.",
+          "For broader cooking-appliance support, you can review the site's appliance repair in San Mateo, CA service options and choose the closest stove, range, cooktop, burner, igniter, or emergency repair category.",
         ],
       },
       {
-        heading: "What to do right now",
+        kind: "callout",
+        tone: "info",
+        heading: "Illustrative Example: A Typical San Mateo Gas Stove Smell Scenario",
         body: [
-          "If you suspect a leak, act in this order. The aim is to remove ignition sources and get people away from the gas — not to find the source yourself.",
+          "This example describes a common repair scenario and is not a claim about a specific customer job.",
+          "A San Mateo renter notices a gas smell whenever the front burner is turned on. The burner clicks several times before lighting, and the smell fades after the flame appears.",
+          "The renter stops using that burner, opens a nearby window safely, reports the issue to the property manager, and schedules a stove inspection.",
+          "During a situation like this, a technician may find a dirty burner port, a misaligned burner cap, or a weak igniter causing delayed ignition. After the burner and ignition system are corrected, the burner should light more reliably and the repeated gas smell should stop.",
+          "This is a typical example, not a guaranteed diagnosis. The key point is that repeated gas smell should be inspected before the stove is used normally again.",
         ],
+      },
+      {
+        kind: "callout",
+        tone: "safety",
+        heading: "What Not to Do If You Smell Gas From Your Stove",
+        body: ["Use this checklist if your stove smells like gas."],
         bullets: [
-          "Stop using the appliance and turn the knob fully off, if you can do that without moving toward a strong odor",
-          "Do not try the ignition again — repeated attempts release more gas",
-          "Avoid flames of any kind: matches, lighters, candles, cigarettes, another burner",
-          "Do not operate electrical switches, outlets, fans, or appliances near the stove",
-          "Ventilate only if the odor is faint and it is safe to open a nearby door or window",
-          "If the odor is strong, spreading, or anyone feels unwell, leave immediately with everyone in the home, pets included",
-          "From outside or another safe location, call PG&E at 1-800-743-5000, or 911",
+          "Do not ignore repeated gas odor.",
+          "Do not keep trying to light the burner.",
+          "Do not use matches, lighters, candles, or cigarettes.",
+          "Do not turn electrical switches on or off.",
+          "Do not use a fan if a gas leak is suspected.",
+          "Do not move the stove to inspect the gas line yourself.",
+          "Do not attempt DIY gas line work.",
+          "Do not adjust the gas valve yourself.",
+          "Do not test for leaks with a flame.",
+          "Do not assume the smell is safe just because it happened before.",
+          "Do not delay emergency help if the smell is strong, spreading, or paired with symptoms.",
         ],
       },
       {
-        heading: "What not to attempt",
+        kind: "prose",
+        heading: "Get the Stove Checked Before Using It Again",
+        anchor: "conclusion",
         body: [
-          "Some of the most dangerous responses to a gas smell look like sensible troubleshooting. They are not.",
-        ],
-        bullets: [
-          "Never test for a leak with a flame",
-          "Do not adjust or attempt to repair a gas valve, connector, or line",
-          "Do not move the stove to look behind it while you can smell gas",
-          "Do not take gas components apart",
-          "Do not use a fan to clear the air if a leak is suspected",
-          "Do not assume it is fine because the same smell happened before",
-        ],
-      },
-      {
-        heading: "After the area is confirmed safe",
-        body: [
-          "Repair comes after the safety question is settled, not alongside it. Once PG&E or emergency services have assessed the situation and confirmed the area is safe, the appliance itself still needs looking at before it goes back into normal use — particularly if the odor was tied to one burner or to ignition.",
-          "At that stage, a stove-focused technician can inspect the burner, ignition components, and connections to establish why the odor was occurring. SanMateo FixHub handles that appliance-side inspection for gas stoves, ranges, and cooktops across San Mateo and the nearby Peninsula, once the utility or emergency services have confirmed it is safe to work on the appliance.",
-        ],
-      },
-      {
-        heading: "Recurring odor deserves an answer",
-        body: [
-          "A smell that keeps coming back during ignition is telling you something is drifting out of adjustment, even when each individual occurrence seems minor. Delayed ignition, blocked ports, a cap that no longer seats properly, or an igniter losing strength all tend to get worse rather than better.",
-          "Getting it inspected while it is still an ignition-quality issue is considerably better than waiting until the appliance is behaving unpredictably. If in doubt at any point, treat the odor as serious first and sort the repair out afterwards.",
+          "A gas smell from your stove in San Mateo, CA should never be brushed off. It may be something simple like delayed ignition or a dirty burner, but it can also be a serious gas leak from stove components, a valve, a connector, or a line.",
+          "If the smell is strong, constant, or spreading, leave immediately and call emergency help first. Once the area is safe, do not keep using the stove until it has been inspected.",
+          "For safety-aware stove repair San Mateo CA, call SanMateo FixHub at (650) 525-2329 or request service. We help San Mateo homeowners, renters, landlords, and property managers with gas stove repair, burner problems, ignition issues, and urgent stove repair needs across San Mateo County and the Peninsula.",
         ],
       },
     ],
@@ -579,204 +1217,308 @@ export const blogPosts: BlogPost[] = [
       {
         question: "Why does my stove smell like gas when I turn it on?",
         answer:
-          "A small amount of gas leaves the burner before the flame catches, so a faint odor for about a second during ignition can be normal. Repeated odor, slow lighting, or clicking without a flame points to an igniter, burner, or gas-flow problem instead.",
+          "Your stove may smell like gas when gas flows before the burner fully lights. A very brief smell can happen during ignition, but repeated odor, slow lighting, or clicking without flame can point to an igniter, burner, or gas flow problem.",
       },
       {
-        question: "Is a slight gas smell from a stove normal?",
+        question: "Is a slight gas smell from stove normal?",
         answer:
-          "A momentary trace as a burner lights can be. It should not linger, strengthen, spread, or keep returning. If the smell is strong, constant, or present with the stove off, leave the area and call PG&E at 1-800-743-5000 or 911 from a safe location.",
+          "A slight gas smell for a moment during ignition can happen, but it should not linger or return repeatedly. If the smell is strong, constant, or present when the stove is off, leave the area and call emergency help.",
       },
       {
-        question: "Can I use my stove if I can smell gas?",
+        question: "Can I use my stove if I smell gas?",
         answer:
-          "No. Stop using it until the cause is established. If the odor is strong or spreading, leave immediately and call for emergency help. If it is faint but keeps returning during use, stop using that burner and arrange an inspection.",
+          "No. Stop using the stove until the cause is clear. If the smell is strong or spreading, leave immediately and call emergency help. If the smell is mild but keeps returning during use, schedule professional inspection.",
       },
       {
-        question: "How do I know whether my stove has a gas leak?",
+        question: "How do I know if my stove has a gas leak?",
         answer:
-          "Warning signs include gas you can smell with the stove off, odor near the back of the appliance, hissing, repeated failed ignition alongside a smell, or headaches, dizziness, or nausea near the stove. Only the utility or a qualified professional can confirm a leak.",
+          "Possible warning signs include gas smell when the stove is off, odor near the back of the appliance, hissing sounds, repeated burner ignition problems, or symptoms like headache, dizziness, or nausea. If you suspect a leak, leave first and get emergency guidance.",
       },
       {
-        question: "Should I open windows if I smell gas?",
+        question: "How fast should a gas smell from stove be repaired?",
         answer:
-          "Only if the odor is faint and you can open a nearby door or window without moving toward the smell. If it is strong or spreading, leave first — ventilating is not worth the delay, and do not use a fan.",
+          "A strong gas smell should be treated immediately as a safety concern. After emergency steps are complete, recurring stove gas smell should be inspected as soon as possible before the appliance is used again.",
       },
       {
-        question: "Who should I call first?",
+        question: "Do I need emergency stove repair in San Mateo?",
         answer:
-          "The gas utility or emergency services come first: PG&E at 1-800-743-5000, or 911. Appliance repair is the step after the area has been confirmed safe, not a substitute for that call.",
+          "You may need same-day stove repair if the stove has repeated gas odor, ignition failure, hissing sounds, burner problems, or a smell that returns after basic safety steps. If the smell is strong or spreading, emergency services come first.",
+      },
+      {
+        question: "Who should I call for stove repair San Mateo CA?",
+        answer:
+          "After the immediate safety risk is handled, call SanMateo FixHub at (650) 525-2329 for local stove repair help. You can also contact our team to request service for gas stove repair, burner issues, ignition problems, and stove diagnosis in San Mateo, CA.",
       },
     ],
     relatedLinks: [
-      {
-        label: "Gas smell from a stove",
-        href: "/problems/gas-smell-from-stove/",
-        description: "The full safety guide, including what to do first.",
-      },
-      {
-        label: "Emergency stove repair",
-        href: "/services/emergency-stove-repair-san-mateo-ca/",
-        description: "Urgent appliance help once the area is confirmed safe.",
-      },
-      {
-        label: "Gas stove repair in San Mateo",
-        href: "/services/gas-stove-repair-san-mateo-ca/",
-        description: "Burner, ignition, and gas-flow inspection and repair.",
-      },
-      {
-        label: "Contact SanMateo FixHub",
-        href: "/contact/",
-        description: "Arrange an inspection after the safety steps are complete.",
-      },
+      { label: "Stove Repair", href: "/services/stove-repair-san-mateo-ca/", description: "Core gas and electric stove repair." },
+      { label: "Gas Stove Repair", href: "/services/gas-stove-repair-san-mateo-ca/", description: "Burner, ignition, valve, and combustion faults." },
+      { label: "Emergency Stove Repair", href: "/services/emergency-stove-repair-san-mateo-ca/", description: "Urgent stove issues once the area is safe." },
+      { label: "Igniter Repair", href: "/services/igniter-repair-san-mateo-ca/", description: "Weak or failing igniters." },
+      { label: "Burner Repair", href: "/services/burner-repair-san-mateo-ca/", description: "Burner, cap, and connection faults." },
+      { label: "All Services", href: "/services/", description: "Every stove, range, and cooktop service." },
+      { label: "Request Service", href: "/contact/", description: "Book an inspection after the safety steps." },
     ],
+    relatedPosts: ["gas-stove-clicking-after-cleaning-spill"],
   },
 
-  // ── 5. What shapes a repair estimate ───────────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+  // POST 5 — Tab 5: Should You Repair or Replace Your Stove in San Mateo?
+  // ═══════════════════════════════════════════════════════════════════════════
   {
-    slug: "what-affects-stove-repair-cost-san-mateo",
-    title: "What Affects Stove Repair Cost in San Mateo?",
-    h1: "What Affects Stove Repair Cost in San Mateo?",
-    metaTitle: "What Affects Stove Repair Cost in San Mateo?",
+    slug: "repair-or-replace-stove-factors",
+    title: "Repair or Replace Your Stove in San Mateo?",
+    h1: "Should You Repair or Replace Your Stove in San Mateo? Cost, Age, and Warning Signs",
+    metaTitle: "Repair or Replace Your Stove in San Mateo? Cost, Age & Signs",
     metaDescription:
-      "Why two stoves with the same symptom can produce different estimates: the failed part, gas or electric construction, access, parts availability, and urgency.",
+      "A practical, diagnosis-first guide for comparing repair cost, appliance age, recent breakdowns, safety concerns, and the full cost of replacement.",
     excerpt:
-      "Why two stoves with the same symptom can lead to very different estimates — the factors that actually move the number.",
+      "A diagnosis-first guide to repairing or replacing a stove: cost, age, repair history, parts availability, safety, and warning signs.",
+    heroIntro:
+      "A practical, diagnosis-first guide for comparing repair cost, appliance age, recent breakdowns, safety concerns, and the full cost of replacement.",
     quickAnswer:
-      "Stove repair estimates vary because the same symptom can have different causes. What moves the number is which part actually failed, whether the stove is gas or electric, how easy the appliance is to access, whether the part is readily available for that brand and model, how urgent the visit is, and whether more than one fault is involved.",
+      "Repair your stove when it still has useful life, only one part has failed, and the repair is substantially less expensive than replacing and installing a comparable unit. Replacement usually makes more sense when the stove is old, breakdowns keep returning, parts are unavailable, or a gas or electrical problem makes another repair a poor long-term value.",
     publishedTime: "2026-07-27T14:00:00.000Z",
     author: "SanMateo FixHub",
     published: true,
-    content: [
+    blocks: [
       {
-        heading: "Why there is no single price",
+        kind: "prose",
+        anchor: "intro",
         body: [
-          "The most common question about stove repair is what it costs, and the honest answer is that it depends on what is wrong — which nobody knows before the appliance has been looked at. A burner that will not light might need a small part, or it might turn out to be a control or gas-flow problem that takes considerably more work.",
-          "That is why this article explains the factors rather than quoting numbers. For guidance on what to expect and how to request an estimate, our stove repair pricing page is the place to start. What follows is what actually moves the figure up or down.",
+          "When the choice is not obvious, diagnose the stove before buying a new one. A burner that will not ignite may need one replaceable part—or it may reveal a larger control, wiring, or gas-flow problem.",
+          "Deciding should you repair or replace your stove in San Mateo comes down to age, repair history, total cost, parts availability, and safety. A proper diagnosis helps avoid replacing a repairable stove or continuing to spend on an appliance that has become unreliable.",
         ],
       },
       {
-        heading: "Diagnosis comes first",
+        kind: "prose",
+        heading: "What Really Decides Repair vs. Replace?",
+        anchor: "deciding-factors",
         body: [
-          "Every other factor depends on this one. Diagnosis establishes which component failed and why, and it is the only way to give an estimate that means anything. The same symptom regularly has several possible causes, and they are not equivalent in either parts or labor.",
-          "A useful diagnosis also tests the connected system rather than replacing the part most obviously associated with the symptom. Confirming whether one burner or the whole appliance is affected, checking the supply, testing the ignition or element, and inspecting nearby connections for heat damage is what prevents a repair that fixes the symptom and leaves the cause.",
+          "Consider the appliance as a complete system, not only the part that stopped working.",
+          "Age and repair history. A younger stove with its first isolated failure is usually easier to justify repairing. Several repairs in one or two years—especially involving different burners or controls—suggest that multiple parts may be aging together.",
+          "Repair cost versus full replacement cost. Compare the estimate with the complete stove replacement cost, including tax, delivery, removal, installation, and any gas, electrical, countertop, or cabinetry adjustments.",
         ],
       },
       {
-        heading: "Which part actually failed",
+        kind: "prose",
         body: [
-          "This is usually the largest single factor. Components differ substantially in what they cost and in how long they take to reach and replace.",
-          "Simpler components — knobs, caps, sockets, some switches and igniters — generally sit at the more affordable end. Electronic controls, gas valves, spark modules, and wiring harnesses sit higher, both because the parts themselves cost more and because they take longer to access, test, and verify.",
+          "Safety and parts availability. Gas odor, sparking, damaged wiring, overheating, or repeated breaker trips come before cost. Repair may also be impractical when a critical model-specific part has been discontinued.",
+          "What a technician checks before recommending repair. A technician should test the connected system rather than automatically replacing the part most closely associated with the symptom. For a burner that will not ignite, that means:",
+        ],
+        bullets: [
+          "Confirming whether one burner or the whole stove is affected",
+          "Checking the power or gas supply",
+          "Testing the igniter, switch, valve, or control",
+          "Inspecting nearby wiring and connections for heat damage",
+          "Confirming parts availability and whether the fix addresses the cause",
         ],
       },
       {
-        heading: "Gas and electric are built differently",
+        kind: "prose",
         body: [
-          "The two types fail in different ways and need different work. A gas stove involves burners, igniters, spark modules, valves, and gas-flow checks, and gas work carries safety verification that has to be done properly rather than quickly.",
-          "An electric stove involves elements, sockets, switches, thermostats, and control boards, with high-current connections that need careful testing. Neither is universally more expensive — it depends entirely on which component failed. Gas stove repair and electric stove repair cover what each involves.",
+          "This diagnosis-first process is the value of professional stove repair San Mateo service.",
+        ],
+        links: [{ label: "Stove repair San Mateo", href: "/services/stove-repair-san-mateo-ca/" }],
+      },
+      {
+        kind: "table",
+        heading: "Repair vs. replacement at a glance",
+        anchor: "at-a-glance",
+        caption: "How repair and replacement compare across cost, age, safety, reliability, convenience, and value",
+        columns: ["Factor", "Repair", "Replacement", "Best choice when"],
+        rows: [
+          ["Cost", "Lower initial expense", "Higher purchase and installation expense", "Repair is well below the complete replacement cost"],
+          ["Age", "Usually stronger for younger and mid-life stoves", "More attractive for older appliances", "Age is considered with condition and repair history"],
+          ["Safety", "Appropriate when the fault can be corrected fully", "Better when safe operation cannot be restored", "Gas or electrical concerns affect the decision"],
+          ["Reliability", "Strong for one isolated failure", "Stronger after repeated breakdowns", "Recent service history reveals a pattern"],
+          ["Convenience", "May restore cooking quickly when parts are available", "Requires shopping, delivery, and installation", "The option minimizes total kitchen disruption"],
+          ["Long-term value", "Better when the repair should last", "Better when more failures are likely", "Future reliability justifies the money spent"],
         ],
       },
       {
-        heading: "How easy the appliance is to reach",
+        kind: "prose",
+        heading: "How Much Stove Repair Usually Costs in San Mateo",
+        anchor: "repair-cost",
         body: [
-          "Access affects labor time, and labor time affects the estimate. A freestanding range that can be pulled out is quicker to work on than a built-in cooktop set into a countertop, or a unit in a tight galley kitchen where the appliance cannot easily be moved.",
-          "How much has to come apart to reach the failed component matters just as much. Replacing something behind the control panel or under the cooktop surface is a different job from replacing something reachable from the top, even when the part itself is inexpensive.",
+          "A reasonable planning range for many routine stove and cooktop repairs is approximately $150 to $500. Control boards, gas valves, specialty components, difficult access, and multi-part failures can cost more. This is general guidance, not a quote; the exact stove repair cost San Mateo homeowners receive depends on the diagnosis.",
+        ],
+        bullets: [
+          "Part type: Igniters and elements differ from valves and electronic controls.",
+          "Gas versus electric: Each system requires different testing and safety steps.",
+          "Labor complexity: Access and disassembly time affect labor.",
+          "Brand and parts availability: Specialty or discontinued parts can increase cost and delay.",
+          "Safety checks: Gas flow, overheating, wiring, and grounding require careful testing.",
+        ],
+        links: [{ label: "Stove repair cost San Mateo", href: "/stove-repair-cost-san-mateo-ca/" }],
+      },
+      {
+        kind: "prose",
+        body: [
+          "SanMateo FixHub diagnoses the actual fault before providing an estimate rather than quoting one flat number for every stove.",
         ],
       },
       {
-        heading: "Brand, model, and parts availability",
+        kind: "prose",
+        heading: "How Age Changes the Decision",
+        anchor: "age-guide",
         body: [
-          "Widely used mainstream brands generally have components that are straightforward to source. High-end, imported, or older appliances can need model-specific parts that cost more, take longer to arrive, or are no longer made at all.",
-          "Availability affects timing as well as cost. If a part has to be ordered, the repair may need a second visit, and if a critical component has been discontinued it may change the conversation entirely — which is where the repair-or-replace comparison starts.",
+          "Use age as a guide—not as an automatic expiration date.",
+          "A well-maintained 12-year-old stove with its first failed switch may be a better repair candidate than an 8-year-old appliance with damaged wiring and repeated ignition failures.",
         ],
       },
       {
-        heading: "How urgent the visit is",
-        body: [
-          "A repair that can be scheduled normally is not the same as one that cannot wait. Safety situations — a gas smell, sparking, smoke, a burning electrical odor, or a burner that will not switch off — need attention promptly, and urgency is a legitimate factor in what a visit involves.",
-          "If you have any of those symptoms, deal with the safety side first rather than the cost side. For a gas smell in particular, stop using the stove and call PG&E at 1-800-743-5000 or 911 from a safe location before arranging any repair.",
+        kind: "checklist",
+        heading: "Warning Signs That Replacement May Be Smarter",
+        anchor: "warning-signs",
+        intro: ["One warning sign may be repairable; several appearing together are more significant."],
+        items: [
+          "Repeated repairs: Different parts keep failing within a year or two.",
+          "Gas smell: Stop using the appliance and treat the situation as urgent.",
+          "Yellow or uneven flames: There may be combustion, burner, or gas-flow trouble.",
+          "Repeated ignition failure: Cleaning or prior service does not keep the problem away.",
+          "Breaker trips: The stove repeatedly faults or overloads the circuit.",
+          "Electrical odor or sparking: Wiring, controls, or terminals may be overheating.",
+          "Discontinued parts: The correct component cannot be sourced reliably.",
+          "Rising repair costs: Each new failure makes the investment harder to justify.",
         ],
       },
       {
-        heading: "Whether it is one fault or several",
-        body: [
-          "A single contained failure is the simplest case to price. Several faults found during the same visit — a failed element alongside a damaged socket, or an ignition problem alongside heat-damaged wiring — change both the parts and the labor involved.",
-          "Multiple faults are also a signal in their own right. When a technician finds several components failing together, the sensible next step is often to compare the total against what replacing the appliance would involve, rather than repairing everything by default.",
+        kind: "prose",
+        heading: "When Repair Is the Better Choice",
+        anchor: "repair-choice",
+        body: ["Repair normally makes sense when:"],
+        bullets: [
+          "The stove is relatively young.",
+          "Only one identifiable part has failed.",
+          "The appliance performed reliably before this problem.",
+          "The correct replacement part is readily available.",
+          "The repair is much less expensive than full replacement.",
+          "Related components remain in good condition.",
+          "The work can restore safe, dependable operation.",
         ],
       },
       {
-        heading: "When replacement enters the conversation",
+        kind: "prose",
         body: [
-          "Cost is only one side of the decision. If the appliance is older, the same fault has returned repeatedly, or a critical part is unavailable, the value of a repair changes regardless of what it costs on paper.",
-          "A diagnosis is what makes that comparison possible, because it tells you what is actually wrong and whether the fix should last. Our guide to repairing or replacing a stove covers how to weigh those factors together.",
+          "Examples include one failed igniter, burner switch, element, coil, or connection. See gas stove repair San Mateo for ignition and burner faults or electric stove repair San Mateo for elements and controls.",
+          "Before you buy a new stove, confirm what failed. A focused diagnosis can show whether you need one replaceable part or whether broader wear makes replacement the better value.",
+        ],
+        links: [
+          { label: "Gas stove repair San Mateo", href: "/services/gas-stove-repair-san-mateo-ca/" },
+          { label: "Electric stove repair San Mateo", href: "/services/electric-stove-repair-san-mateo-ca/" },
         ],
       },
       {
-        heading: "What to expect when you ask",
+        kind: "cta",
+        heading: "Get the stove diagnosed before replacing it",
+        subheading: "Call for the fastest response or send the model, symptom, and preferred contact method.",
+      },
+      {
+        kind: "prose",
+        heading: "When Replacement Is the Better Choice",
+        anchor: "replacement-choice",
+        body: ["Replacement normally makes more sense when:"],
+        bullets: [
+          "The stove is near or beyond 15 years old.",
+          "Different components are failing close together.",
+          "The same problem returns after previous service.",
+          "A critical part is unavailable or discontinued.",
+          "The repair is expensive relative to replacement.",
+          "Damage affects multiple connections.",
+          "The work is likely to be a short-term fix.",
+          "Safe operation cannot be restored confidently.",
+        ],
+        footnote:
+          "Continuing to repair an unreliable stove can create more expense and disruption than replacing it once.",
+      },
+      {
+        kind: "prose",
+        heading: "Illustrative Example: A Real-Style Example From a San Mateo Home",
+        anchor: "local-example",
         body: [
-          "A straightforward sequence: the appliance is inspected, the fault is identified and explained, and an estimate follows from that diagnosis rather than preceding it. That way the figure reflects your stove rather than an average of everyone else's.",
-          "SanMateo FixHub works on gas and electric stoves, ranges, and cooktops across San Mateo and the nearby Peninsula. If you would like an estimate, the most useful things to have ready are the brand and model, what the appliance is doing, and when it started.",
+          "This example describes a common repair scenario and is not a claim about a specific customer job.",
+          "A five-year-old gas stove with one failed igniter. A five-year-old gas stove in Hillsdale clicks, but one burner will not ignite. The other burners work normally, there is no repair history, and testing identifies one failed igniter.",
+          "The practical choice is repair. The stove is young, the fault is isolated, and the repair is a small portion of full replacement cost.",
+          "If the stove were 14 years old with two recent burner repairs and heat-damaged switches, replacement could offer better long-term value.",
+          "This is an illustrative scenario, not a claim about a specific customer or fixed local price.",
+        ],
+      },
+      {
+        kind: "checklist",
+        heading: "Quick Decision Checklist",
+        anchor: "decision-checklist",
+        intro: ["Use this before spending money."],
+        items: [
+          "Is the stove under about 12 years old?",
+          "Is only one part or burner affected?",
+          "Is this the first major repair in one or two years?",
+          "Is the repair far below full replacement cost?",
+          "Are the correct parts still available?",
+          "Has the stove otherwise operated reliably?",
+          "Is there no unresolved gas or electrical hazard?",
+          "Does the technician expect the repair to last?",
+        ],
+        footnote:
+          "Mostly “yes” answers favor repair. Several “no” answers—especially about safety, repeat failures, and parts—favor comparing replacement.",
+      },
+      {
+        kind: "prose",
+        heading: "Final Recommendation: Repair the Fault, Replace the Pattern",
+        anchor: "conclusion",
+        body: [
+          "Repair when the fault is isolated, useful life remains, parts are available, and the work should restore reliable operation for much less than replacement. Replace when age, repeated failures, cost, missing parts, or safety make another repair poor value.",
+          "Before buying a new appliance, request a local diagnosis. SanMateo FixHub supports gas and electric stoves, ranges, and cooktops across San Mateo and nearby Peninsula communities.",
+          "Searching for stove repair near me or need a second opinion before replacing your appliance?",
         ],
       },
     ],
     faqs: [
       {
-        question: "Why can't I get a price before the visit?",
+        question: "How old is too old to repair a stove?",
         answer:
-          "Because the same symptom can have several different causes, and they differ in both parts and labor. A burner that will not light might need a small component or reveal a control or gas-flow problem. The estimate follows the diagnosis for that reason.",
+          "There is no exact cutoff, but after about 13–15 years, compare every major repair with replacement. A small repair may still be worthwhile.",
       },
       {
-        question: "What has the biggest effect on the estimate?",
+        question: "Is it cheaper to repair or replace a stove?",
         answer:
-          "Usually which component failed, followed by how much work it takes to reach and test it. Brand and parts availability, whether the stove is gas or electric, urgency, and the number of faults found all contribute as well.",
+          "Repair is usually cheaper for one contained fault. Replacement can be better value when failures repeat or the repair approaches full replacement cost.",
       },
       {
-        question: "Is gas stove repair different from electric stove repair?",
+        question: "What stove problems are not worth repairing?",
         answer:
-          "They involve different components and different checks. Gas work centres on burners, ignition, valves, and gas-flow safety verification; electric work centres on elements, sockets, switches, and controls. Which is more involved depends on the fault, not the fuel.",
+          "Multiple major failures, extensive heat damage, discontinued critical parts, or recurring gas and electrical faults may not justify another repair.",
       },
       {
-        question: "Does the brand of stove matter?",
+        question: "How much does stove repair cost in San Mateo?",
         answer:
-          "Mainly through parts. Mainstream brands generally have components that are easy to source, while high-end, imported, or older appliances may need model-specific parts that cost more, take longer to arrive, or are no longer produced.",
+          "Many routine jobs fall around $150–$500, while controls, valves, specialty parts, and multi-part faults can cost more. Diagnosis is required for a quote.",
       },
       {
-        question: "Why does a built-in cooktop cost more to work on?",
+        question: "Can a stove be repaired the same day?",
         answer:
-          "Access. A built-in unit set into a countertop, or an appliance in a tight kitchen, takes longer to reach safely than a freestanding range that can be pulled out, and labor time is part of any estimate.",
+          "Common single-part faults may qualify for same-day stove repair San Mateo service when a technician and the correct part are available. Ask when booking.",
       },
       {
-        question: "Should I repair or replace instead?",
+        question: "Should I repair a gas stove or replace it?",
         answer:
-          "That depends on the appliance's age, its repair history, whether parts are still available, and whether the fault is isolated. A diagnosis gives you the information to compare properly rather than guessing.",
+          "Repair often suits a younger gas stove with one failed igniter, switch, or burner part. Replace when faults recur or safe operation cannot be restored.",
+      },
+      {
+        question: "Is electric stove repair worth it?",
+        answer:
+          "Yes, when one element, coil, switch, or connection has failed. Repeated breaker trips or extensive wiring damage require a broader evaluation.",
       },
     ],
     relatedLinks: [
-      {
-        label: "Stove repair pricing guidance",
-        href: "/stove-repair-cost-san-mateo-ca/",
-        description: "The main pricing page and how to request an estimate.",
-      },
-      {
-        label: "Gas stove repair in San Mateo",
-        href: "/services/gas-stove-repair-san-mateo-ca/",
-        description: "Burners, ignition, valves, and gas-flow faults.",
-      },
-      {
-        label: "Electric stove repair in San Mateo",
-        href: "/services/electric-stove-repair-san-mateo-ca/",
-        description: "Elements, sockets, switches, and controls.",
-      },
-      {
-        label: "How the repair process works",
-        href: "/repair-process/",
-        description: "From first call through diagnosis to completed repair.",
-      },
-      {
-        label: "Request an estimate",
-        href: "/contact/",
-        description: "Send the brand, model, and what the stove is doing.",
-      },
+      { label: "Stove repair in San Mateo", href: "/services/stove-repair-san-mateo-ca/", description: "Gas and electric stove, range, and cooktop repair." },
+      { label: "Gas stove repair", href: "/services/gas-stove-repair-san-mateo-ca/", description: "Ignition and burner faults." },
+      { label: "Electric stove repair", href: "/services/electric-stove-repair-san-mateo-ca/", description: "Elements and controls." },
+      { label: "Emergency stove repair", href: "/services/emergency-stove-repair-san-mateo-ca/", description: "Urgent gas or electrical safety issues." },
+      { label: "Pricing guidance", href: "/stove-repair-cost-san-mateo-ca/", description: "What affects stove repair cost." },
+      { label: "Request Service", href: "/contact/", description: "Get a diagnosis before you replace." },
     ],
+    relatedPosts: ["stove-repair-cost-san-mateo-2026-guide", "one-stove-burner-not-heating"],
   },
 ];
 
