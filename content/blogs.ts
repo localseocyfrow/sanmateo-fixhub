@@ -903,8 +903,6 @@ export const blogPosts: BlogPost[] = [
       },
       {
         kind: "prose",
-        heading: "Call to Action",
-        anchor: "cta",
         body: [
           "Is your stove not heating in San Mateo or is one burner not working properly? Call SanMateo FixHub at (650) 525-2329 for local stove repair help in San Mateo, CA. We help with gas stoves, electric stoves, burners, igniters, ranges, cooktops, and control issues.",
         ],
