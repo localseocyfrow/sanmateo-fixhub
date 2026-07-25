@@ -29,10 +29,12 @@ export function BlogToc({ entries }: { entries: TocEntry[] }) {
   return (
     <nav aria-label="In this guide" className="rounded-2xl border border-line bg-surface p-5 sm:p-6">
       <h2 className="text-sm font-bold uppercase tracking-[0.12em] text-ink-faint">In this guide</h2>
-      <ol className="mt-3 grid gap-x-6 gap-y-1.5 sm:grid-cols-2">
-        {entries.map((e, i) => (
-          <li key={e.anchor} className="flex gap-2 text-sm">
-            <span className="font-semibold text-ink-faint tabular-nums">{i + 1}.</span>
+      {/* Numbering comes from the ordered list's own marker (list-decimal),
+          not a manual prefix — one number source, no visible/SR duplication.
+          list-inside keeps the marker inline so it renders inside the grid. */}
+      <ol className="mt-3 grid list-decimal list-inside gap-x-6 gap-y-1.5 sm:grid-cols-2 marker:font-semibold marker:tabular-nums marker:text-ink-faint">
+        {entries.map((e) => (
+          <li key={e.anchor} className="text-sm">
             <a href={`#${e.anchor}`} className="font-semibold text-navy-700 underline-offset-2 hover:text-copper-700 hover:underline">
               {e.label}
             </a>
