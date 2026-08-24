@@ -8,18 +8,26 @@ import { Icon } from "./Icon";
 export function Hero() {
   return (
     <section className="relative isolate overflow-hidden bg-navy-900 text-white">
-      {/* Hero photograph — a lit gas range in a San Mateo kitchen. */}
+      {/* Decorative hero photograph — technician sits in the right third of the frame, so the
+          crop is biased right-of-centre and anchored to the top to keep his head out of the cut.
+          Empty alt: the H1 already carries the message, the photo adds nothing for a screen reader. */}
       <Image
-        src="/images/home/san-mateo-stove-repair-hero.png"
-        alt="Stainless steel gas range with lit blue burners in a modern San Mateo kitchen"
+        src="/images/home/home-page-hero-image.png"
+        alt=""
         fill
-        priority
+        preload
         sizes="100vw"
-        className="-z-10 object-cover object-[68%_center] lg:object-center"
+        className="-z-10 object-cover object-[78%_top] lg:object-[center_top]"
       />
-      {/* Navy scrims for text contrast: dark on the left, subtle depth at the bottom. */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy-950 via-navy-900/80 to-navy-900/20" aria-hidden />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-950/70 via-transparent to-navy-950/30" aria-hidden />
+      {/* Navy scrim tuned to this photo. Mobile: the copy runs full-width over the technician, so
+          the wash is vertical and fairly even. Desktop: heavy behind the left-hand copy column
+          (~0-50vw), fading out across the technician and kitchen so they stay naturally lit. */}
+      <div
+        className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(7,31,47,0.82)_0%,rgba(7,31,47,0.72)_45%,rgba(7,31,47,0.88)_100%)] lg:bg-[linear-gradient(to_right,rgba(7,31,47,0.94)_0%,rgba(7,31,47,0.90)_30%,rgba(7,31,47,0.72)_46%,rgba(12,39,57,0.38)_68%,rgba(12,39,57,0.14)_100%)]"
+        aria-hidden
+      />
+      {/* Desktop-only bottom vignette for depth; mobile already has its vertical wash above. */}
+      <div className="absolute inset-0 -z-10 hidden lg:block lg:bg-gradient-to-t lg:from-navy-950/45 lg:via-transparent lg:to-navy-950/15" aria-hidden />
 
       <Container className="relative py-20 sm:py-28 lg:py-32">
         <div className="max-w-xl animate-rise">
