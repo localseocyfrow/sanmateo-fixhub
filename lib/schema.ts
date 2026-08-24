@@ -13,7 +13,18 @@ const ORG_ID = `${BASE}/#organization`;
 const WEBSITE_ID = `${BASE}/#website`;
 
 const logoUrl = absoluteUrl("/brand/sanmateo-fixhub-logo.png");
+/**
+ * Default representative image for any page that doesn't supply its own —
+ * service pages, brand pages, inner WebPages, and blog posts all fall back here.
+ */
 const heroUrl = absoluteUrl("/images/home/san-mateo-stove-repair-hero.png");
+/**
+ * Homepage-only hero — the technician photo the home hero actually renders.
+ * Passed explicitly by app/page.tsx so no other page picks it up implicitly.
+ * NOT used by organizationSchema: that one is emitted site-wide from the root
+ * layout, so changing it there would silently retag every page.
+ */
+export const homeHeroImage = absoluteUrl("/images/home/home-page-hero-image.png");
 
 const sameAs = () => socialProfiles.map((p) => p.url).filter(Boolean);
 
@@ -99,7 +110,7 @@ export function websiteSchema() {
  * describe the service area, which is valid and honest. Includes logo/image,
  * opening hours (from config), and social profiles.
  */
-export function localBusinessSchema(opts?: { areaName?: string; url?: string }) {
+export function localBusinessSchema(opts?: { areaName?: string; url?: string; image?: string }) {
   const base: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "HomeAndConstructionBusiness",
@@ -110,7 +121,9 @@ export function localBusinessSchema(opts?: { areaName?: string; url?: string }) 
     email: site.email,
     description: `Specialist stove, range, and cooktop repair serving ${opts?.areaName ?? "San Mateo and the Peninsula"}.`,
     logo: logoUrl,
-    image: [heroUrl, logoUrl],
+    // Page-specific image wins; otherwise the shared default. Only the homepage
+    // passes one today, so contact/location pages keep the stove hero.
+    image: [opts?.image ?? heroUrl, logoUrl],
     areaServed: areaServed(opts?.areaName ? [opts.areaName] : undefined),
     geo: { "@type": "GeoCoordinates", latitude: site.geo.lat, longitude: site.geo.lng },
     openingHoursSpecification: openingHours(),

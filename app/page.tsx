@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
-import { localBusinessSchema, faqSchema } from "@/lib/schema";
+import { localBusinessSchema, faqSchema, homeHeroImage } from "@/lib/schema";
 import { services, cityLocations, getService, getProblem, globalFaqs } from "@/lib/content";
 import { site } from "@/lib/site";
 import { JsonLd } from "@/components/JsonLd";
@@ -452,7 +452,7 @@ export default function Home() {
       {/* 17. Final CTA */}
       <CTASection source="home-footer" />
 
-      <JsonLd data={[localBusinessSchema(), faqSchema(homeFaqs)]} />
+      <JsonLd data={[localBusinessSchema({ image: homeHeroImage }), faqSchema(homeFaqs)]} />
     </>
   );
 }
