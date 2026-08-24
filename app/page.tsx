@@ -3,6 +3,7 @@ import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
 import { localBusinessSchema, faqSchema } from "@/lib/schema";
 import { services, cityLocations, getService, getProblem, globalFaqs } from "@/lib/content";
+import { site } from "@/lib/site";
 import { JsonLd } from "@/components/JsonLd";
 import { Hero } from "@/components/Hero";
 import { Container, Section, SectionHeading } from "@/components/ui/Layout";
@@ -42,18 +43,37 @@ const featuredProblemSlugs = [
   "stove-wont-turn-on",
 ];
 
+// Customer-oriented framing of the four steps. Deliberately makes no claim that
+// a repair finishes on the first visit or that parts are always on hand.
 const diagnoseSteps = [
-  { title: "Describe the Symptom", body: "Tell us what your stove is doing — clicking, not heating, a gas smell, or a dead burner. Clear symptoms speed up diagnosis." },
-  { title: "On-Site Inspection", body: "A hands-on check of burners, igniters, elements, controls, and gas or electrical connections to find the real cause." },
-  { title: "Clear Explanation", body: "You get a plain-language explanation of what's wrong and the repair options before any work is agreed." },
-  { title: "Focused Repair", body: "Repair centers on the failed part or component, with safety checks appropriate to gas or electric stoves." },
+  { title: "Tell Us the Symptom", body: "Clicking without lighting, a dead burner, no heat, a gas smell. The clearer the symptom, the quicker this goes." },
+  { title: "The Stove Gets Inspected", body: "A technician checks it in person — burners, igniters, elements, switches, controls, and the connections behind them." },
+  { title: "You Hear What's Wrong", body: "The fault is explained in plain language, with the repair options and an estimate, before anything is approved." },
+  { title: "The Approved Repair", body: "Work focuses on the part that actually failed, with safety checks suited to gas or electric." },
 ];
 
+// Each item maps to a fact verified elsewhere in the repo:
+//  • stove-only focus ....... content/faqs.ts "Do you only work on stoves…"
+//  • diagnosis first ........ content/faqs.ts "How does the diagnosis process work?"
+//  • estimate before work ... app/terms/page.tsx "Estimates and repairs"
+//  • 24/7 phone ............. lib/site.ts hours + emergencyAvailable/sameDayAvailable
+// Nothing here asserts licensing, insurance, warranty, tenure, or ratings.
 const whyChoose: { icon: IconName; title: string; body: string }[] = [
-  { icon: "flame", title: "Stove Specialists", body: "We focus on gas and electric stoves, ranges, and cooktops — not a bit of everything. That focus shows in the diagnosis." },
-  { icon: "search", title: "Diagnosis First", body: "We explain what's actually wrong in plain language before any repair is agreed, so you can make an informed decision." },
-  { icon: "shield", title: "Safety-Aware", body: "Gas and electrical stove work is handled with the caution it deserves, including clear guidance when a problem is urgent." },
-  { icon: "stove", title: "Homes & Businesses", body: "From single-family kitchens to small commercial kitchens across San Mateo and the Peninsula." },
+  { icon: "flame", title: "Stoves, Ranges & Cooktops Only", body: "Gas, electric, and dual-fuel cooking appliances are the whole focus here. If a job falls outside that, we say so." },
+  { icon: "search", title: "Diagnosis Before Repair", body: "A technician inspects the appliance and tests the relevant parts first. Nothing is quoted sight unseen." },
+  { icon: "check", title: "Estimate Before Any Work", body: "Scope and estimate are confirmed once the fault is known, and nothing proceeds without your approval." },
+  { icon: "phone", title: "Reachable Around the Clock", body: `The line is open 24/7 on ${site.phone.display} — check same-day and emergency availability whenever the problem starts.` },
+];
+
+// Safe, non-invasive checks only — each drawn from existing site content
+// (content/faqs.ts "What information should I have ready", content/problems.ts
+// breaker and burner-cap guidance). No gas, wiring, or disassembly steps.
+const beforeYouCall: { icon: IconName; title: string; body: string }[] = [
+  { icon: "burner", title: "Pin down what's affected", body: "One burner or all of them? Cooktop, oven, or both? That alone narrows it a long way." },
+  { icon: "range", title: "Find the brand and model", body: "Usually on a plate around the door frame, drawer, or underside. It tells us which parts the unit uses." },
+  { icon: "board", title: "Note any error code", body: "A code on the display narrows things fast — a photo of it works just as well." },
+  { icon: "bolt", title: "Check the breaker once — electric only", body: "If a tripped breaker resets and holds, that may be the whole story. If it trips again, leave it off and tell us." },
+  { icon: "flame", title: "Check a cool burner cap — gas only", body: "Once the burner is completely cool, check the cap sits squarely in place. Out of position, it often explains clicking that never lights." },
 ];
 
 export default function Home() {
@@ -86,14 +106,13 @@ export default function Home() {
             <SectionHeading eyebrow="Stove Repair San Mateo" title="Local Stove Repair Specialists in San Mateo, CA" />
             <div className="mt-4 space-y-4 leading-relaxed text-ink-soft">
               <p>
-                When a stove stops working, the whole kitchen slows down. SanMateo FixHub is a specialist stove repair
-                service focused on gas stoves, electric stoves, ranges, and cooktops in San Mateo and nearby Peninsula
-                communities. Instead of guessing, we help pinpoint what&apos;s actually wrong so the right repair happens.
+                When a stove stops working, the whole kitchen slows down. SanMateo FixHub works on cooking appliances
+                and nothing else — gas stoves, electric stoves, ranges, and cooktops across the Peninsula.
               </p>
               <p>
-                From ignition and burner faults to elements, control boards, and pilot lights, our work centers on the
-                cooking side of your appliance. Explore the individual services below, or call now and we&apos;ll help you
-                figure out next steps.
+                That focus is deliberate. Everything centers on the cooking side of the unit: igniters and burner
+                assemblies, heating elements, control boards, pilot lights. Browse the services below, or call and
+                we&apos;ll narrow it down together.
               </p>
             </div>
             <div className="mt-6 flex flex-wrap gap-3">
@@ -146,14 +165,14 @@ export default function Home() {
           <FuelCard
             icon="flame"
             title="Gas Stove Repair in San Mateo"
-            body="Clicking igniters, burners that won't light, weak or yellow flames, and gas flow issues are common on gas stoves. We diagnose the ignition and burner system and handle gas work with appropriate caution."
+            body="A clicking igniter that never catches, a cold burner, or a weak yellow flame usually traces to the ignition system — the spark module and igniter, the burner cap and its ports, or the gas valve behind them. Gas work gets the caution it deserves."
             href="/services/gas-stove-repair-san-mateo-ca/"
             cta="Gas Stove Repair"
           />
           <FuelCard
             icon="bolt"
             title="Electric Stove Repair in San Mateo"
-            body="Elements that won't heat, slow heating, or a burner stuck on can point to coils, radiant elements, switches, or connections. We track down the electric fault behind the symptom."
+            body="An element that won't heat, warms slowly, or stays stuck on points somewhere along the electric path: the coil or radiant element, the burner switch, the receptacle and wiring, or the control board. We trace it rather than swapping parts and hoping."
             href="/services/electric-stove-repair-san-mateo-ca/"
             cta="Electric Stove Repair"
           />
@@ -167,9 +186,8 @@ export default function Home() {
             <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-copper-600"><Icon name="alert" className="h-7 w-7 text-white" /></span>
             <h2 className="mt-4 text-2xl font-extrabold tracking-tight text-white">Emergency Stove Repair &amp; Fast Help</h2>
             <p className="mt-3 leading-relaxed text-navy-100">
-              Some stove problems can&apos;t wait — a burner stuck on, a stove that keeps shutting off, or a gas smell. We
-              help you understand what&apos;s urgent, what to do right now, and how to check availability for fast stove
-              repair in San Mateo.
+              Some faults can&apos;t wait — a burner stuck on, a stove that keeps shutting off, a gas smell. We&apos;ll
+              help you tell what&apos;s urgent and what to do right now.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
               <LinkButton href="/services/emergency-stove-repair-san-mateo-ca/" variant="primary">Emergency Stove Repair</LinkButton>
@@ -180,8 +198,9 @@ export default function Home() {
             <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-teal-600"><Icon name="range" className="h-7 w-7 text-white" /></span>
             <h2 className="mt-4 text-2xl font-extrabold tracking-tight text-white">Range &amp; Cooktop Repair</h2>
             <p className="mt-3 leading-relaxed text-navy-100">
-              Whether you have a freestanding range that combines oven and cooktop, or a built-in cooktop set into the
-              counter, we repair the cooking surface — burners, elements, ignition, and controls.
+              A freestanding or slide-in range combines oven and cooking surface; a built-in cooktop sits in the counter
+              on its own. Either way the surface is gas burners, electric coils, or a glass radiant top, and each fails
+              differently. Repair covers the burners, elements, ignition, and controls.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
               <LinkButton href="/services/range-repair-san-mateo-ca/" variant="primary">Range Repair</LinkButton>
@@ -203,6 +222,7 @@ export default function Home() {
         </Container>
       </Section>
 
+
       {/* 9. Why fast repair */}
       <Section tint="white">
         <Container className="grid items-center gap-10 lg:grid-cols-2">
@@ -210,21 +230,18 @@ export default function Home() {
             <SectionHeading eyebrow="Why it matters" title="Why San Mateo Kitchens Need Fast Stove Repair" />
             <div className="mt-4 space-y-4 leading-relaxed text-ink-soft">
               <p>
-                A stove is one of the hardest appliances to live without. In busy San Mateo and Peninsula households, even
-                a single dead burner disrupts daily cooking, and a partial fault can quietly get worse over time.
-              </p>
-              <p>
-                Gas issues in particular deserve prompt attention for safety, and electrical faults can stress other
-                components if left unaddressed. Diagnosing the problem early usually keeps the repair more focused.
+                A stove is one of the hardest appliances to live without, and a partial fault usually worsens quietly
+                rather than all at once. Gas problems deserve prompt attention for safety; an electrical fault left
+                alone can stress the parts around it.
               </p>
             </div>
           </div>
           <ul className="grid gap-4 sm:grid-cols-2">
             {[
-              { icon: "clock" as IconName, t: "Less Disruption", b: "Get your kitchen back to normal cooking sooner." },
-              { icon: "shield" as IconName, t: "Safety Awareness", b: "Gas and electrical faults handled with proper caution." },
-              { icon: "wrench" as IconName, t: "Focused Repairs", b: "Catching issues early often keeps the fix contained." },
-              { icon: "check" as IconName, t: "Clear Guidance", b: "Know what's wrong and what your options are." },
+              { icon: "clock" as IconName, t: "Less Disruption", b: "Back to normal cooking sooner." },
+              { icon: "shield" as IconName, t: "Safety Awareness", b: "Gas and electrical faults treated with caution." },
+              { icon: "wrench" as IconName, t: "Focused Repairs", b: "Caught early, the fix usually stays contained." },
+              { icon: "check" as IconName, t: "Clear Guidance", b: "You know the fault and your options." },
             ].map((i) => (
               <li key={i.t} className="rounded-2xl border border-line bg-surface p-5">
                 <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-white text-copper-600 shadow-soft"><Icon name={i.icon} className="h-5 w-5" /></span>
@@ -236,15 +253,69 @@ export default function Home() {
         </Container>
       </Section>
 
+
       {/* 10 & 11. How we diagnose + process */}
       <Section tint="surface">
         <Container>
-          <SectionHeading eyebrow="Our approach" title="How SanMateo FixHub Diagnoses Stove Issues" intro="A clear, four-step path from symptom to repair — no guesswork, no pressure." align="center" />
+          <SectionHeading eyebrow="Our approach" title="How SanMateo FixHub Diagnoses Stove Issues" intro="From symptom to repair, without guesswork or pressure." align="center" />
           <div className="mt-10">
             <ProcessSteps steps={diagnoseSteps} />
           </div>
           <div className="mt-8 text-center">
             <LinkButton href="/repair-process/" variant="secondary">See Our Full Repair Process</LinkButton>
+          </div>
+        </Container>
+      </Section>
+
+      {/* Before you call — safe, non-invasive checks only. Sources: content/faqs.ts
+          ("What information should I have ready before I call?"), content/problems.ts
+          (breaker + burner-cap guidance), app/safety. No gas or wiring instructions. */}
+      <Section tint="white">
+        <Container className="grid items-start gap-10 lg:grid-cols-[1.25fr_1fr]">
+          <div>
+            <SectionHeading
+              eyebrow="Be ready"
+              title="Before You Call for Stove Repair"
+              intro="A few details make the first call much shorter, and a couple of safe checks sometimes explain the fault outright."
+            />
+            <ul className="mt-6 space-y-3">
+              {beforeYouCall.map((c) => (
+                <li key={c.title} className="flex items-start gap-4 rounded-xl border border-line bg-surface p-4">
+                  <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white text-copper-600 shadow-soft">
+                    <Icon name={c.icon} className="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span className="block font-bold text-navy-800">{c.title}</span>
+                    <span className="mt-1 block text-sm leading-relaxed text-ink-soft">{c.body}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="rounded-2xl border-l-4 border-copper-600 bg-copper-50 p-6">
+            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-white text-copper-700 shadow-soft">
+              <Icon name="alert" className="h-5 w-5" />
+            </span>
+            <h3 className="mt-3 text-xl font-bold text-navy-800">Stop and get help instead if&hellip;</h3>
+            <ul className="mt-3 space-y-2 text-sm leading-relaxed text-ink-soft">
+              {[
+                "You smell gas, and it doesn't clear",
+                "You see repeated sparking or scorching",
+                "There's smoke or a burning smell",
+                "A burner or element won't switch off",
+              ].map((s) => (
+                <li key={s} className="flex items-start gap-2">
+                  <Icon name="alert" className="mt-0.5 h-4 w-4 shrink-0 text-copper-700" />
+                  {s}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 text-sm leading-relaxed text-ink-soft">
+              For a gas smell, don&apos;t use switches or flames — leave and call PG&amp;E at 1-800-743-5000 or 911
+              first. More in our{" "}
+              <Link href="/safety/" className="font-semibold text-navy-700 underline">safety guide</Link> and{" "}
+              <Link href="/emergency-stove-help/" className="font-semibold text-navy-700 underline">emergency steps</Link>.
+            </p>
           </div>
         </Container>
       </Section>
@@ -255,8 +326,9 @@ export default function Home() {
           <div>
             <SectionHeading eyebrow="Pricing" title="Stove Repair Cost &amp; Pricing Guidance" invert />
             <p className="mt-4 leading-relaxed text-navy-100">
-              Stove repair cost depends on the part involved, the brand and model, and the complexity of the diagnosis.
-              We explain the likely repair and give you a clear estimate before any work begins — no surprise charges.
+              What a repair costs depends on which part failed, the brand and model it sits in, and how much work
+              reaching it takes. We don&apos;t quote a flat figure sight unseen — once the fault is known you get the
+              scope and an estimate, and nothing goes ahead until you approve it.
             </p>
             <div className="mt-6">
               <LinkButton href="/stove-repair-cost-san-mateo-ca/" variant="primary">See Cost Guidance</LinkButton>
@@ -275,7 +347,13 @@ export default function Home() {
       {/* 14. Service areas */}
       <Section tint="surface">
         <Container>
-          <SectionHeading eyebrow="Service areas" title="Stove Repair Service Areas Near San Mateo" intro="SanMateo FixHub serves San Mateo and communities across the Peninsula." align="center" />
+          <SectionHeading eyebrow="Service areas" title="Stove Repair Service Areas Near San Mateo" align="center" />
+          {/* One natural neighborhood line — names taken from the San Mateo entry in
+              content/locations.ts. Deliberately not a ZIP or street-name list. */}
+          <p className="mx-auto mt-4 max-w-2xl text-center leading-relaxed text-ink-soft">
+            Within the city itself that covers downtown, San Mateo Park, Baywood, and Hayward Park, along with the
+            Bay-side blocks around Bridgepointe and Shoreview.
+          </p>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {cityLocations().map((l) => (
               <LocationCard key={l.slug} location={l} />
@@ -303,8 +381,34 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 16. FAQs */}
+      {/* About — describes scope, method and coverage only. No founding date, ownership,
+          tenure, licensing, insurance or certification: none of that is verified anywhere
+          in the repo, so none of it is claimed here. */}
       <Section tint="surface">
+        <Container className="max-w-3xl">
+          <SectionHeading eyebrow="About us" title="About SanMateo FixHub" />
+          <div className="mt-4 space-y-4 leading-relaxed text-ink-soft">
+            <p>
+              SanMateo FixHub is a stove repair service, and that is deliberately all it is: gas stoves, electric
+              stoves, freestanding and slide-in ranges, and built-in cooktops — not the wider appliance catalog.
+            </p>
+            <p>
+              Gas and electric units fail differently and get treated differently. A gas fault usually leads to the
+              igniter, spark module, burner cap and ports, or the valve behind them; an electric one points toward
+              elements, burner switches, wiring, or the control board. Describing the symptom first — what the stove
+              does, and when it started — lets a technician arrive already narrowing things down, and an in-person
+              inspection settles the rest.
+            </p>
+            <p>
+              We cover San Mateo and nearby Peninsula communities across San Mateo County.{" "}
+              <Link href="/about/" className="font-semibold text-copper-700 hover:underline">More about how we work →</Link>
+            </p>
+          </div>
+        </Container>
+      </Section>
+
+      {/* 16. FAQs */}
+      <Section tint="white">
         <Container className="max-w-3xl">
           <FAQAccordion faqs={homeFaqs} heading="Stove Repair FAQs" />
           <div className="mt-6 text-center">
@@ -314,13 +418,13 @@ export default function Home() {
       </Section>
 
       {/* Request form — conversion */}
-      <Section tint="white" id="request-service">
+      <Section tint="surface" id="request-service">
         <Container className="grid items-start gap-10 lg:grid-cols-[1fr_1.1fr]">
           <div>
             <SectionHeading
               eyebrow="Request Service"
               title="Book Stove Repair in San Mateo"
-              intro="Tell us what your stove is doing and we'll help you check availability and next steps. Prefer to talk it through now? Calling is the fastest way to reach us."
+              intro="Tell us what your stove is doing and we'll help you check availability. Calling is the fastest way to reach us."
             />
             <ul className="mt-6 space-y-3">
               {[
