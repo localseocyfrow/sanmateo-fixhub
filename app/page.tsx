@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
 import { localBusinessSchema, faqSchema, homeHeroImage } from "@/lib/schema";
-import { services, cityLocations, getService, getProblem, globalFaqs } from "@/lib/content";
+import { services, getProblem, globalFaqs } from "@/lib/content";
 import { site } from "@/lib/site";
 import { JsonLd } from "@/components/JsonLd";
 import { Hero } from "@/components/Hero";
 import { Container, Section, SectionHeading } from "@/components/ui/Layout";
 import { QuickAnswer } from "@/components/ui/QuickAnswer";
 import { DefinitionBlock } from "@/components/ui/DefinitionBlock";
-import { ServiceCard, ProblemCard, LocationCard } from "@/components/cards/Cards";
+import { ProblemCard } from "@/components/cards/Cards";
 import { ProcessSteps } from "@/components/ui/ProcessSteps";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { CTASection } from "@/components/ui/CTASection";
@@ -24,15 +24,6 @@ export const metadata: Metadata = buildMetadata({
     "SanMateo FixHub helps diagnose gas stove, electric stove, range, and cooktop problems in San Mateo, CA. Specialist stove repair for homes and businesses across the Peninsula.",
   path: "/",
 });
-
-const featuredServiceSlugs = [
-  "stove-repair-san-mateo-ca",
-  "gas-stove-repair-san-mateo-ca",
-  "electric-stove-repair-san-mateo-ca",
-  "range-repair-san-mateo-ca",
-  "cooktop-repair-san-mateo-ca",
-  "igniter-repair-san-mateo-ca",
-];
 
 const featuredProblemSlugs = [
   "stove-not-heating",
@@ -101,7 +92,10 @@ export default function Home() {
 
       {/* 3. Stove Repair in San Mateo */}
       <Section tint="white" className="!pt-8">
-        <Container className="grid items-start gap-10 lg:grid-cols-[1.3fr_1fr]">
+        {/* The services box now carries all 10 entries, so it gets a slightly larger
+            share than the copy column — enough for two columns of full-length service
+            names on wide desktops without truncation. */}
+        <Container className="grid items-start gap-10 lg:grid-cols-[1fr_1.1fr]">
           <div>
             <SectionHeading eyebrow="Stove Repair San Mateo" title="Local Stove Repair Specialists in San Mateo, CA" />
             <div className="mt-4 space-y-4 leading-relaxed text-ink-soft">
@@ -122,22 +116,25 @@ export default function Home() {
           </div>
           <div className="rounded-2xl border border-line bg-surface p-6">
             <h3 className="text-sm font-bold uppercase tracking-wide text-navy-800">Popular Stove Repair Services</h3>
-            <ul className="mt-4 space-y-2">
-              {featuredServiceSlugs.slice(0, 6).map((slug) => {
-                const s = getService(slug);
-                if (!s) return null;
-                return (
-                  <li key={slug}>
-                    <Link href={`/services/${s.slug}/`} className="flex items-center justify-between gap-3 rounded-lg bg-white px-4 py-3 font-semibold text-navy-800 shadow-soft transition hover:text-copper-700">
-                      <span className="flex items-center gap-2">
-                        <Icon name={s.icon} className="h-5 w-5 text-copper-600" />
-                        {s.name}
-                      </span>
-                      <span aria-hidden className="text-copper-600">→</span>
-                    </Link>
-                  </li>
-                );
-              })}
+            {/* Every service, straight from content/services.ts — slugs and icons come
+                from the data so the links can't drift. Two columns wherever the box is
+                actually wide enough (full-width below lg, and again from xl up); one
+                column at lg, where the box is the narrow right-hand cell. */}
+            <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+              {services.map((s) => (
+                <li key={s.slug}>
+                  <Link
+                    href={`/services/${s.slug}/`}
+                    className="flex h-full min-h-[48px] items-center justify-between gap-2 rounded-lg bg-white px-3 py-3 text-sm font-semibold text-navy-800 shadow-soft transition hover:text-copper-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 sm:px-4 sm:text-[0.95rem] xl:px-3 xl:text-sm"
+                  >
+                    <span className="flex min-w-0 items-center gap-1.5">
+                      <Icon name={s.icon} className="h-5 w-5 shrink-0 text-copper-600" />
+                      <span>{s.name}</span>
+                    </span>
+                    <span aria-hidden className="shrink-0 text-copper-600">→</span>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </Container>
@@ -210,19 +207,6 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* All services grid */}
-      <Section tint="surface">
-        <Container>
-          <SectionHeading eyebrow="Full service list" title="Every Stove Repair Service We Offer" align="center" />
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((s) => (
-              <ServiceCard key={s.slug} service={s} />
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-
       {/* 9. Why fast repair */}
       <Section tint="white">
         <Container className="grid items-center gap-10 lg:grid-cols-2">
@@ -252,7 +236,6 @@ export default function Home() {
           </ul>
         </Container>
       </Section>
-
 
       {/* 10 & 11. How we diagnose + process */}
       <Section tint="surface">
@@ -320,58 +303,13 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 13. Cost */}
-      <Section tint="navy">
-        <Container className="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
-          <div>
-            <SectionHeading eyebrow="Pricing" title="Stove Repair Cost &amp; Pricing Guidance" invert />
-            <p className="mt-4 leading-relaxed text-navy-100">
-              What a repair costs depends on which part failed, the brand and model it sits in, and how much work
-              reaching it takes. We don&apos;t quote a flat figure sight unseen — once the fault is known you get the
-              scope and an estimate, and nothing goes ahead until you approve it.
-            </p>
-            <div className="mt-6">
-              <LinkButton href="/stove-repair-cost-san-mateo-ca/" variant="primary">See Cost Guidance</LinkButton>
-            </div>
-          </div>
-          <ul className="space-y-3">
-            {["What part or component has failed", "The stove brand and model", "Gas vs. electric complexity", "Diagnosis and access time"].map((f) => (
-              <li key={f} className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 text-navy-100">
-                <Icon name="check" className="h-5 w-5 text-copper-400" /> {f}
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </Section>
-
-      {/* 14. Service areas */}
-      <Section tint="surface">
-        <Container>
-          <SectionHeading eyebrow="Service areas" title="Stove Repair Service Areas Near San Mateo" align="center" />
-          {/* One natural neighborhood line — names taken from the San Mateo entry in
-              content/locations.ts. Deliberately not a ZIP or street-name list. */}
-          <p className="mx-auto mt-4 max-w-2xl text-center leading-relaxed text-ink-soft">
-            Within the city itself that covers downtown, San Mateo Park, Baywood, and Hayward Park, along with the
-            Bay-side blocks around Bridgepointe and Shoreview.
-          </p>
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {cityLocations().map((l) => (
-              <LocationCard key={l.slug} location={l} />
-            ))}
-          </div>
-          <div className="mt-8 text-center">
-            <LinkButton href="/locations/" variant="outline">All Service Areas</LinkButton>
-          </div>
-        </Container>
-      </Section>
-
       {/* 15. Why choose */}
-      <Section tint="white">
+      <Section tint="surface">
         <Container>
           <SectionHeading eyebrow="Why SanMateo FixHub" title="Why Choose SanMateo FixHub for Stove Repair" align="center" />
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {whyChoose.map((w) => (
-              <div key={w.title} className="rounded-2xl border border-line bg-surface p-6">
+              <div key={w.title} className="rounded-2xl border border-line bg-white p-6">
                 <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-navy-800 text-white"><Icon name={w.icon} className="h-6 w-6" /></span>
                 <h3 className="mt-4 font-bold text-navy-800">{w.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-soft">{w.body}</p>
@@ -384,7 +322,7 @@ export default function Home() {
       {/* About — describes scope, method and coverage only. No founding date, ownership,
           tenure, licensing, insurance or certification: none of that is verified anywhere
           in the repo, so none of it is claimed here. */}
-      <Section tint="surface">
+      <Section tint="white">
         <Container className="max-w-3xl">
           <SectionHeading eyebrow="About us" title="About SanMateo FixHub" />
           <div className="mt-4 space-y-4 leading-relaxed text-ink-soft">
@@ -408,7 +346,7 @@ export default function Home() {
       </Section>
 
       {/* 16. FAQs */}
-      <Section tint="white">
+      <Section tint="surface">
         <Container className="max-w-3xl">
           <FAQAccordion faqs={homeFaqs} heading="Stove Repair FAQs" />
           <div className="mt-6 text-center">
@@ -418,7 +356,7 @@ export default function Home() {
       </Section>
 
       {/* Request form — conversion */}
-      <Section tint="surface" id="request-service">
+      <Section tint="white" id="request-service">
         <Container className="grid items-start gap-10 lg:grid-cols-[1fr_1.1fr]">
           <div>
             <SectionHeading
